@@ -25,7 +25,7 @@ function BrandCard({ brand }) {
     >
       <img
         src={brand.logoUrl}
-        alt={${brand.name} Logo}
+       alt={`${brand.name} Logo`}
         className="max-w-full max-h-full object-contain"
         onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/200x100/CCCCCC/333333?text=Logo+Error"; }}
       />
