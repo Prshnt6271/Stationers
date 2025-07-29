@@ -102,25 +102,7 @@ export default function FeaturedProducts() {
         </div>
 
         {/* Product Review Video Section */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden p-6 md:p-8">
-          <h3 className="text-2xl sm:text-3xl font-bold text-blue-700 mb-6 text-center">
-            Product Review: The Masters Brush Cleaner
-          </h3>
-          <div className="relative w-full" style={{ paddingBottom: '56.25%' /* 16:9 Aspect Ratio */ }}>
-            {/* Placeholder for YouTube iframe */}
-            <iframe
-              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-md"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with your actual YouTube video embed URL
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-          <p className="text-center text-gray-600 mt-6 text-md sm:text-lg">
-            Watch an in-depth review and unboxing of "The Masters Brush Cleaner & Preserver".
-          </p>
-        </div>
+        
 
       </div>
     </section>

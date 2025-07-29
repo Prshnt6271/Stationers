@@ -42,10 +42,12 @@ export default function BrandsSection() {
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-700 leading-tight mb-4">
-            Our Esteemed Brands
+            Brands We Carry
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-            We partner with the world's leading brands to bring you the best quality products.
+        We deal's in the world's most trusted stationery brands to bring 
+
+you quality products that inspire excellence.
           </p>
         </div>
 

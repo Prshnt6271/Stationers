@@ -1,77 +1,53 @@
 import React from 'react';
 
-// Dummy data for product categories
+// Updated product categories
 const categories = [
   {
     id: 1,
-    name: "JUNIOR ARTIST",
-    imageUrl: "https://placehold.co/400x250/ADD8E6/000000?text=Junior+Artist",
+    name: "Young Picasso",
+    imageUrl: "https://placehold.co/400x250/ADD8E6/000000?text=Young+Picasso",
     link: "#",
   },
   {
     id: 2,
-    name: "COLOURS",
-    imageUrl: "https://placehold.co/400x250/F0F8FF/000000?text=Colours",
+    name: "Color Carnival",
+    imageUrl: "https://placehold.co/400x250/F0F8FF/000000?text=Color+Carnival",
     link: "#",
   },
   {
     id: 3,
-    name: "BRUSHES",
-    imageUrl: "https://placehold.co/400x250/DDA0DD/000000?text=Brushes",
+    name: "Brush Bar",
+    imageUrl: "https://placehold.co/400x250/DDA0DD/000000?text=Brush+Bar",
     link: "#",
   },
   {
     id: 4,
-    name: "AUXILIARIES",
+    name: "Auxiliaries",
     imageUrl: "https://placehold.co/400x250/B0E0E6/000000?text=Auxiliaries",
     link: "#",
   },
   {
     id: 5,
-    name: "CANVAS",
+    name: "Canvas",
     imageUrl: "https://placehold.co/400x250/FFDAB9/000000?text=Canvas",
     link: "#",
   },
   {
     id: 6,
-    name: "SKETCHING & DRAWING",
-    imageUrl: "https://placehold.co/400x250/F5DEB3/000000?text=Sketching",
+    name: "Ink & Imagination",
+    imageUrl: "https://placehold.co/400x250/F5DEB3/000000?text=Ink+%26+Imagination",
     link: "#",
   },
   {
     id: 7,
-    name: "MEDIUMS & VARNISHES",
-    imageUrl: "https://placehold.co/400x250/E6E6FA/000000?text=Mediums",
+    name: "Mediums & Varnishes",
+    imageUrl: "https://placehold.co/400x250/E6E6FA/000000?text=Mediums+%26+Varnishes",
     link: "#",
   },
   {
     id: 8,
-    name: "CRAFT & HOBBY",
-    imageUrl: "https://placehold.co/400x250/C0C0C0/000000?text=Craft",
-    link: "#",
-  },
-  {
-    id: 9,
-    name: "PAPER & PADS",
-    imageUrl: "https://placehold.co/400x250/F0F0F0/000000?text=Paper",
-    link: "#",
-  },
-  {
-    id: 10,
-    name: "EASEL STANDS",
-    imageUrl: "https://placehold.co/400x250/ADD8E6/000000?text=Easel+Stands",
-    link: "#",
-  },
-  {
-    id: 11,
-    name: "ART BOOKS",
-    imageUrl: "https://placehold.co/400x250/F0F8FF/000000?text=Art+Books",
-    link: "#",
-  },
-  {
-    id: 12,
-    name: "STATIONERY",
-    imageUrl: "https://placehold.co/400x250/DDA0DD/000000?text=Stationery",
+    name: "Hobby Hub",
+    imageUrl: "https://placehold.co/400x250/C0C0C0/000000?text=Hobby+Hub",
     link: "#",
   },
 ];
@@ -111,10 +87,11 @@ export default function ProductCategories() {
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-700 leading-tight mb-4">
-            PRODUCT CATEGORIES
+            OUR PRODUCT CATEGORIES
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our diverse range of products across various categories.
+            From premium writing instruments to educational toys, we have everything you 
+            need for work, school, and creativity.
           </p>
         </div>
 
