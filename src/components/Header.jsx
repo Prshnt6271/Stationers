@@ -4,6 +4,7 @@ function Header() {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const productsDropdownRef = useRef(null);
   const categoryDropdownRef = useRef(null);
@@ -33,48 +34,72 @@ function Header() {
   const toggleProductsDropdown = () => setIsProductsDropdownOpen(!isProductsDropdownOpen);
   const toggleCategoryDropdown = () => setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log('Searching for:', searchQuery);
+  };
 
   return (
     <header className="bg-white shadow-lg font-inter">
       {/* Main Header */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between">
-        {/* Left Spacer */}
-        <div className="flex-1"></div>
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between">
+        {/* Logo Section */}
+        <div className="flex-shrink-0 mb-4 md:mb-0">
+          <a href="/" className="flex items-center group">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
+              <h1 className="text-lg md:text-xl font-bold tracking-wide">
+                <span className="text-yellow-300">K</span>undkund
+                <span className="block text-sm font-medium opacity-90 -mt-1">STATIONERS</span>
+              </h1>
+            </div>
+          </a>
+        </div>
 
         {/* Centered Search Bar */}
-        <div className="hidden md:flex flex-grow max-w-xl justify-center relative">
-          <input
-            type="text"
-            placeholder="Search for products..."
-            className="flex-grow p-2.5 pl-5 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 text-sm"
-          />
-          <div className="relative" ref={categoryDropdownRef}>
-            <button
-              onClick={toggleCategoryDropdown}
-              className="h-full p-2.5 border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center text-sm transition-colors duration-200"
-            >
-              SELECT CATEGORY
-              <svg className="w-4 h-4 ml-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            {isCategoryDropdownOpen && (
-              <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 1</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 2</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 3</a>
-              </div>
-            )}
-          </div>
-          <button className="h-full p-2.5 bg-blue-600 text-white rounded-r-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
+        <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0">
+          <form onSubmit={handleSearch} className="relative flex">
+            <div className="relative flex-grow">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for products..."
+                className="w-full p-3 pl-5 pr-12 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
+              />
+              <button 
+                type="submit"
+                className="absolute right-0 top-0 h-full px-4 text-gray-500 hover:text-blue-600 focus:outline-none"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="relative ml-2" ref={categoryDropdownRef}>
+              <button
+                type="button"
+                onClick={toggleCategoryDropdown}
+                className="h-full p-3 px-4 border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center text-sm transition-colors duration-200 rounded-full whitespace-nowrap"
+              >
+                Categories
+                <svg className="w-4 h-4 ml-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              {isCategoryDropdownOpen && (
+                <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
+                  <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 1</a>
+                  <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 2</a>
+                  <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 3</a>
+                </div>
+              )}
+            </div>
+          </form>
         </div>
 
         {/* Right Mobile Toggles */}
-        <div className="flex items-center space-x-4 sm:space-x-6 justify-end flex-1">
+        <div className="flex items-center space-x-4 sm:space-x-6 justify-end w-full md:w-auto">
           <button className="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-full hover:bg-gray-100 transition" aria-label="Search">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -96,18 +121,26 @@ function Header() {
         </div>
       </div>
 
-      {/* Desktop Navigation */}
+      {/* Desktop Navigation - Now with visible buttons */}
       <nav className="hidden md:block bg-gray-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
-        <ul className="flex justify-end space-x-6 text-sm font-medium items-center">
-          <li><a href="#" className="hover:text-blue-300 transition px-3 py-2 rounded-md">HOME</a></li>
-          <li><a href="#" className="hover:text-blue-300 transition px-3 py-2 rounded-md">BRANDS</a></li>
+        <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
+          <li>
+            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              HOME
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              BRANDS
+            </a>
+          </li>
           <li className="relative" ref={productsDropdownRef}>
             <button
               onClick={toggleProductsDropdown}
-              className="flex items-center hover:text-blue-300 focus:outline-none transition px-3 py-2 rounded-md"
+              className="flex items-center hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md focus:outline-none transition-colors duration-200"
             >
               PRODUCTS
-              <svg className="w-4 h-4 ml-1 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-4 h-4 ml-1 transform transition-transform ${isProductsDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
@@ -122,9 +155,21 @@ function Header() {
               </div>
             )}
           </li>
-          <li><a href="#" className="hover:text-blue-300 transition px-3 py-2 rounded-md">OTHER OFFERS <span className="text-red-400 text-xs ml-1 font-bold">NEW</span></a></li>
-          <li><a href="#" className="hover:text-blue-300 transition px-3 py-2 rounded-md">NEW ARRIVALS</a></li>
-          <li><a href="#" className="hover:text-blue-300 transition px-3 py-2 rounded-md">ARTIST</a></li>
+          <li>
+            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              OTHER OFFERS <span className="text-red-400 text-xs ml-1 font-bold">NEW</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              NEW ARRIVALS
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              ARTIST
+            </a>
+          </li>
         </ul>
       </nav>
 

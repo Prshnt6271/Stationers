@@ -1,12 +1,12 @@
 import React from 'react';
 
-// Dummy data for featured products
+// Dummy data for featured products with plain white image backgrounds
 const featuredProducts = [
   {
     id: 1,
     name: "White Nights Granulating Watercolour 21 Full Pans Set",
     price: "₹6,499.00",
-    imageUrl: "https://placehold.co/300x200/F0F8FF/000000?text=Watercolour+Set",
+    imageUrl: "https://placehold.co/300x200/FFFFFF/000000?text=Watercolour+Set",
     badge: "NEW",
     description: "A unique set of granulating watercolors for stunning effects.",
   },
@@ -14,7 +14,7 @@ const featuredProducts = [
     id: 2,
     name: "Master Class Oil Paint Tube 46ml Open Stock",
     price: "₹550.00 - ₹1,800.00",
-    imageUrl: "https://placehold.co/300x200/F0F8FF/000000?text=Oil+Paint+Tubes",
+    imageUrl: "https://placehold.co/300x200/FFFFFF/000000?text=Oil+Paint+Tubes",
     badge: "NEW",
     description: "High-quality oil paints for professional artists.",
   },
@@ -22,57 +22,43 @@ const featuredProducts = [
     id: 3,
     name: "Nitram Liquid Charcoal",
     price: "₹2,425.00",
-    imageUrl: "https://placehold.co/300x200/F0F8FF/000000?text=Liquid+Charcoal",
+    imageUrl: "https://placehold.co/300x200/FFFFFF/000000?text=Liquid+Charcoal",
     description: "Innovative liquid charcoal for expressive drawing.",
   },
   {
     id: 4,
     name: "Roubloff Retractable Synthetic Squirrel Imitation Round with Chrome Plated Handle Soft Touch Ferrule Brushes",
     price: "₹1,199.00 - ₹1,899.00",
-    imageUrl: "https://placehold.co/300x200/F0F8FF/000000?text=Retractable+Brushes",
+    imageUrl: "https://placehold.co/300x200/FFFFFF/000000?text=Retractable+Brushes",
     badge: "NEW",
     description: "Premium synthetic brushes for watercolor and ink.",
   },
-  // Add more featured products as needed
 ];
 
-// ProductCard Component (reused and slightly enhanced for badge)
+// ProductCard Component
 function ProductCard({ product }) {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col">
-      <div className="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+    <div className="flex flex-col items-start space-y-2">
+      <div className="relative w-full h-40 bg-white flex items-center justify-center overflow-hidden -">
         <img
           src={product.imageUrl}
           alt={product.name}
           className="object-contain w-full h-full"
-          onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/300x200/CCCCCC/333333?text=Image+Error"; }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://placehold.co/300x200/CCCCCC/333333?text=Image+Error";
+          }}
         />
         {product.badge && (
-          <div className={`absolute top-2 right-2 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-sm
-            ${product.badge === 'NEW' ? 'bg-green-500' : 'bg-red-500'}`}
-          >
+          <div className="absolute top-2 right-2 text-white text-xs font-semibold px-2 py-1 rounded bg-green-500 shadow">
             {product.badge}
           </div>
         )}
-        {/* You can add brand logo here if product.brand exists, similar to other product cards */}
-      </div>
-      <div className="p-4 flex-grow flex flex-col justify-between">
-        <div>
-          <h4 className="text-lg font-semibold text-gray-900 mb-2 leading-tight">
-            {product.name}
-          </h4>
-          {product.description && (
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-              {product.description}
-            </p>
-          )}
-        </div>
-        <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-          <span className="text-xl font-bold text-blue-700">{product.price}</span>
-          <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-orange-600 transition-colors duration-200 shadow-md">
-            Add to Cart
-          </button>
-        </div>
+      </div>  
+      <div className="text-left">
+        <h4 className="text-md font-semibold text-gray-800 mb-1">{product.name}</h4>
+        <p className="text-sm text-gray-600 mb-1">{product.description}</p>
+        <p className="text-blue-700 font-bold">{product.price}</p>
       </div>
     </div>
   );
@@ -80,31 +66,41 @@ function ProductCard({ product }) {
 
 // FeaturedProducts Component
 export default function FeaturedProducts() {
+  // Split products into pairs for two-product boxes
+  const productPairs = [];
+  for (let i = 0; i < featuredProducts.length; i += 2) {
+    productPairs.push(featuredProducts.slice(i, i + 2));
+  }
+
   return (
-    <section className="bg-gray-50 py-12 sm:py-16 lg:py-20 font-sans antialiased text-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section className="bg-gray-50 py-12 font-sans text-gray-800">
+      <div className="max-w-6xl mx-auto px-4">
 
         {/* Section Header */}
-        <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-700 leading-tight mb-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-blue-700 mb-4">
             FEATURED PRODUCTS
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-xl mx-auto">
             Visit our shop to see amazing creations from our designers.
           </p>
         </div>
 
-        {/* Featured Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        {/* Two-Box Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {productPairs.map((pair, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl shadow-lg p-6 flex flex-col space-y-6 justify-between"
+            >
+              {pair.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
           ))}
         </div>
 
-        {/* Product Review Video Section */}
-        
-
       </div>
     </section>
-  );
+  );
 }

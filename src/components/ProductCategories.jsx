@@ -1,105 +1,122 @@
 import React from 'react';
 
-// Updated product categories
 const categories = [
   {
-    id: 1,
-    name: "Young Picasso",
-    imageUrl: "https://placehold.co/400x250/ADD8E6/000000?text=Young+Picasso",
+    id: 34,
+    name: "Brush Bar & Auxiliaries",
+    description: "Premium brushes and painting tools",
     link: "#",
+    size: "xlarge",
+    image: "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 2,
     name: "Color Carnival",
-    imageUrl: "https://placehold.co/400x250/F0F8FF/000000?text=Color+Carnival",
+    description: "Vibrant colors for your artwork",
     link: "#",
-  },
-  {
-    id: 3,
-    name: "Brush Bar",
-    imageUrl: "https://placehold.co/400x250/DDA0DD/000000?text=Brush+Bar",
-    link: "#",
-  },
-  {
-    id: 4,
-    name: "Auxiliaries",
-    imageUrl: "https://placehold.co/400x250/B0E0E6/000000?text=Auxiliaries",
-    link: "#",
-  },
-  {
-    id: 5,
-    name: "Canvas",
-    imageUrl: "https://placehold.co/400x250/FFDAB9/000000?text=Canvas",
-    link: "#",
-  },
-  {
-    id: 6,
-    name: "Ink & Imagination",
-    imageUrl: "https://placehold.co/400x250/F5DEB3/000000?text=Ink+%26+Imagination",
-    link: "#",
+    size: "wide",
+    image: "https://images.unsplash.com/photo-1579965342575-16428a7c8881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 7,
     name: "Mediums & Varnishes",
-    imageUrl: "https://placehold.co/400x250/E6E6FA/000000?text=Mediums+%26+Varnishes",
+    description: "Finishing and texture products",
     link: "#",
+    size: "square",
+    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 8,
     name: "Hobby Hub",
-    imageUrl: "https://placehold.co/400x250/C0C0C0/000000?text=Hobby+Hub",
+    description: "Supplies for casual artists",
     link: "#",
+    size: "square",
+    image: "https://images.unsplash.com/photo-1613243555978-636c48dc653c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 15,
+    name: "Young Picasso & Canvas",
+    description: "Art materials for children and various canvas types",
+    link: "#",
+    size: "wide",
+    image: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 6,
+    name: "Ink & Imagination",
+    description: "Ink products for artists",
+    link: "#",
+    size: "wide",
+    image: "https://images.unsplash.com/photo-1622542796254-5b9c46ab0d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
 ];
 
-// Component to display a single category card
 function CategoryCard({ category }) {
+  const sizeClasses = {
+    wide: `col-span-2 w-[95%] mx-auto min-h-[180px]`,
+    square: `h-52 sm:h-60 w-[90%] mx-auto`,
+    xlarge: "col-span-2 row-span-2 w-[97%] h-full"
+  };
+
   return (
     <a
       href={category.link}
-      className="relative block w-full h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
+      className={`flex flex-col items-center justify-end relative overflow-hidden ${sizeClasses[category.size]} text-center group border border-gray-200`}
     >
-      <img
-        src={category.imageUrl}
+      {/* Background Image */}
+      <img 
+        src={category.image} 
         alt={category.name}
-        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = "https://placehold.co/400x250/CCCCCC/333333?text=Image+Error";
-        }}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
-      <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center">
-        <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-wide">
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+      {/* Inner Gray Box for xlarge size */}
+      {category.size === "xlarge" && (
+        <div className="absolute inset-14 bg-gray-200/80 z-10 -md border border-gray-300"></div>
+      )}
+
+      {/* Content */}
+      <div className="relative z-20 p-4 w-full text-white transform transition-all duration-300 group-hover:-translate-y-2">
+        <h3 className="text-xl font-bold uppercase mb-1 group-hover:text-blue-300 transition-colors">
           {category.name}
         </h3>
+        <p className="text-sm opacity-90 group-hover:opacity-100 transition-opacity">
+          {category.description}
+        </p>
       </div>
+
+      {/* Hover Overlay */}
+      <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-all duration-500 z-10"></div>
     </a>
   );
 }
 
-// Main ProductCategories Component
 export default function ProductCategories() {
   return (
-    <section className="bg-gray-50 py-12 sm:py-16 lg:py-20 font-sans antialiased text-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        
-        {/* Section Header */}
-        <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-700 leading-tight mb-4">
-            OUR PRODUCT CATEGORIES
+    <section className="bg-gray-50 py-16 font-sans text-gray-800">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="text-center mb-12">
+          <div className="inline-block text-blue-700 px-4 py-2 mb-4">
+            EXPLORE OUR COLLECTION
+          </div>
+          <h2 className="text-4xl font-extrabold text-gray-900 mb-6">
+            PRODUCT CATEGORIES
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-            From premium writing instruments to educational toys, we have everything you 
-            need for work, school, and creativity.
-          </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-fr">
           {categories.map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
+        </div>
+
+        <div className="text-center mt-16">
+          <button className="bg-gray-800 text-white px-8 py-4 font-semibold hover:bg-gray-700 transition-colors">
+            View All Products
+          </button>
         </div>
       </div>
     </section>

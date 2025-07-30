@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 // Hero Section Component
 export default function HeroSection() {
@@ -7,6 +7,9 @@ export default function HeroSection() {
     "https://placehold.co/1600x600/33FF57/FFFFFF?text=Your+Hero+Image+2",
     "https://placehold.co/1600x600/3357FF/FFFFFF?text=Your+Hero+Image+3",
   ];
+
+  // Memoize the images array
+  const memoizedImages = useMemo(() => images, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
@@ -19,14 +22,18 @@ export default function HeroSection() {
   useEffect(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
 
-    intervalRef.current = setInterval(() => {
-      goToNext();
-    }, 5000);
+    // Only start auto-advance if user hasn't interacted recently
+    const timeoutId = setTimeout(() => {
+      intervalRef.current = setInterval(() => {
+        goToNext();
+      }, 5000);
+    }, 1000);
 
     return () => {
+      clearTimeout(timeoutId);
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [images.length]);
+  }, [currentIndex]); // Add currentIndex to dependencies
 
   return (
     <section className="relative w-full overflow-hidden shadow-xl rounded-b-lg">
@@ -41,6 +48,8 @@ export default function HeroSection() {
               src={image}
               alt={`Hero Slide ${index + 1}`}
               className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-b-lg"
+              loading="lazy"
+              style={{ minHeight: '12rem' }} // Prevent layout shift
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = "https://placehold.co/1600x600/CCCCCC/333333?text=Image+Error";
