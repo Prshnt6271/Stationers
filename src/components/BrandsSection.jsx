@@ -27,7 +27,7 @@ function BrandCard({ brand }) {
   return (
     <a
       href="#"
-      className="block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col items-center justify-center p-4 h-32 sm:h-40 border border-gray-100 hover:border-blue-200"
+      className=" bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col items-center justify-center p-4 h-32 sm:h-40 border border-gray-100 hover:border-blue-200"
     >
       <img
         src={brand.logoUrl}
