@@ -3,9 +3,11 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 // Hero Section Component
 export default function HeroSection() {
   const images = [
-    "https://placehold.co/1600x600/FF5733/FFFFFF?text=Your+Hero+Image+1",
-    "https://placehold.co/1600x600/33FF57/FFFFFF?text=Your+Hero+Image+2",
-    "https://placehold.co/1600x600/3357FF/FFFFFF?text=Your+Hero+Image+3",
+    "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    "https://media.gettyimages.com/id/882856192/photo/creativity-takes-courage.jpg?s=2048x2048&w=gi&k=20&c=9ss9QXrfhZLpkcCwZwxbT2UETj7jozF1fQyWatTsPd8="
   ];
 
   // Memoize the images array

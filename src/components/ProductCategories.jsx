@@ -58,7 +58,7 @@ const moreCategories = [
     description: "Perfect tools for sketching brilliance",
     link: "#",
     size: "xlarge",
-    image: "https://images.unsplash.com/photo-1581291519195-ef11498d1cf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://media.gettyimages.com/id/1353307053/photo/creative-graphic-designer-using-digital-tablet-and-computer.jpg?s=2048x2048&w=gi&k=20&c=03mHZuyxx7wnOG41_QrjQC2e_puRNWZP2HQT7qnckZA=  "
   },
   {
     id: 102,
@@ -66,7 +66,7 @@ const moreCategories = [
     description: "Vibrant palettes for your art blends",
     link: "#",
     size: "wide",
-    image: "https://images.unsplash.com/photo-1606813902635-2fda52f00c9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://media.istockphoto.com/id/501630964/photo/art-process.jpg?s=2048x2048&w=is&k=20&c=8b30MNIQ9fAJ0IHYpfYmmDfDIEq6NiLbIMvCV3gSv-0="
   },
   {
     id: 103,
@@ -74,7 +74,7 @@ const moreCategories = [
     description: "Canvas collection for every creation",
     link: "#",
     size: "square",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1578926375605-eaf7559b1458?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 104,
@@ -82,7 +82,7 @@ const moreCategories = [
     description: "Basic tools every artist needs",
     link: "#",
     size: "square",
-    image: "https://images.unsplash.com/photo-1512299281534-dc9fdc7b4e6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://plus.unsplash.com/premium_photo-1682125164600-e7493508e496?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     id: 105,
@@ -90,7 +90,7 @@ const moreCategories = [
     description: "Gear up your personal studio",
     link: "#",
     size: "wide",
-    image: "https://images.unsplash.com/photo-1545235617-9465d2b96e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1545156521-77bd85671d30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 106,
@@ -98,7 +98,7 @@ const moreCategories = [
     description: "Organize your creative tools",
     link: "#",
     size: "wide",
-    image: "https://images.unsplash.com/photo-1581349482358-3691e3de71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1638847868668-a05a2f69622f?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
 ];
 
