@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Import brand logos from local assets (updated to .webp)
-import domsLogo from '../assets/Brand-logo/doms.webp';
+// import domsLogo from '../assets/Brand-logo/doms.webp';
 import koresLogo from '../assets/Brand-logo/kores.webp';
 import unomaxLogo from '../assets/Brand-logo/unomax.webp';
 import celloLogo from '../assets/Brand-logo/cello.webp';
@@ -12,7 +12,7 @@ import flairLogo from '../assets/Brand-logo/flair.webp';
 
 // Updated brands with local logo imports
 const brands = [
-  { id: 1, name: "DOMS", logoUrl: domsLogo },
+  // { id: 1, name: "DOMS", logoUrl: domsLogo },
   { id: 2, name: "Kores", logoUrl: koresLogo },
   { id: 3, name: "UNOMAX", logoUrl: unomaxLogo },
   { id: 4, name: "Cello", logoUrl: celloLogo },
