@@ -1,15 +1,25 @@
 import React from 'react';
 
-// Updated brands with placeholder images (no imports needed)
+// Import brand logos from local assets
+import domsLogo from '../assets/Brand-logo/doms.png';
+import koresLogo from '../assets/Brand-logo/kores.png';
+import unomaxLogo from '../assets/Brand-logo/unomax.png';
+import celloLogo from '../assets/Brand-logo/cello.png';
+import fevicolLogo from '../assets/Brand-logo/fevicol.png';
+import montexLogo from '../assets/Brand-logo/montex.png';
+import writeflowLogo from '../assets/Brand-logo/writeflow.png';
+import flairLogo from '../assets/Brand-logo/flair.png';
+
+// Updated brands with local logo imports
 const brands = [
-  { id: 1, name: "DOMS", logoUrl: "https://via.placeholder.com/200x100/4F46E5/FFFFFF?text=DOMS" },
-  { id: 2, name: "Kores", logoUrl: "https://via.placeholder.com/200x100/EF4444/FFFFFF?text=Kores" },
-  { id: 3, name: "UNOMAX", logoUrl: "https://via.placeholder.com/200x100/10B981/FFFFFF?text=UNOMAX" },
-  { id: 4, name: "Cello", logoUrl: "https://via.placeholder.com/200x100/F59E0B/FFFFFF?text=Cello" },
-  { id: 5, name: "FEVICOL", logoUrl: "https://via.placeholder.com/200x100/8B5CF6/FFFFFF?text=FEVICOL" },
-  { id: 6, name: "Montex", logoUrl: "https://via.placeholder.com/200x100/EC4899/FFFFFF?text=Montex" },
-  { id: 7, name: "WriteFlow", logoUrl: "https://via.placeholder.com/200x100/06B6D4/FFFFFF?text=WriteFlow" },
-  { id: 8, name: "Flair", logoUrl: "https://via.placeholder.com/200x100/84CC16/FFFFFF?text=Flair" },
+  { id: 1, name: "DOMS", logoUrl: domsLogo },
+  { id: 2, name: "Kores", logoUrl: koresLogo },
+  { id: 3, name: "UNOMAX", logoUrl: unomaxLogo },
+  { id: 4, name: "Cello", logoUrl: celloLogo },
+  { id: 5, name: "FEVICOL", logoUrl: fevicolLogo },
+  { id: 6, name: "Montex", logoUrl: montexLogo },
+  { id: 7, name: "WriteFlow", logoUrl: writeflowLogo },
+  { id: 8, name: "Flair", logoUrl: flairLogo },
 ];
 
 // BrandCard Component (for individual brand display)
