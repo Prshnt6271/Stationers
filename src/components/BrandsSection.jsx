@@ -8,7 +8,7 @@ import d from '../assets/d.jpg';
 import e from '../assets/e.jpg';
 import f from '../assets/f.jpg';
 import g from '../assets/g.jpg';
-
+import h from '../assets/h.jpg';
 
 // Updated brands with local brand logos
 const brands = [
@@ -46,6 +46,11 @@ const brands = [
     id: 7, 
     name: "WriteFlow", 
     logoUrl: g 
+  },
+  { 
+    id: 8, 
+    name: "Flair", 
+    logoUrl: h 
   },
 ];
 
