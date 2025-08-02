@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Import brand logos from local assets (updated to .webp)
-import domsLogo from '../assets/Brand-logo/doms.webp';
+// import domsLogo from '../assets/Brand-logo/doms.webp';
 import koresLogo from '../assets/Brand-logo/kores.webp';
 import unomaxLogo from '../assets/Brand-logo/unomax.webp';
 import celloLogo from '../assets/Brand-logo/cello.webp';
