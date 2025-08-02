@@ -1,46 +1,51 @@
 import React from 'react';
 
-// Updated brands with working online brand logos
+// Import local images
+import a from '../assets/a.jpg';
+import b from '../assets/b.jpg';
+import c from '../assets/c.jpg';
+import d from '../assets/d.jpg';
+import e from '../assets/e.jpg';
+import f from '../assets/f.jpg';
+import g from '../assets/g.jpg';
+
+
+// Updated brands with local brand logos
 const brands = [
   { 
     id: 1, 
     name: "DOMS", 
-    logoUrl: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=200&h=100&fit=crop&crop=center" 
+    logoUrl: a 
   },
   { 
     id: 2, 
     name: "Kores", 
-    logoUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=100&fit=crop&crop=center" 
+    logoUrl: b 
   },
   { 
     id: 3, 
     name: "UNOMAX", 
-    logoUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=200&h=100&fit=crop&crop=center" 
+    logoUrl: c 
   },
   { 
     id: 4, 
     name: "Cello", 
-    logoUrl: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=200&h=100&fit=crop&crop=center" 
+    logoUrl: d 
   },
   { 
     id: 5, 
     name: "FEVICOL", 
-    logoUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=200&h=100&fit=crop&crop=center" 
+    logoUrl: e 
   },
   { 
     id: 6, 
     name: "Montex", 
-    logoUrl: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=200&h=100&fit=crop&crop=center" 
+    logoUrl: f 
   },
   { 
     id: 7, 
     name: "WriteFlow", 
-    logoUrl: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=200&h=100&fit=crop&crop=center" 
-  },
-  { 
-    id: 8, 
-    name: "Flair", 
-    logoUrl: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=200&h=100&fit=crop&crop=center" 
+    logoUrl: g 
   },
 ];
 
@@ -55,10 +60,6 @@ function BrandCard({ brand }) {
         src={brand.logoUrl}
         alt={`${brand.name} Logo`}
         className="max-w-full max-h-20 object-contain filter hover:brightness-110 transition-all duration-300 mb-2"
-        onError={(e) => { 
-          e.target.onerror = null; 
-          e.target.src = `https://picsum.photos/200/100?text=${brand.name}&random=${brand.id}`; 
-        }}
       />
       <span className="text-xs font-medium text-gray-600 text-center">{brand.name}</span>
     </a>
@@ -87,16 +88,6 @@ export default function BrandsSection() {
           {brands.map((brand) => (
             <BrandCard key={brand.id} brand={brand} />
           ))}
-
-          {/* "View All Brands" Button Card */}
-          {/* <div className="col-span-2 sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 flex items-center justify-center bg-orange-500 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 h-32 sm:h-40">
-            <a
-              href="#" // Link to a dedicated "All Brands" page
-              className="text-white text-lg sm:text-xl font-bold text-center px-4 py-2 hover:underline"
-            >
-              VIEW ALL BRANDS
-            </a>
-          </div> */}
         </div>
 
       </div>
