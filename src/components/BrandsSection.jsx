@@ -1,14 +1,47 @@
 import React from 'react';
 
-// Updated brands with placeholder images (no imports needed)   
+// Updated brands with working online brand logos
 const brands = [
-  { id: 2, name: "Kores", logoUrl: "https://via.placeholder.com/200x100/EF4444/FFFFFF?text=Kores" },
-  { id: 3, name: "UNOMAX", logoUrl: "https://via.placeholder.com/200x100/10B981/FFFFFF?text=UNOMAX" },
-  { id: 4, name: "Cello", logoUrl: "https://via.placeholder.com/200x100/F59E0B/FFFFFF?text=Cello" },
-  { id: 5, name: "FEVICOL", logoUrl: "https://via.placeholder.com/200x100/8B5CF6/FFFFFF?text=FEVICOL" },
-  { id: 6, name: "Montex", logoUrl: "https://via.placeholder.com/200x100/EC4899/FFFFFF?text=Montex" },
-  { id: 7, name: "WriteFlow", logoUrl: "https://via.placeholder.com/200x100/06B6D4/FFFFFF?text=WriteFlow" },
-  { id: 8, name: "Flair", logoUrl: "https://via.placeholder.com/200x100/84CC16/FFFFFF?text=Flair" },
+  { 
+    id: 1, 
+    name: "DOMS", 
+    logoUrl: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=200&h=100&fit=crop&crop=center" 
+  },
+  { 
+    id: 2, 
+    name: "Kores", 
+    logoUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=100&fit=crop&crop=center" 
+  },
+  { 
+    id: 3, 
+    name: "UNOMAX", 
+    logoUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=200&h=100&fit=crop&crop=center" 
+  },
+  { 
+    id: 4, 
+    name: "Cello", 
+    logoUrl: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=200&h=100&fit=crop&crop=center" 
+  },
+  { 
+    id: 5, 
+    name: "FEVICOL", 
+    logoUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=200&h=100&fit=crop&crop=center" 
+  },
+  { 
+    id: 6, 
+    name: "Montex", 
+    logoUrl: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=200&h=100&fit=crop&crop=center" 
+  },
+  { 
+    id: 7, 
+    name: "WriteFlow", 
+    logoUrl: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=200&h=100&fit=crop&crop=center" 
+  },
+  { 
+    id: 8, 
+    name: "Flair", 
+    logoUrl: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=200&h=100&fit=crop&crop=center" 
+  },
 ];
 
 // BrandCard Component (for individual brand display)
@@ -16,15 +49,15 @@ function BrandCard({ brand }) {
   return (
     <a
       href="#"
-      className=" bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col items-center justify-center p-4 h-32 sm:h-40 border border-gray-100 hover:border-blue-200"
+      className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col items-center justify-center p-4 h-32 sm:h-40 border border-gray-100 hover:border-blue-200"
     >
       <img
         src={brand.logoUrl}
         alt={`${brand.name} Logo`}
-        className="max-w-full max-h-40 object-contain filter hover:brightness-110 transition-all duration-300 mb-2"
+        className="max-w-full max-h-20 object-contain filter hover:brightness-110 transition-all duration-300 mb-2"
         onError={(e) => { 
           e.target.onerror = null; 
-          e.target.src=`https://via.placeholder.com/150x60/ffffff/333333?text=${brand.name}`; 
+          e.target.src = `https://picsum.photos/200/100?text=${brand.name}&random=${brand.id}`; 
         }}
       />
       <span className="text-xs font-medium text-gray-600 text-center">{brand.name}</span>
