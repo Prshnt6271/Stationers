@@ -2,24 +2,24 @@ import React from 'react';
 
 // Import brand logos from local assets (updated to .webp)
 // import domsLogo from '../assets/Brand-logo/doms.webp';
-import koresLogo from '../assets/Brand-logo/kores.webp';
-import unomaxLogo from '../assets/Brand-logo/unomax.webp';
-import celloLogo from '../assets/Brand-logo/cello.webp';
-import fevicolLogo from '../assets/Brand-logo/fevicol.webp';
-import montexLogo from '../assets/Brand-logo/montex.webp';
-import writeflowLogo from '../assets/Brand-logo/writeflow.webp';
-import flairLogo from '../assets/Brand-logo/flair.webp';
+import kores from '../assets/Brand-logo/kores.webp';
+import unomax from '../assets/Brand-logo/unomax.webp';
+import cello from '../assets/Brand-logo/cello.webp';
+import fevicol from '../assets/Brand-logo/fevicol.webp';
+import montex from '../assets/Brand-logo/montex.webp';
+import writeflow from '../assets/Brand-logo/writeflow.webp';
+import flair from '../assets/Brand-logo/flair.webp';
 
 // Updated brands with local logo imports
 const brands = [
   // { id: 1, name: "DOMS", logoUrl: domsLogo },
-  { id: 2, name: "Kores", logoUrl: koresLogo },
-  { id: 3, name: "UNOMAX", logoUrl: unomaxLogo },
-  { id: 4, name: "Cello", logoUrl: celloLogo },
-  { id: 5, name: "FEVICOL", logoUrl: fevicolLogo },
-  { id: 6, name: "Montex", logoUrl: montexLogo },
-  { id: 7, name: "WriteFlow", logoUrl: writeflowLogo },
-  { id: 8, name: "Flair", logoUrl: flairLogo },
+  { id: 2, name: "Kores", logoUrl: kores },
+  { id: 3, name: "UNOMAX", logoUrl: unomax },
+  { id: 4, name: "Cello", logoUrl: cello },
+  { id: 5, name: "FEVICOL", logoUrl: fevicol },
+  { id: 6, name: "Montex", logoUrl: montex },
+  { id: 7, name: "WriteFlow", logoUrl: writeflow },
+  { id: 8, name: "Flair", logoUrl: flair },
 ];
 
 // BrandCard Component (for individual brand display)
