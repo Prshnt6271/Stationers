@@ -51,6 +51,57 @@ const categories = [
   },
 ];
 
+const moreCategories = [
+  {
+    id: 101,
+    name: "Sketch Master",
+    description: "Perfect tools for sketching brilliance",
+    link: "#",
+    size: "xlarge",
+    image: "https://images.unsplash.com/photo-1581291519195-ef11498d1cf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 102,
+    name: "Palette Play",
+    description: "Vibrant palettes for your art blends",
+    link: "#",
+    size: "wide",
+    image: "https://images.unsplash.com/photo-1606813902635-2fda52f00c9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 103,
+    name: "Canvas Cove",
+    description: "Canvas collection for every creation",
+    link: "#",
+    size: "square",
+    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 104,
+    name: "Art Essentials",
+    description: "Basic tools every artist needs",
+    link: "#",
+    size: "square",
+    image: "https://images.unsplash.com/photo-1512299281534-dc9fdc7b4e6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 105,
+    name: "Studio Gear",
+    description: "Gear up your personal studio",
+    link: "#",
+    size: "wide",
+    image: "https://images.unsplash.com/photo-1545235617-9465d2b96e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 106,
+    name: "Creative Storage",
+    description: "Organize your creative tools",
+    link: "#",
+    size: "wide",
+    image: "https://images.unsplash.com/photo-1581349482358-3691e3de71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+];
+
 function CategoryCard({ category }) {
   const sizeClasses = {
     wide: `col-span-2 w-[95%] mx-auto min-h-[180px]`,
@@ -63,22 +114,18 @@ function CategoryCard({ category }) {
       href={category.link}
       className={`flex flex-col items-center justify-end relative overflow-hidden ${sizeClasses[category.size]} text-center group border border-gray-200`}
     >
-      {/* Background Image */}
-      <img 
-        src={category.image} 
+      <img
+        src={category.image}
         alt={category.name}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
 
-      {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
-      {/* Inner Gray Box for xlarge size */}
       {category.size === "xlarge" && (
-        <div className="absolute inset-14 bg-gray-200/80 z-10 -md border border-gray-300"></div>
+        <div className="absolute inset-14 bg-gray-200/80 z-10 border border-gray-300"></div>
       )}
 
-      {/* Content */}
       <div className="relative z-20 p-4 w-full text-white transform transition-all duration-300 group-hover:-translate-y-2">
         <h3 className="text-xl font-bold uppercase mb-1 group-hover:text-blue-300 transition-colors">
           {category.name}
@@ -88,7 +135,6 @@ function CategoryCard({ category }) {
         </p>
       </div>
 
-      {/* Hover Overlay */}
       <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-all duration-500 z-10"></div>
     </a>
   );
@@ -107,16 +153,18 @@ export default function ProductCategories() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-fr">
+        {/* First Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-fr mb-16">
           {categories.map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <button className="bg-gray-800 text-white px-8 py-4 font-semibold hover:bg-gray-700 transition-colors">
-            View All Products
-          </button>
+        {/* Repeated Grid with new names & images */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-fr">
+          {moreCategories.map((category) => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
         </div>
       </div>
     </section>
