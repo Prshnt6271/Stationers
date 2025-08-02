@@ -1,14 +1,14 @@
 import React from 'react';
 
 // Import brand logos from local assets
-import domsLogo from '../assets/Brand-logo/doms.png';
-import koresLogo from '../assets/Brand-logo/kores.png';
-import unomaxLogo from '../assets/Brand-logo/unomax.png';
-import celloLogo from '../assets/Brand-logo/cello.png';
-import fevicolLogo from '../assets/Brand-logo/fevicol.png';
-import montexLogo from '../assets/Brand-logo/montex.png';
-import writeflowLogo from '../assets/Brand-logo/writeflow.png';
-import flairLogo from '../assets/Brand-logo/flair.png';
+import domsLogo from '../assets/Brand-logo/doms.webp';
+import koresLogo from '../assets/Brand-logo/kores.webp';
+import unomaxLogo from '../assets/Brand-logo/unomax.webp';
+import celloLogo from '../assets/Brand-logo/cello.webp';
+import fevicolLogo from '../assets/Brand-logo/fevicol.webp';
+import montexLogo from '../assets/Brand-logo/montex.webp';
+import writeflowLogo from '../assets/Brand-logo/writeflow.webp';
+import flairLogo from '../assets/Brand-logo/flair.webp';
 
 // Updated brands with local logo imports
 const brands = [
