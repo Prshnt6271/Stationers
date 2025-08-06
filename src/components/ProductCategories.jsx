@@ -1,4 +1,8 @@
 import React from 'react';
+import Brush from '../assets/productCat/Brush.jpg';
+import ink from '../assets/productCat/ink.jpg';
+import plate from '../assets/productCat/plate.jpg';
+import sketch from '../assets/productCat/sketch.jpg';
 
 const categories = [
   {
@@ -7,7 +11,7 @@ const categories = [
     description: "Premium brushes and painting tools",
     link: "#",
     size: "xlarge",
-    image: "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: Brush
   },
   {
     id: 2,
@@ -47,7 +51,7 @@ const categories = [
     description: "Ink products for artists",
     link: "#",
     size: "wide",
-    image: "https://images.unsplash.com/photo-1622542796254-5b9c46ab0d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: ink
   },
 ];
 
@@ -58,7 +62,7 @@ const moreCategories = [
     description: "Perfect tools for sketching brilliance",
     link: "#",
     size: "xlarge",
-    image: "https://media.gettyimages.com/id/1353307053/photo/creative-graphic-designer-using-digital-tablet-and-computer.jpg?s=2048x2048&w=gi&k=20&c=03mHZuyxx7wnOG41_QrjQC2e_puRNWZP2HQT7qnckZA=  "
+    image: sketch
   },
   {
     id: 102,
@@ -66,7 +70,7 @@ const moreCategories = [
     description: "Vibrant palettes for your art blends",
     link: "#",
     size: "wide",
-    image: "https://media.istockphoto.com/id/501630964/photo/art-process.jpg?s=2048x2048&w=is&k=20&c=8b30MNIQ9fAJ0IHYpfYmmDfDIEq6NiLbIMvCV3gSv-0="
+    image: plate
   },
   {
     id: 103,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-
+  
 // Hero Section Component
 export default function HeroSection() {
   const images = [
