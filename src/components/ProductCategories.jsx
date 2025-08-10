@@ -108,9 +108,9 @@ const moreCategories = [
 
 function CategoryCard({ category }) {
   const sizeClasses = {
-    wide: `col-span-2 w-[95%] mx-auto min-h-[180px]`,
-    square: `h-52 sm:h-60 w-[90%] mx-auto`,
-    xlarge: "col-span-2 row-span-2 w-[97%] h-full"
+    wide: `col-span-2 min-h-[180px] w-full`,
+    square: `h-52 sm:h-60 w-full`,
+    xlarge: "col-span-2 row-span-2 w-full h-full"
   };
 
   return (

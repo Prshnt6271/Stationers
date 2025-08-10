@@ -121,7 +121,7 @@ function Header() {
         </div>
       </div>
 
-      {/* Desktop Navigation - Now with visible buttons */}
+      {/* Desktop Navigation */}
       <nav className="hidden md:block bg-gray-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
         <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
           <li>
@@ -146,28 +146,21 @@ function Header() {
             </button>
             {isProductsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Art Books</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Adult Colouring Books</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Learners Books</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Painting Books</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sketching Books</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Brushes</a>
+                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Office</a>
+                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Stationary</a>
+                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Toys</a>
+                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Decoration</a>
               </div>
             )}
           </li>
           <li>
-            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
-              OTHER OFFERS <span className="text-red-400 text-xs ml-1 font-bold">NEW</span>
+            <a href=" /AboutUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              ABOUT US
             </a>
           </li>
           <li>
-            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
-              NEW ARRIVALS
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
-              ARTIST
+            <a href="/ContactUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              CONTACT US
             </a>
           </li>
         </ul>
@@ -204,18 +197,15 @@ function Header() {
                   </button>
                   {isProductsDropdownOpen && (
                     <div className="mt-2 pl-4 border-l border-gray-200 space-y-2">
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Art Books</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Adult Colouring Books</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Learners Books</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Painting Books</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Sketching Books</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Brushes</a>
+                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Office</a>
+                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Stationary</a>
+                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Toys</a>
+                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Decoration</a>
                     </div>
                   )}
                 </li>
-                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">OTHER OFFERS <span className="text-red-500 text-xs ml-1 font-bold">NEW</span></a></li>
-                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">NEW ARRIVALS</a></li>
-                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">ARTIST</a></li>
+                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">ABOUT US</a></li>
+                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">CONTACT US</a></li>
               </ul>
             </nav>
           </div>

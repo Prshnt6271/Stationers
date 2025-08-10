@@ -33,17 +33,17 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Useful Links Section */}
-        <div className="flex flex-col space-y-3">
-          <h3 className="text-xl font-bold mb-3 border-b-2 border-orange-400 pb-2">USEFUL LINKS</h3>
-          <a href="#" className="text-sm hover:text-orange-200 transition-colors duration-200">About us</a>
-          <a href="#" className="text-sm hover:text-orange-200 transition-colors duration-200">Privacy Policy</a>
-          <a href="#" className="text-sm hover:text-orange-200 transition-colors duration-200">Shipping Policy</a>
-          <a href="#" className="text-sm hover:text-orange-200 transition-colors duration-200">Terms & Conditions</a>
-          <a href="#" className="text-sm hover:text-orange-200 transition-colors duration-200">Refund, Returns and Cancellation Policy</a>
-          <a href="#" className="text-sm hover:text-orange-200 transition-colors duration-200">Art Hub</a>
-          <a href="#" className="text-sm hover:text-orange-200 transition-colors duration-200">Contact Us</a>
-        </div>
+
+                  {/* Useful Links Section */}
+            <div className="flex flex-col space-y-3">
+              <h3 className="text-xl font-bold mb-3 border-b-2 border-orange-400 pb-2">USEFUL LINKS</h3>
+              <a href="/AboutUs" className="text-sm hover:text-orange-200 transition-colors duration-200">About Us</a>
+              <a href="/privacy-policy" className="text-sm hover:text-orange-200 transition-colors duration-200">Privacy Policy</a>
+              <a href="/terms-conditions" className="text-sm hover:text-orange-200 transition-colors duration-200">Terms & Conditions</a>
+              <a href="/ContactUs" className="text-sm hover:text-orange-200 transition-colors duration-200">Contact Us</a>
+            </div>
+
+   
 
         {/* Quick Enquiry Section */}
         <div className="flex flex-col space-y-4">
