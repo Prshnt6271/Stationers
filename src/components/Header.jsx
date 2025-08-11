@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
@@ -45,14 +46,14 @@ function Header() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between">
         {/* Logo Section */}
         <div className="flex-shrink-0 mb-4 md:mb-0">
-          <a href="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group">
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
               <h1 className="text-lg md:text-xl font-bold tracking-wide">
                 <span className="text-yellow-300">K</span>undkund
                 <span className="block text-sm font-medium opacity-90 -mt-1">STATIONERS</span>
               </h1>
             </div>
-          </a>
+          </Link>
         </div>
 
         {/* Centered Search Bar */}
@@ -89,9 +90,9 @@ function Header() {
               </button>
               {isCategoryDropdownOpen && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                  <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 1</a>
-                  <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 2</a>
-                  <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 3</a>
+                  <Link to="/category1" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 1</Link>
+                  <Link to="/category2" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 2</Link>
+                  <Link to="/category3" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 3</Link>
                 </div>
               )}
             </div>
@@ -125,14 +126,14 @@ function Header() {
       <nav className="hidden md:block bg-gray-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
         <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
           <li>
-            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+            <Link to="/" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
               HOME
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+            <Link to="/brands" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
               BRANDS
-            </a>
+            </Link>
           </li>
           <li className="relative" ref={productsDropdownRef}>
             <button
@@ -146,22 +147,22 @@ function Header() {
             </button>
             {isProductsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Office</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Stationary</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Toys</a>
-                <a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Decoration</a>
+                <Link to="/products/office" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Office</Link>
+                <Link to="/products/stationary" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Stationary</Link>
+                <Link to="/products/toys" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Toys</Link>
+                <Link to="/products/decoration" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Decoration</Link>
               </div>
             )}
           </li>
           <li>
-            <a href=" /AboutUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+            <Link to="/AboutUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
               ABOUT US
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/ContactUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+            <Link to="/ContactUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
               CONTACT US
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -183,8 +184,8 @@ function Header() {
             </div>
             <nav>
               <ul className="flex flex-col space-y-4 text-lg">
-                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">HOME</a></li>
-                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">BRANDS</a></li>
+                <li><Link to="/" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>HOME</Link></li>
+                <li><Link to="/brands" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>BRANDS</Link></li>
                 <li className="relative">
                   <button
                     onClick={toggleProductsDropdown}
@@ -197,15 +198,15 @@ function Header() {
                   </button>
                   {isProductsDropdownOpen && (
                     <div className="mt-2 pl-4 border-l border-gray-200 space-y-2">
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Office</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Stationary</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Toys</a>
-                      <a href="#" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md">Decoration</a>
+                      <Link to="/products/office" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Office</Link>
+                      <Link to="/products/stationary" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Stationary</Link>
+                      <Link to="/products/toys" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Toys</Link>
+                      <Link to="/products/decoration" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Decoration</Link>
                     </div>
                   )}
                 </li>
-                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">ABOUT US</a></li>
-                <li><a href="#" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md">CONTACT US</a></li>
+                <li><Link to="/about" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>ABOUT US</Link></li>
+                <li><Link to="/contact" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>CONTACT US</Link></li>
               </ul>
             </nav>
           </div>
