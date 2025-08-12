@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import ContactUs from './pages/ContactUs';
 import AboutUs from './pages/AboutUs';
 import BrandsPage from './pages/BrandsPage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 export default function App() {
   return (
@@ -21,6 +22,8 @@ export default function App() {
             <Route path="/ContactUs" element={<ContactUs />} />
              <Route path="/AboutUs" element={<AboutUs />} />
                 <Route path="/brands" element={<BrandsPage />} />
+                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          
 
           
           </Routes>

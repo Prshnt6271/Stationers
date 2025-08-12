@@ -34,16 +34,37 @@ export default function Footer() {
         </div>
 
 
-                  {/* Useful Links Section */}
-            <div className="flex flex-col space-y-3">
-              <h3 className="text-xl font-bold mb-3 border-b-2 border-orange-400 pb-2">USEFUL LINKS</h3>
-              <a href="/AboutUs" className="text-sm hover:text-orange-200 transition-colors duration-200">About Us</a>
-              <a href="/privacy-policy" className="text-sm hover:text-orange-200 transition-colors duration-200">Privacy Policy</a>
-              <a href="/terms-conditions" className="text-sm hover:text-orange-200 transition-colors duration-200">Terms & Conditions</a>
-              <a href="/ContactUs" className="text-sm hover:text-orange-200 transition-colors duration-200">Contact Us</a>
-            </div>
+            {/* Useful Links Section */}
+          <div className="flex flex-col space-y-3">
+            <h3 className="text-xl font-bold mb-3 border-b-2 border-orange-400 pb-2">USEFUL LINKS</h3>
+            <Link 
+              to="/AboutUs" 
+              className="text-sm hover:text-orange-200 transition-colors duration-200"
+            >
+              About Us
+            </Link>
+         <Link 
+  to="/privacy-policy" 
+  className="text-sm hover:text-orange-200 transition-colors duration-200"
+  onClick={() => window.scrollTo(0, 0)}
+>
+  Privacy Policy
+</Link>
+            <Link 
+              to="/terms-conditions" 
+              className="text-sm hover:text-orange-200 transition-colors duration-200"
+            >
+              Terms & Conditions
+            </Link>
+            <Link 
+              to="/ContactUs" 
+              className="text-sm hover:text-orange-200 transition-colors duration-200"
+            >
+              Contact Us
+            </Link>
+          </div>
 
-   
+            
 
         {/* Quick Enquiry Section */}
         <div className="flex flex-col space-y-4">

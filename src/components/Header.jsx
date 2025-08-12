@@ -6,22 +6,18 @@ function Header() {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [isBrandsDropdownOpen, setIsBrandsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileBrandsOpen, setIsMobileBrandsOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const productsDropdownRef = useRef(null);
   const categoryDropdownRef = useRef(null);
   const brandsDropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
+  const mobileBrandsRef = useRef(null);
+  const mobileProductsRef = useRef(null);
 
   const navigate = useNavigate();
-
-  const brands = ["Doms", "Waterflow", "Flair", "Fevicol", "Kores", "Montex", "Cello"];
-  const products = [
-    { name: "Office", path: "/products/office" },
-    { name: "Stationary", path: "/products/stationary" },
-    { name: "Toys", path: "/products/toys" },
-    { name: "Decoration", path: "/products/decoration" }
-  ];
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -39,6 +35,12 @@ function Header() {
           setIsMobileMenuOpen(false);
         }
       }
+      if (mobileBrandsRef.current && !mobileBrandsRef.current.contains(event.target)) {
+        setIsMobileBrandsOpen(false);
+      }
+      if (mobileProductsRef.current && !mobileProductsRef.current.contains(event.target)) {
+        setIsMobileProductsOpen(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -51,6 +53,8 @@ function Header() {
   const toggleCategoryDropdown = () => setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
   const toggleBrandsDropdown = () => setIsBrandsDropdownOpen(!isBrandsDropdownOpen);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleMobileBrands = () => setIsMobileBrandsOpen(!isMobileBrandsOpen);
+  const toggleMobileProducts = () => setIsMobileProductsOpen(!isMobileProductsOpen);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -60,6 +64,7 @@ function Header() {
   const handleBrandClick = (brand) => {
     navigate(`/brands#${brand.toLowerCase()}`);
     setIsBrandsDropdownOpen(false);
+    setIsMobileBrandsOpen(false);
     setIsMobileMenuOpen(false);
   };
 
@@ -67,7 +72,7 @@ function Header() {
     <header className="bg-white shadow-lg font-inter">
       {/* Main Header */}
       <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between">
-        {/* Logo */}
+        {/* Logo Section */}
         <div className="flex-shrink-0 mb-4 md:mb-0">
           <Link to="/" className="flex items-center group">
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
@@ -123,7 +128,7 @@ function Header() {
           </form>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Toggles */}
         <div className="flex items-center space-x-4 sm:space-x-6 justify-end w-full md:w-auto">
           <button
             onClick={toggleMobileMenu}
@@ -144,13 +149,17 @@ function Header() {
       {/* Desktop Navigation */}
       <nav className="hidden md:block bg-gray-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
         <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
-          <li><Link to="/" className="hover:bg-gray-700 px-4 py-2 rounded-md">HOME</Link></li>
+          <li>
+            <Link to="/" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              HOME
+            </Link>
+          </li>
 
-          {/* Brands */}
+          {/* Brands Dropdown */}
           <li className="relative" ref={brandsDropdownRef}>
             <button
               onClick={toggleBrandsDropdown}
-              className="flex items-center hover:bg-gray-700 px-4 py-2 rounded-md"
+              className="flex items-center hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md focus:outline-none transition-colors duration-200"
             >
               BRANDS
               <svg className={`w-4 h-4 ml-1 transform transition-transform ${isBrandsDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,7 +168,7 @@ function Header() {
             </button>
             {isBrandsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                {brands.map((brand) => (
+                {["Doms", "Waterflow", "Flair", "Fevicol", "Kores", "Montex", "Cello","Unomax"].map((brand) => (
                   <button
                     key={brand}
                     onClick={() => handleBrandClick(brand)}
@@ -172,11 +181,11 @@ function Header() {
             )}
           </li>
 
-          {/* Products */}
+          {/* Products Dropdown */}
           <li className="relative" ref={productsDropdownRef}>
             <button
               onClick={toggleProductsDropdown}
-              className="flex items-center hover:bg-gray-700 px-4 py-2 rounded-md"
+              className="flex items-center hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md focus:outline-none transition-colors duration-200"
             >
               PRODUCTS
               <svg className={`w-4 h-4 ml-1 transform transition-transform ${isProductsDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,17 +194,24 @@ function Header() {
             </button>
             {isProductsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                {products.map((p) => (
-                  <Link key={p.name} to={p.path} className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">
-                    {p.name}
-                  </Link>
-                ))}
+                <Link to="/products/office" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Office</Link>
+                <Link to="/products/stationary" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Stationary</Link>
+                <Link to="/products/toys" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Toys</Link>
+                <Link to="/products/decoration" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Decoration</Link>
               </div>
             )}
           </li>
 
-          <li><Link to="/AboutUs" className="hover:bg-gray-700 px-4 py-2 rounded-md">ABOUT US</Link></li>
-          <li><Link to="/ContactUs" className="hover:bg-gray-700 px-4 py-2 rounded-md">CONTACT US</Link></li>
+          <li>
+            <Link to="/AboutUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              ABOUT US
+            </Link>
+          </li>
+          <li>
+            <Link to="/ContactUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+              CONTACT US
+            </Link>
+          </li>
         </ul>
       </nav>
 
@@ -203,7 +219,7 @@ function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30" onClick={toggleMobileMenu}>
           <div
-            className="fixed top-0 right-0 w-64 h-full bg-white shadow-xl p-6"
+            className="fixed top-0 right-0 w-64 h-full bg-white shadow-xl p-6 overflow-y-auto"
             ref={mobileMenuRef}
             onClick={(e) => e.stopPropagation()}
           >
@@ -215,27 +231,36 @@ function Header() {
               </button>
             </div>
             <nav>
-              <ul className="flex flex-col space-y-4 text-lg">
-                <li><Link to="/" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>HOME</Link></li>
-
-                {/* Mobile Brands */}
+              <ul className="flex flex-col space-y-2 text-lg">
                 <li>
+                  <Link to="/" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>
+                    HOME
+                  </Link>
+                </li>
+
+                {/* Mobile Brands Dropdown */}
+                <li className="relative" ref={mobileBrandsRef}>
                   <button
-                    onClick={toggleBrandsDropdown}
-                    className="w-full flex justify-between items-center py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md"
+                    onClick={toggleMobileBrands}
+                    className="flex items-center justify-between w-full py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md focus:outline-none"
                   >
-                    BRANDS
-                    <svg className={`w-4 h-4 transform transition-transform ${isBrandsDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span>BRANDS</span>
+                    <svg 
+                      className={`w-4 h-4 ml-2 transform transition-transform ${isMobileBrandsOpen ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  {isBrandsDropdownOpen && (
-                    <div className="pl-4">
-                      {brands.map((brand) => (
+                  {isMobileBrandsOpen && (
+                    <div className="ml-4 mt-1 bg-gray-50 rounded-md overflow-hidden">
+                      {["Doms", "Waterflow", "Flair", "Fevicol", "Kores", "Montex", "Cello","Unomax"].map((brand) => (
                         <button
                           key={brand}
                           onClick={() => handleBrandClick(brand)}
-                          className="block w-full text-left px-3 py-2 hover:bg-blue-50 hover:text-blue-700 rounded-md"
+                          className="block w-full text-left px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700"
                         >
                           {brand}
                         </button>
@@ -244,35 +269,42 @@ function Header() {
                   )}
                 </li>
 
-                {/* Mobile Products */}
-                <li>
+                {/* Mobile Products Dropdown */}
+                <li className="relative" ref={mobileProductsRef}>
                   <button
-                    onClick={toggleProductsDropdown}
-                    className="w-full flex justify-between items-center py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md"
+                    onClick={toggleMobileProducts}
+                    className="flex items-center justify-between w-full py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md focus:outline-none"
                   >
-                    PRODUCTS
-                    <svg className={`w-4 h-4 transform transition-transform ${isProductsDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span>PRODUCTS</span>
+                    <svg 
+                      className={`w-4 h-4 ml-2 transform transition-transform ${isMobileProductsOpen ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  {isProductsDropdownOpen && (
-                    <div className="pl-4">
-                      {products.map((p) => (
-                        <Link
-                          key={p.name}
-                          to={p.path}
-                          className="block px-3 py-2 hover:bg-blue-50 hover:text-blue-700 rounded-md"
-                          onClick={toggleMobileMenu}
-                        >
-                          {p.name}
-                        </Link>
-                      ))}
+                  {isMobileProductsOpen && (
+                    <div className="ml-4 mt-1 bg-gray-50 rounded-md overflow-hidden">
+                      <Link to="/products/office" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Office</Link>
+                      <Link to="/products/stationary" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Stationary</Link>
+                      <Link to="/products/toys" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Toys</Link>
+                      <Link to="/products/decoration" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Decoration</Link>
                     </div>
                   )}
                 </li>
 
-                <li><Link to="/about" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>ABOUT US</Link></li>
-                <li><Link to="/contact" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>CONTACT US</Link></li>
+                <li>
+                  <Link to="/AboutUs" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>
+                    ABOUT US
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/ContactUs" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>
+                    CONTACT US
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>
