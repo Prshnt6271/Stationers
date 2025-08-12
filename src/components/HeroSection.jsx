@@ -1,30 +1,24 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-  
-// Hero Section Component
-export default function HeroSection() {
-  const images = [
-    "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
-    "https://media.gettyimages.com/id/882856192/photo/creativity-takes-courage.jpg?s=2048x2048&w=gi&k=20&c=9ss9QXrfhZLpkcCwZwxbT2UETj7jozF1fQyWatTsPd8="
-  ];
 
-  // Memoize the images array
-  const memoizedImages = useMemo(() => images, []);
+// Import local images
+import img1 from '../assets/Hero/1.jpg';
+import img2 from '../assets/Hero/2.jpg';
+import img3 from '../assets/Hero/3.jpg';
+
+export default function HeroSection() {
+  const images = useMemo(() => [img1, img2, img3], []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
   const intervalRef = useRef(null);
 
-  const goToNext = () => setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  const goToPrevious = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  const goToNext = () =>
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   const goToSlide = (index) => setCurrentIndex(index);
 
   useEffect(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
 
-    // Only start auto-advance if user hasn't interacted recently
     const timeoutId = setTimeout(() => {
       intervalRef.current = setInterval(() => {
         goToNext();
@@ -35,51 +29,31 @@ export default function HeroSection() {
       clearTimeout(timeoutId);
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [currentIndex]); // Add currentIndex to dependencies
+  }, [currentIndex]);
 
   return (
-    <section className="relative w-full overflow-hidden shadow-xl rounded-b-lg">
+    <section className="relative w-full overflow-hidden shadow-xl rounded-b-lg h-[80vh]">
       <div
         ref={carouselRef}
-        className="flex transition-transform duration-700 ease-in-out"
+        className="flex transition-transform duration-700 ease-in-out h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
-          <div key={index} className="w-full flex-shrink-0">
+          <div key={index} className="w-full flex-shrink-0 h-full">
             <img
               src={image}
               alt={`Hero Slide ${index + 1}`}
-              className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-b-lg"
+              className="w-full h-full object-cover rounded-b-lg"
               loading="lazy"
-              style={{ minHeight: '12rem' }} // Prevent layout shift
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "https://placehold.co/1600x600/CCCCCC/333333?text=Image+Error";
+                e.target.src =
+                  'https://placehold.co/1600x900/CCCCCC/333333?text=Image+Error';
               }}
             />
           </div>
         ))}
       </div>
-
-      {/* Navigation Arrows */}
-      <button
-        onClick={goToPrevious}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full focus:outline-none hover:bg-opacity-75 transition-all duration-300 z-10"
-        aria-label="Previous slide"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-      </button>
-      <button
-        onClick={goToNext}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full focus:outline-none hover:bg-opacity-75 transition-all duration-300 z-10"
-        aria-label="Next slide"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </button>
 
       {/* Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
@@ -87,7 +61,11 @@ export default function HeroSection() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full ${currentIndex === index ? 'bg-blue-600' : 'bg-gray-300 bg-opacity-70'} hover:bg-blue-500 transition-colors duration-300`}
+            className={`w-3 h-3 rounded-full ${
+              currentIndex === index
+                ? 'bg-blue-600'
+                : 'bg-gray-300 bg-opacity-70'
+            } hover:bg-blue-500 transition-colors duration-300`}
             aria-label={`Go to slide ${index + 1}`}
           ></button>
         ))}

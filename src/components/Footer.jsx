@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // Footer Component
 export default function Footer() {
   return (
-    <footer className="bg-orange-600 text-white py-10 md:py-16 mt-12 rounded-t-lg shadow-inner">
+    <footer className="bg-gray-800 text-white py-10 md:py-16 mt-12 rounded-t-lg shadow-inner">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
 
         {/* About Us Section */}
@@ -52,22 +52,22 @@ export default function Footer() {
             <input
               type="text"
               placeholder="Your Name*"
-              className="w-full p-3 rounded-md bg-orange-700 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm"
+              className="w-full p-3 rounded-md bg-gray-800 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm"
             />
             <input
               type="email"
               placeholder="Your Email*"
-              className="w-full p-3 rounded-md bg-orange-700 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm"
+              className="w-full p-3 rounded-md bg-gray-800 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm"
             />
             <input
               type="tel"
               placeholder="Your Number*"
-              className="w-full p-3 rounded-md bg-orange-700 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm"
+              className="w-full p-3 rounded-md bg-gray-800 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm"
             />
             <textarea
               placeholder="Your Message"
               rows="4"
-              className="w-full p-3 rounded-md bg-orange-700 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm resize-y"
+              className="w-full p-3 rounded-md bg-gray-800 border border-orange-500 placeholder-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 text-sm resize-y"
             ></textarea>
             <div className="flex items-center justify-between">
               {/* Placeholder for reCAPTCHA or similar, as seen in the image */}

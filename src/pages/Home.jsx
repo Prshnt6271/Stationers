@@ -17,17 +17,23 @@ export default function Home() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-xl font-semibold text-blue-600 mb-3">Art Supplies</h2>
-          <p className="text-gray-700">Discover paints, brushes, canvases, and more for your artistic endeavors.</p>
+          <h2 className="text-xl font-semibold text-blue-600 mb-3">Toys</h2>
+      
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-xl font-semibold text-blue-600 mb-3">Office Stationery</h2>
-          <p className="text-gray-700">From pens to paper, find everything you need for a productive workspace.</p>
+          <h2 className="text-xl font-semibold text-blue-600 mb-3">Office Supply</h2>
+       
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-xl font-semibold text-blue-600 mb-3">Books & Journals</h2>
-          <p className="text-gray-700">A curated collection of notebooks, diaries, and specialized books.</p>
+          <h2 className="text-xl font-semibold text-blue-600 mb-3">School Stationary</h2>
+        
         </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+          <h2 className="text-xl font-semibold text-blue-600 mb-3">Decoration</h2>
+      
+        </div>
+
       </div>
       
       <div className="h-64 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl mt-12 flex items-center justify-center text-gray-600 text-xl font-medium shadow-inner">

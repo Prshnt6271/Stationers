@@ -14,42 +14,42 @@ import h from '../assets/h.jpg';
 const brands = [
   { 
     id: 1, 
-    name: "DOMS", 
+    name: "FLAIR", 
     logoUrl: a 
   },
   { 
     id: 2, 
-    name: "Kores", 
+    name: "WRITEFLOW", 
     logoUrl: b 
   },
   { 
     id: 3, 
-    name: "UNOMAX", 
+    name: "MONTEX", 
     logoUrl: c 
   },
   { 
     id: 4, 
-    name: "Cello", 
+    name: "FEVICOL", 
     logoUrl: d 
   },
   { 
     id: 5, 
-    name: "FEVICOL", 
+    name: "CELLO", 
     logoUrl: e 
   },
   { 
     id: 6, 
-    name: "Montex", 
+    name: "UNOMAX", 
     logoUrl: f 
   },
   { 
     id: 7, 
-    name: "WriteFlow", 
+    name: "KORES", 
     logoUrl: g 
   },
   { 
     id: 8, 
-    name: "Flair", 
+    name: "DOMS", 
     logoUrl: h 
   },
 ];

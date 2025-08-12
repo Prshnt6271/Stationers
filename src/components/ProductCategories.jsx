@@ -7,7 +7,7 @@ const categories = [
     description: "Durable binders for organizing documents",
     link: "#",
     size: "xlarge",
-    image: "https://images.unsplash.com/photo-1579965342575-16428a7c8881?auto=format&fit=crop&w=800&q=80" // replace with binder image
+    image: "https://images.unsplash.com/photo-1579965342575-16428a7c8881?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const categories = [
     description: "Smooth-writing premium pens",
     link: "#",
     size: "wide",
-    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80" // replace with pen image
+    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const categories = [
     description: "Quality notebooks for notes & sketches",
     link: "#",
     size: "square",
-    image: "https://images.unsplash.com/photo-1613243555978-636c48dc653c?auto=format&fit=crop&w=800&q=80" // notebook image
+    image: "https://images.unsplash.com/photo-1613243555978-636c48dc653c?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 4,
@@ -110,9 +110,10 @@ const moreCategories = [
   },
 ];
 
+
 function CategoryCard({ category }) {
   const sizeClasses = {
-    wide: `col-span-2 min-h-[180px] w-full`,
+    wide: `col-span-2 min-h-[220px] md:min-h-[260px] w-full`, // Increased height
     square: `h-52 sm:h-60 w-full`,
     xlarge: "col-span-2 row-span-2 w-full h-full"
   };
@@ -145,10 +146,21 @@ export default function ProductCategories() {
           {categories.map((c) => <CategoryCard key={c.id} category={c} />)}
         </div>
 
-
         {/* More Products Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-fr">
-          {moreCategories.map((c) => <CategoryCard key={c.id} category={c} />)}
+          {/* First row */}
+          {moreCategories.slice(0, 2).map((c) => <CategoryCard key={c.id} category={c} />)}
+          
+          {/* Second row */}
+          {moreCategories.slice(2, 4).map((c) => <CategoryCard key={c.id} category={c} />)}
+          
+          {/* Centered last item with increased height */}
+          <div className="col-span-2 md:col-start-2">
+            <CategoryCard category={{
+              ...moreCategories[4],
+              size: "wide" // Ensure it uses the wide size class with increased height
+            }} />
+          </div>
         </div>
       </div>
     </section>

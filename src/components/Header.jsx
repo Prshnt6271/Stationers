@@ -1,15 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [isBrandsDropdownOpen, setIsBrandsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const productsDropdownRef = useRef(null);
   const categoryDropdownRef = useRef(null);
+  const brandsDropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  const brands = ["Doms", "Waterflow", "Flair", "Fevicol", "Kores", "Montex", "Cello"];
+  const products = [
+    { name: "Office", path: "/products/office" },
+    { name: "Stationary", path: "/products/stationary" },
+    { name: "Toys", path: "/products/toys" },
+    { name: "Decoration", path: "/products/decoration" }
+  ];
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -18,6 +30,9 @@ function Header() {
       }
       if (categoryDropdownRef.current && !categoryDropdownRef.current.contains(event.target)) {
         setIsCategoryDropdownOpen(false);
+      }
+      if (brandsDropdownRef.current && !brandsDropdownRef.current.contains(event.target)) {
+        setIsBrandsDropdownOpen(false);
       }
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && isMobileMenuOpen) {
         if (event.target.closest('button[aria-label="Toggle mobile menu"]') === null) {
@@ -34,17 +49,25 @@ function Header() {
 
   const toggleProductsDropdown = () => setIsProductsDropdownOpen(!isProductsDropdownOpen);
   const toggleCategoryDropdown = () => setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+  const toggleBrandsDropdown = () => setIsBrandsDropdownOpen(!isBrandsDropdownOpen);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
   const handleSearch = (e) => {
     e.preventDefault();
     console.log('Searching for:', searchQuery);
+  };
+
+  const handleBrandClick = (brand) => {
+    navigate(`/brands#${brand.toLowerCase()}`);
+    setIsBrandsDropdownOpen(false);
+    setIsMobileMenuOpen(false);
   };
 
   return (
     <header className="bg-white shadow-lg font-inter">
       {/* Main Header */}
       <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between">
-        {/* Logo Section */}
+        {/* Logo */}
         <div className="flex-shrink-0 mb-4 md:mb-0">
           <Link to="/" className="flex items-center group">
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
@@ -56,7 +79,7 @@ function Header() {
           </Link>
         </div>
 
-        {/* Centered Search Bar */}
+        {/* Search Bar */}
         <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0">
           <form onSubmit={handleSearch} className="relative flex">
             <div className="relative flex-grow">
@@ -67,7 +90,7 @@ function Header() {
                 placeholder="Search for products..."
                 className="w-full p-3 pl-5 pr-12 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
               />
-              <button 
+              <button
                 type="submit"
                 className="absolute right-0 top-0 h-full px-4 text-gray-500 hover:text-blue-600 focus:outline-none"
               >
@@ -76,7 +99,8 @@ function Header() {
                 </svg>
               </button>
             </div>
-            
+
+            {/* Category Dropdown */}
             <div className="relative ml-2" ref={categoryDropdownRef}>
               <button
                 type="button"
@@ -99,13 +123,8 @@ function Header() {
           </form>
         </div>
 
-        {/* Right Mobile Toggles */}
+        {/* Mobile Toggle */}
         <div className="flex items-center space-x-4 sm:space-x-6 justify-end w-full md:w-auto">
-          <button className="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-full hover:bg-gray-100 transition" aria-label="Search">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
           <button
             onClick={toggleMobileMenu}
             className="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-full hover:bg-gray-100 transition"
@@ -125,20 +144,39 @@ function Header() {
       {/* Desktop Navigation */}
       <nav className="hidden md:block bg-gray-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
         <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
-          <li>
-            <Link to="/" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
-              HOME
-            </Link>
-          </li>
-          <li>
-            <Link to="/brands" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
+          <li><Link to="/" className="hover:bg-gray-700 px-4 py-2 rounded-md">HOME</Link></li>
+
+          {/* Brands */}
+          <li className="relative" ref={brandsDropdownRef}>
+            <button
+              onClick={toggleBrandsDropdown}
+              className="flex items-center hover:bg-gray-700 px-4 py-2 rounded-md"
+            >
               BRANDS
-            </Link>
+              <svg className={`w-4 h-4 ml-1 transform transition-transform ${isBrandsDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {isBrandsDropdownOpen && (
+              <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
+                {brands.map((brand) => (
+                  <button
+                    key={brand}
+                    onClick={() => handleBrandClick(brand)}
+                    className="block w-full text-left px-4 py-2 hover:bg-blue-50 hover:text-blue-700"
+                  >
+                    {brand}
+                  </button>
+                ))}
+              </div>
+            )}
           </li>
+
+          {/* Products */}
           <li className="relative" ref={productsDropdownRef}>
             <button
               onClick={toggleProductsDropdown}
-              className="flex items-center hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md focus:outline-none transition-colors duration-200"
+              className="flex items-center hover:bg-gray-700 px-4 py-2 rounded-md"
             >
               PRODUCTS
               <svg className={`w-4 h-4 ml-1 transform transition-transform ${isProductsDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,23 +185,17 @@ function Header() {
             </button>
             {isProductsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                <Link to="/products/office" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Office</Link>
-                <Link to="/products/stationary" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Stationary</Link>
-                <Link to="/products/toys" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Toys</Link>
-                <Link to="/products/decoration" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Decoration</Link>
+                {products.map((p) => (
+                  <Link key={p.name} to={p.path} className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">
+                    {p.name}
+                  </Link>
+                ))}
               </div>
             )}
           </li>
-          <li>
-            <Link to="/AboutUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
-              ABOUT US
-            </Link>
-          </li>
-          <li>
-            <Link to="/ContactUs" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
-              CONTACT US
-            </Link>
-          </li>
+
+          <li><Link to="/AboutUs" className="hover:bg-gray-700 px-4 py-2 rounded-md">ABOUT US</Link></li>
+          <li><Link to="/ContactUs" className="hover:bg-gray-700 px-4 py-2 rounded-md">CONTACT US</Link></li>
         </ul>
       </nav>
 
@@ -185,26 +217,60 @@ function Header() {
             <nav>
               <ul className="flex flex-col space-y-4 text-lg">
                 <li><Link to="/" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>HOME</Link></li>
-                <li><Link to="/brands" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>BRANDS</Link></li>
-                <li className="relative">
+
+                {/* Mobile Brands */}
+                <li>
+                  <button
+                    onClick={toggleBrandsDropdown}
+                    className="w-full flex justify-between items-center py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md"
+                  >
+                    BRANDS
+                    <svg className={`w-4 h-4 transform transition-transform ${isBrandsDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {isBrandsDropdownOpen && (
+                    <div className="pl-4">
+                      {brands.map((brand) => (
+                        <button
+                          key={brand}
+                          onClick={() => handleBrandClick(brand)}
+                          className="block w-full text-left px-3 py-2 hover:bg-blue-50 hover:text-blue-700 rounded-md"
+                        >
+                          {brand}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </li>
+
+                {/* Mobile Products */}
+                <li>
                   <button
                     onClick={toggleProductsDropdown}
-                    className="flex items-center justify-between w-full py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md"
+                    className="w-full flex justify-between items-center py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md"
                   >
                     PRODUCTS
-                    <svg className={`w-5 h-5 ml-1 text-gray-600 transform transition-transform duration-200 ${isProductsDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-4 h-4 transform transition-transform ${isProductsDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
                   {isProductsDropdownOpen && (
-                    <div className="mt-2 pl-4 border-l border-gray-200 space-y-2">
-                      <Link to="/products/office" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Office</Link>
-                      <Link to="/products/stationary" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Stationary</Link>
-                      <Link to="/products/toys" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Toys</Link>
-                      <Link to="/products/decoration" className="block px-4 py-2 text-sm hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>Decoration</Link>
+                    <div className="pl-4">
+                      {products.map((p) => (
+                        <Link
+                          key={p.name}
+                          to={p.path}
+                          className="block px-3 py-2 hover:bg-blue-50 hover:text-blue-700 rounded-md"
+                          onClick={toggleMobileMenu}
+                        >
+                          {p.name}
+                        </Link>
+                      ))}
                     </div>
                   )}
                 </li>
+
                 <li><Link to="/about" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>ABOUT US</Link></li>
                 <li><Link to="/contact" className="block py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md" onClick={toggleMobileMenu}>CONTACT US</Link></li>
               </ul>
