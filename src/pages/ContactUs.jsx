@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ContactUs() {
   return (
-    <section className="min-h-screen bg-white py-12 px-4 md:px-8">
+    <section className="min-h-screen bg-white py-12 px-4 md:px-8 overflow-x-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         
         {/* Left: Contact Form */}
@@ -96,20 +96,19 @@ export default function ContactUs() {
             </div>
           </div>
 
-          {/* Google Map Section */}
-        <div className="mt-8 w-lvh h-80 rounded-lg overflow-hidden shadow-lg">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14015.961383138362!2d77.264223!3d28.678638!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQwJzQzLjEiTiA3N8KwMTUnNTEuMiJF!5e0!3m2!1sen!2sin!4v1722960000000!5m2!1sen!2sin"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Our Location Map"
-        ></iframe>
-        </div>
-
+          {/* Google Map Section - Fixed for mobile */}
+          <div className="mt-8 w-full h-80 rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14015.961383138362!2d77.264223!3d28.678638!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQwJzQzLjEiTiA3N8KwMTUnNTEuMiJF!5e0!3m2!1sen!2sin!4v1722960000000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Our Location Map"
+            ></iframe>
+          </div>
         </div>
       </div>
     </section>
