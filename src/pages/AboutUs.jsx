@@ -1,4 +1,5 @@
 import React from 'react';
+import BrandsSection from '../components/BrandsSection';
 
 const AboutUs = () => {
   return (
@@ -90,6 +91,7 @@ We welcome retailers, resellers, and procurement professionals to visit our stor
           ))}
         </div>
       </div>
+      <BrandsSection></BrandsSection>
     </div>
   );
 };

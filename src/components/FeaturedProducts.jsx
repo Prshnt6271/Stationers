@@ -1,4 +1,7 @@
 import React from 'react';
+import files from '../assets/FeaturedProd/files.jpg';
+import rc from '../assets/FeaturedProd/rc.jpg';
+
 
 // Updated featured products with guaranteed working images
 const featuredProducts = [
@@ -7,7 +10,7 @@ const featuredProducts = [
     mainText: "Files",
     subText: "Office",
     badge: "NEW",
-    bgImage: "https://picsum.photos/id/1011/600/400", // File placeholder
+    bgImage: files, // File placeholder
   },
   {
     id: 2,
@@ -20,7 +23,7 @@ const featuredProducts = [
     id: 3,
     mainText: "RC Car",
     subText: "Toys",
-    bgImage: "https://picsum.photos/id/103/600/400", // RC Car placeholder
+    bgImage: rc, // RC Car placeholder
   },
   {
     id: 4,

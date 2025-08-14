@@ -13,19 +13,19 @@ export default function Home() {
         Explore our wide range of high-quality stationery and art supplies. We are committed to providing the best products for all your creative and professional needs.
       </p>
       
-      {/* Updated Categories Section - Equal width horizontal layout */}
-      <div className="flex flex-nowrap overflow-x-auto py-4 gap-20 mt-12 scrollbar-hide">
-        <div className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-xl font-semibold text-blue-600 mb-3">Toys</h2>
+      {/* Updated Responsive Categories Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
+          <h2 className="text-xl font-semibold text-blue-600">Toys</h2>
         </div>
-        <div className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-xl font-semibold text-blue-600 mb-3">Office Supply</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
+          <h2 className="text-xl font-semibold text-blue-600">Office Supply</h2>
         </div>
-        <div className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-xl font-semibold text-blue-600 mb-3">School Stationary</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
+          <h2 className="text-xl font-semibold text-blue-600">School Stationary</h2>
         </div>
-        <div className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h2 className="text-xl font-semibold text-blue-600 mb-3">Decoration</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
+          <h2 className="text-xl font-semibold text-blue-600">Decoration</h2>
         </div>
       </div>
 
