@@ -1,6 +1,9 @@
 import React from 'react';
 import files from '../assets/FeaturedProd/files.jpg';
 import rc from '../assets/FeaturedProd/rc.jpg';
+import ballon from '../assets/FeaturedProd/ballon.jpg';
+import writeflow from '../assets/FeaturedProd/writeflow.jpg';
+
 
 
 // Updated featured products with guaranteed working images
@@ -17,7 +20,7 @@ const featuredProducts = [
     mainText: "Writeflow Notebook",
     subText: "Stationery",
     badge: "NEW",
-    bgImage: "https://picsum.photos/id/1021/600/400", // Notebook placeholder
+    bgImage: writeflow // Notebook placeholder
   },
   {
     id: 3,
@@ -30,7 +33,7 @@ const featuredProducts = [
     mainText: "Balloon",
     subText: "Decoration",
     badge: "NEW",
-    bgImage: "https://picsum.photos/id/1040/600/400", // Balloon placeholder
+    bgImage: ballon // Balloon placeholder
   },
 ];
 
