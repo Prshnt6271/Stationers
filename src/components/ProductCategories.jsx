@@ -7,7 +7,7 @@ import files from '../assets/productCat/files.jpg';
 import punch from '../assets/productCat/punch.jpg';
 import fileholder from '../assets/productCat/fileholder.jpg';
 import highliter from '../assets/productCat/highliter.jpg';
-import organiser from '../assets/productCat/organiser.jpg';
+import organ from '../assets/productCat/organ.jpg';
 import notebooks from '../assets/productCat/notebooks.jpg';
 import toys from '../assets/productCat/toys.jpg';
 import pens from '../assets/productCat/pens.jpg';
@@ -95,7 +95,7 @@ const moreCategories = [
     description: "Keep your workspace tidy and efficient",
     link: "#",
     size: "square",
-    image: organiser
+    image: organ
   },
   {
     id: 11,
