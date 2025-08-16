@@ -1,17 +1,17 @@
 import React from 'react';
-import sticky from '../assets/productCat/sticky.jpg';
-import ring from '../assets/productCat/ring.jpg';
+import sticky from '../assets/productCat/sticky.webp';
+import ring from '../assets/productCat/ring.webp';
 import coppies from '../assets/productCat/coppies.jpg';
-import markers from '../assets/productCat/markers.jpg';
-import files from '../assets/productCat/files.jpg';
-import punch from '../assets/productCat/punch.jpg';
-import fileholder from '../assets/productCat/fileholder.jpg';
-import highliter from '../assets/productCat/highliter.jpg';
+import markers from '../assets/productCat/markers.webp';
+import files from '../assets/productCat/files.webp';
+import punch from '../assets/productCat/punch.webp';
+import fileholder from '../assets/productCat/fileholder.webp';
+import highliter from '../assets/productCat/highliter.webp';
 import organ from '../assets/productCat/organ.jpg';
-import notebooks from '../assets/productCat/notebooks.jpg';
+import notebooks from '../assets/productCat/notebooks.webp';
 import toys from '../assets/productCat/toys.jpg';
-import pens from '../assets/productCat/pens.jpg';
-import notebok from '../assets/productCat/notebok.jpg'; // make sure file name is exactly correct
+import pen from '../assets/productCat/pen.webp';
+import notebok from '../assets/productCat/notebok.webp'; // make sure file name is exactly correct
 
 const categories = [
   {
@@ -28,7 +28,7 @@ const categories = [
     description: "Smooth-writing premium pens",
     link: "#",
     size: "wide",
-    image: pens
+    image: pen
   },
   {
     id: 3,

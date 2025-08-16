@@ -1,7 +1,7 @@
 import React from 'react';
 import files from '../assets/FeaturedProd/files.jpg';
-import rc from '../assets/FeaturedProd/rc.jpg';
-import ballon from '../assets/FeaturedProd/ballon.jpg';
+import rc from '../assets/FeaturedProd/rc.webp';
+import ballon from '../assets/FeaturedProd/ballon.webp';
 import writeflow from '../assets/FeaturedProd/writeflow.jpg';
 
 
