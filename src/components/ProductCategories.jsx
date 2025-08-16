@@ -11,7 +11,7 @@ import organ from '../assets/productCat/organ.jpg';
 import notebooks from '../assets/productCat/notebooks.webp';
 import toys from '../assets/productCat/toys.jpg';
 import pen from '../assets/productCat/pen.webp';
-import notebok from '../assets/productCat/notebok.webp'; // make sure file name is exactly correct
+import notebok from '../assets/productCat/notebok.webp';
 
 const categories = [
   {
@@ -138,6 +138,8 @@ function CategoryCard({ category }) {
       <img
         src={category.image}
         alt={category.name}
+        loading="eager"  // This prevents lazy loading
+        decoding="async"  // Helps with rendering performance
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
