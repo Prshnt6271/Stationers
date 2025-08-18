@@ -1,10 +1,10 @@
-import React from 'react';
-import files from '../assets/FeaturedProd/files.jpg';
-import rc from '../assets/FeaturedProd/rc.webp';
-import ballon from '../assets/FeaturedProd/ballon.webp';
-import writeflow from '../assets/FeaturedProd/writeflow.jpg';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-
+import files from "../assets/FeaturedProd/files.jpg";
+import rc from "../assets/FeaturedProd/rc.webp";
+import ballon from "../assets/FeaturedProd/ballon.webp";
+import writeflow from "../assets/FeaturedProd/writeflow.jpg";
 
 // Updated featured products with guaranteed working images
 const featuredProducts = [
@@ -13,41 +13,60 @@ const featuredProducts = [
     mainText: "Files",
     subText: "Office",
     badge: "NEW",
-    bgImage: files, // File placeholder
+    bgImage: files,
+    link: "/office-supply", // navigation path
   },
   {
     id: 2,
     mainText: "Writeflow Notebook",
     subText: "Stationery",
     badge: "NEW",
-    bgImage: writeflow // Notebook placeholder
+    bgImage: writeflow,
+    link: "/school-stationary",
   },
   {
     id: 3,
     mainText: "RC Car",
     subText: "Toys",
-    bgImage: rc, // RC Car placeholder
+    bgImage: rc,
+    link: "/toys",
   },
   {
     id: 4,
     mainText: "Balloon",
     subText: "Decoration",
     badge: "NEW",
-    bgImage: ballon // Balloon placeholder
+    bgImage: ballon,
+    link: "/decoration",
   },
 ];
 
+// ScrollToTop hook (ensures page always opens at top)
+function ScrollToTop() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return null;
+}
+
 // ProductCard Component
 function ProductCard({ product }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(product.link);
+  };
+
   return (
     <div className="flex flex-col items-start space-y-2">
       {/* Background image container */}
       <div
-        className="relative w-full h-56 flex flex-col items-center justify-center overflow-hidden rounded-lg shadow-inner"
+        onClick={handleClick}
+        className="relative w-full h-56 flex flex-col items-center justify-center overflow-hidden rounded-lg shadow-inner cursor-pointer"
         style={{
           backgroundImage: `url(${product.bgImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <span className="text-lg font-bold text-white drop-shadow-md">
@@ -65,7 +84,10 @@ function ProductCard({ product }) {
       </div>
 
       {/* Enquire Now Button */}
-      <button className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg shadow hover:bg-blue-700 transition">
+      <button
+        onClick={handleClick}
+        className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg shadow hover:bg-blue-700 transition"
+      >
         Enquire Now
       </button>
     </div>
@@ -82,6 +104,7 @@ export default function FeaturedProducts() {
 
   return (
     <section className="bg-gray-50 py-12 font-sans text-gray-800">
+      <ScrollToTop />
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">

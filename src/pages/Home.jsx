@@ -3,6 +3,7 @@ import ProductCategories from "../components/ProductCategories";
 import BrandCard from "../components/BrandsSection";
 import FeaturedProducts from "../components/FeaturedProducts";
 import HeroSection from "../components/HeroSection";
+import Categories from "./Categories";
 
 export default function Home() {
     return (
@@ -14,20 +15,7 @@ export default function Home() {
       </p>
       
       {/* Updated Responsive Categories Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
-          <h2 className="text-xl font-semibold text-blue-600">Toys</h2>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
-          <h2 className="text-xl font-semibold text-blue-600">Office Supply</h2>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
-          <h2 className="text-xl font-semibold text-blue-600">School Stationary</h2>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-center text-center min-h-[120px]">
-          <h2 className="text-xl font-semibold text-blue-600">Decoration</h2>
-        </div>
-      </div>
+     <Categories></Categories>
 
       <div className="h-80 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl mt-12 p-8 flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
         <blockquote className="max-w-3xl text-center">

@@ -8,6 +8,10 @@ import ContactUs from './pages/ContactUs';
 import AboutUs from './pages/AboutUs';
 import BrandsPage from './pages/BrandsPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Toys from "./pages/Toys";
+import OfficeSupply from "./pages/OfficeSupply";
+import SchoolStationary from "./pages/SchoolStationary";
+import Decoration from "./pages/Decoration";
 
 export default function App() {
   return (
@@ -23,6 +27,10 @@ export default function App() {
              <Route path="/AboutUs" element={<AboutUs />} />
                 <Route path="/brands" element={<BrandsPage />} />
                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+             <Route path="/toys" element={<Toys />} />
+        <Route path="/office-supply" element={<OfficeSupply />} />
+        <Route path="/school-stationary" element={<SchoolStationary />} />
+        <Route path="/decoration" element={<Decoration />} />
           
 
           
