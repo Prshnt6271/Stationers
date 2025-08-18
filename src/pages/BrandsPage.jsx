@@ -115,32 +115,30 @@ function BrandsPage() {
         >
           <h2 className="text-3xl font-semibold mb-6">{brand.name}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {brand.images.map((img, i) => {
-              // ✅ Replace the last image of DOMS with PDF card
-              if (brand.name === "Doms" && i === brand.images.length - 1) {
-                return (
-                  <a
-                    key="doms-pdf"
-                    href={brand.pdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-full h-64 border-2 border-dashed border-gray-400 rounded-lg shadow-lg hover:bg-gray-100 transition"
-                  >
-                    <span className="text-lg font-semibold text-gray-700">
-                      📄 View Doms PDF
-                    </span>
-                  </a>
-                );
-              }
-              return (
-                <img
-                  key={i}
-                  src={img}
-                  alt={`${brand.name} product ${i + 1}`}
-                  className="w-full h-64 object-cover rounded-lg shadow-xl hover:scale-105 transform transition-transform duration-300"
-                />
-              );
-            })}
+            {/* ✅ Show all brand images */}
+            {brand.images.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                alt={`${brand.name} product ${i + 1}`}
+                className="w-full h-64 object-cover rounded-lg shadow-xl hover:scale-105 transform transition-transform duration-300"
+              />
+            ))}
+
+            {/* ✅ Add PDF card after images only for Doms */}
+            {brand.name === "Doms" && (
+              <a
+                key="doms-pdf"
+                href={brand.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-full h-64 border-2 border-dashed border-gray-400 rounded-lg shadow-lg hover:bg-gray-100 transition"
+              >
+                <span className="text-lg font-semibold text-gray-700">
+                  📄 View Doms PDF
+                </span>
+              </a>
+            )}
           </div>
         </div>
       ))}
