@@ -85,28 +85,32 @@ export default function ContactUs() {
               <svg className="w-6 h-6 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"></path>
               </svg>
-              <p>Sitaram Enterprises <br /> J-5 Central Market, Lajpat Nagar-2, New Delhi – 110024</p>
+              <p>
+                KunKun Stationary<br />
+                M7H7+FM4, Delhi<br />
+                28°40'43.1"N 77°15'51.2"E
+              </p>
             </div>
 
             <div className="flex items-start space-x-4">
               <svg className="w-6 h-6 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
               </svg>
-              <p>care@sitaramstationers.com</p>
+              <p>care@kunkunstationary.com</p>
             </div>
           </div>
 
-          {/* Google Map Section - Fixed for mobile */}
+          {/* Google Map Section - Updated with KunKun Stationary location */}
           <div className="mt-8 w-full h-80 rounded-lg overflow-hidden shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14015.961383138362!2d77.264223!3d28.678638!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQwJzQzLjEiTiA3N8KwMTUnNTEuMiJF!5e0!3m2!1sen!2sin!4v1722960000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d14015.961383138362!2d77.264223!3d28.678638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDQwJzQzLjEiTiA3N8KwMTUnNTEuMiJF!5e0!3m2!1sen!2sin!4v1722960000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Our Location Map"
+              title="KunKun Stationary Location Map"
             ></iframe>
           </div>
         </div>

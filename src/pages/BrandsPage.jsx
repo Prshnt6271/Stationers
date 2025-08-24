@@ -27,7 +27,7 @@ import K8 from "../assets/Brand/Kores/K8.jpg";
 import K9 from "../assets/Brand/Kores/K9.jpg";
 import K10 from "../assets/Brand/Kores/K10.jpg";
 import K11 from "../assets/Brand/Kores/K11.jpg";
-// import KoresPDF from "../assets/Brand/Kores/Kores.pdf";
+import KoresPDF from "../assets/Brand/Kores/Kores.pdf";
 
 // ✅ Import images for Munix
 import MU1 from "../assets/Brand/Munix/MU1.jpg";
@@ -66,7 +66,7 @@ const brandsData = [
   {
     name: "Kores",
     images: [K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11],
-    // pdf: KoresPDF,
+    pdf: KoresPDF,
   },
   {
     name: "Munix",
@@ -78,7 +78,6 @@ const brandsData = [
     images: [MI1, MI2, MI3, MI4, MI5, MI6, MI7, MI8, MI9, MI10, MI11],
     pdf: MilesPDF,
   },
-  // ✅ Keep the other brands same as befor
 ];
 
 function BrandsPage() {
@@ -119,18 +118,42 @@ function BrandsPage() {
               />
             ))}
 
-            {/* ✅ Add PDF card after images only for brands with pdf */}
+            {/* ✅ Add PDF card with distinct styling */}
             {brand.pdf && (
               <a
                 key={`${brand.name}-pdf`}
                 href={brand.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-full h-64 border-2 border-dashed border-gray-400 rounded-lg shadow-lg hover:bg-gray-100 transition"
+                className="relative group w-full h-64 rounded-lg shadow-xl overflow-hidden border-2 border-blue-400"
               >
-                <span className="text-lg font-semibold text-gray-700">
-                  📄 View {brand.name} PDF
-                </span>
+                {/* Use the first image of the brand with blur effect */}
+                <img
+                  src={brand.images[0]}
+                  alt={`${brand.name} PDF`}
+                  className="w-full h-full object-cover filter blur-sm group-hover:blur-none transition-all duration-300"
+                />
+                
+                {/* PDF icon badge */}
+                <div className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                
+                {/* Overlay with text */}
+                <div className="absolute inset-0 bg-blue-900 bg-opacity-70 flex flex-col items-center justify-center p-4 text-center">
+                  <span className="text-4xl mb-2">📄</span>
+                  <span className="text-xl font-bold text-white mb-1">
+                    Product Catalog
+                  </span>
+                  <span className="text-lg font-semibold text-white">
+                    Download {brand.name} PDF
+                  </span>
+                  <div className="mt-2 px-3 py-1 bg-white text-blue-900 rounded-full text-sm font-medium">
+                    Click to view
+                  </div>
+                </div>
               </a>
             )}
           </div>
