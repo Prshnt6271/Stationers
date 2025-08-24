@@ -2,89 +2,83 @@ import React, { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 // ✅ Import your own images for Doms
-import D1 from "../assets/Brand/D1.jpg";
-import D2 from "../assets/Brand/D2.jpg";
-import D3 from "../assets/Brand/D3.jpg";
-import D4 from "../assets/Brand/D4.jpg";
-import D5 from "../assets/Brand/D5.jpg";
-import D6 from "../assets/Brand/D6.jpg";
-import D7 from "../assets/Brand/D7.jpg";
-import D8 from "../assets/Brand/D8.jpg";
-import D9 from "../assets/Brand/D9.jpg";
-import D10 from "../assets/Brand/D10.jpg";
+import D1 from "../assets/Brand/Doms/D1.jpg";
+import D2 from "../assets/Brand/Doms/D2.jpg";
+import D3 from "../assets/Brand/Doms/D3.jpg";
+import D4 from "../assets/Brand/Doms/D4.jpg";
+import D5 from "../assets/Brand/Doms/D5.jpg";
+import D6 from "../assets/Brand/Doms/D6.jpg";
+import D7 from "../assets/Brand/Doms/D7.jpg";
+import D8 from "../assets/Brand/Doms/D8.jpg";
+import D9 from "../assets/Brand/Doms/D9.jpg";
+import D10 from "../assets/Brand/Doms/D10.jpg";
+import D11 from "../assets/Brand/Doms/D11.jpg";
+import DomsPDF from "../assets/Brand/Doms/Doms.pdf";
 
-// ✅ Import your PDF
-import DomsPDF from "../assets/Brand/Doms.pdf";
+// ✅ Import images for Kores
+import K1 from "../assets/Brand/Kores/K1.jpg";
+import K2 from "../assets/Brand/Kores/K2.jpg";
+import K3 from "../assets/Brand/Kores/K3.jpg";
+import K4 from "../assets/Brand/Kores/K4.jpg";
+import K5 from "../assets/Brand/Kores/K5.jpg";
+import K6 from "../assets/Brand/Kores/K6.jpg";
+import K7 from "../assets/Brand/Kores/K7.jpg";
+import K8 from "../assets/Brand/Kores/K8.jpg";
+import K9 from "../assets/Brand/Kores/K9.jpg";
+import K10 from "../assets/Brand/Kores/K10.jpg";
+import K11 from "../assets/Brand/Kores/K11.jpg";
+// import KoresPDF from "../assets/Brand/Kores/Kores.pdf";
+
+// ✅ Import images for Munix
+import MU1 from "../assets/Brand/Munix/MU1.jpg";
+import MU2 from "../assets/Brand/Munix/MU2.jpg";
+import MU3 from "../assets/Brand/Munix/MU3.jpg";
+import MU4 from "../assets/Brand/Munix/MU4.jpg";
+import MU5 from "../assets/Brand/Munix/MU5.jpg";
+import MU6 from "../assets/Brand/Munix/MU6.jpg";
+import MU7 from "../assets/Brand/Munix/MU7.jpg";
+import MU8 from "../assets/Brand/Munix/MU8.jpg";
+import MU9 from "../assets/Brand/Munix/MU9.jpg";
+import MU10 from "../assets/Brand/Munix/MU10.jpg";
+import MU11 from "../assets/Brand/Munix/MU11.jpg";
+import MunixPDF from "../assets/Brand/Munix/Munix.pdf";
+
+// ✅ Import images for Miles
+import MI1 from "../assets/Brand/Miles/MI1.jpg";
+import MI2 from "../assets/Brand/Miles/MI2.jpg";
+import MI3 from "../assets/Brand/Miles/MI3.jpg";
+import MI4 from "../assets/Brand/Miles/MI4.jpg";
+import MI5 from "../assets/Brand/Miles/MI5.jpg";
+import MI6 from "../assets/Brand/Miles/MI6.jpg";
+import MI7 from "../assets/Brand/Miles/MI7.jpg";
+import MI8 from "../assets/Brand/Miles/MI8.jpg";
+import MI9 from "../assets/Brand/Miles/MI9.jpg";
+import MI10 from "../assets/Brand/Miles/MI10.jpg";
+import MI11 from "../assets/Brand/Miles/MI11.jpg";
+import MilesPDF from "../assets/Brand/Miles/Miles.pdf";
 
 const brandsData = [
   {
     name: "Doms",
-    images: [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10], // ✅ 10 images
-    pdf: DomsPDF, // ✅ PDF file
-  },
-  {
-    name: "Waterflow",
-    images: [
-      "https://picsum.photos/400/300?random=5",
-      "https://picsum.photos/400/300?random=6",
-      "https://picsum.photos/400/300?random=7",
-      "https://picsum.photos/400/300?random=8",
-    ],
-  },
-  {
-    name: "Flair",
-    images: [
-      "https://picsum.photos/400/300?random=9",
-      "https://picsum.photos/400/300?random=10",
-      "https://picsum.photos/400/300?random=11",
-      "https://picsum.photos/400/300?random=12",
-    ],
-  },
-  {
-    name: "Fevicol",
-    images: [
-      "https://picsum.photos/400/300?random=13",
-      "https://picsum.photos/400/300?random=14",
-      "https://picsum.photos/400/300?random=15",
-      "https://picsum.photos/400/300?random=16",
-    ],
+    images: [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11],
+    pdf: DomsPDF,
   },
   {
     name: "Kores",
-    images: [
-      "https://picsum.photos/400/300?random=17",
-      "https://picsum.photos/400/300?random=18",
-      "https://picsum.photos/400/300?random=19",
-      "https://picsum.photos/400/300?random=20",
-    ],
+    images: [K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11],
+    // pdf: KoresPDF,
   },
   {
-    name: "Montex",
-    images: [
-      "https://picsum.photos/400/300?random=21",
-      "https://picsum.photos/400/300?random=22",
-      "https://picsum.photos/400/300?random=23",
-      "https://picsum.photos/400/300?random=24",
-    ],
+    name: "Munix",
+    images: [MU1, MU2, MU3, MU4, MU5, MU6, MU7, MU8, MU9, MU10, MU11],
+    pdf: MunixPDF,
   },
   {
-    name: "Cello",
-    images: [
-      "https://picsum.photos/400/300?random=25",
-      "https://picsum.photos/400/300?random=26",
-      "https://picsum.photos/400/300?random=27",
-      "https://picsum.photos/400/300?random=28",
-    ],
+    name: "Miles",
+    images: [MI1, MI2, MI3, MI4, MI5, MI6, MI7, MI8, MI9, MI10, MI11],
+    pdf: MilesPDF,
   },
-  {
-    name: "Unomax",
-    images: [
-      "https://picsum.photos/400/300?random=29",
-      "https://picsum.photos/400/300?random=30",
-      "https://picsum.photos/400/300?random=31",
-      "https://picsum.photos/400/300?random=32",
-    ],
-  },
+  // ✅ Keep the other brands same as befor
 ];
 
 function BrandsPage() {
@@ -125,17 +119,17 @@ function BrandsPage() {
               />
             ))}
 
-            {/* ✅ Add PDF card after images only for Doms */}
-            {brand.name === "Doms" && (
+            {/* ✅ Add PDF card after images only for brands with pdf */}
+            {brand.pdf && (
               <a
-                key="doms-pdf"
+                key={`${brand.name}-pdf`}
                 href={brand.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-full h-64 border-2 border-dashed border-gray-400 rounded-lg shadow-lg hover:bg-gray-100 transition"
               >
                 <span className="text-lg font-semibold text-gray-700">
-                  📄 View Doms PDF
+                  📄 View {brand.name} PDF
                 </span>
               </a>
             )}

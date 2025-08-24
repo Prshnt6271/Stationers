@@ -119,7 +119,8 @@ const moreCategories = [
     description: "Track your exercises and goals",
     link: "#",
     size: "wide",
-    image: notebok
+    image: notebok,
+    extraClass: "md:col-span-2 md:col-start-2" // ✅ Center only in laptop view
   },
 ];
 
@@ -133,13 +134,15 @@ function CategoryCard({ category }) {
   return (
     <a
       href={category.link}
-      className={`flex flex-col items-center justify-end relative overflow-hidden ${sizeClasses[category.size]} text-center group border border-gray-200`}
+      className={`flex flex-col items-center justify-end relative overflow-hidden 
+        ${sizeClasses[category.size]} ${category.extraClass || ""} 
+        text-center group border border-gray-200`}
     >
       <img
         src={category.image}
         alt={category.name}
-        loading="eager"  // This prevents lazy loading
-        decoding="async"  // Helps with rendering performance
+        loading="eager"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>

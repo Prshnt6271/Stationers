@@ -168,7 +168,7 @@ function Header() {
             </button>
             {isBrandsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                {["Doms", "Waterflow", "Flair", "Fevicol", "Kores", "Montex", "Cello","Unomax"].map((brand) => (
+                {["Doms", "Miles", "Munix",  "Kores",].map((brand) => (
                   <button
                     key={brand}
                     onClick={() => handleBrandClick(brand)}
@@ -256,7 +256,7 @@ function Header() {
                   </button>
                   {isMobileBrandsOpen && (
                     <div className="ml-4 mt-1 bg-gray-50 rounded-md overflow-hidden">
-                      {["Doms", "Waterflow", "Flair", "Fevicol", "Kores", "Montex", "Cello","Unomax"].map((brand) => (
+                      {["Doms", "Munix", "Miles",  "Kores"].map((brand) => (
                         <button
                           key={brand}
                           onClick={() => handleBrandClick(brand)}
