@@ -62,7 +62,11 @@ function Header() {
   };
 
   const handleBrandClick = (brand) => {
-    navigate(`/brands#${brand.toLowerCase()}`);
+    if (brand === 'all') {
+      navigate('/brands');
+    } else {
+      navigate(`/brands#${brand.toLowerCase()}`);
+    }
     setIsBrandsDropdownOpen(false);
     setIsMobileBrandsOpen(false);
     setIsMobileMenuOpen(false);
@@ -168,7 +172,15 @@ function Header() {
             </button>
             {isBrandsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                {["Doms", "Miles", "Munix",  "Kores",].map((brand) => (
+                {/* All Brands Option */}
+                <button
+                  onClick={() => handleBrandClick('all')}
+                  className="block w-full text-left px-4 py-2 hover:bg-blue-50 hover:text-blue-700 font-semibold border-b border-gray-200"
+                >
+                  All Brands
+                </button>
+                
+                {["Doms", "Miles", "Munix", "Kores"].map((brand) => (
                   <button
                     key={brand}
                     onClick={() => handleBrandClick(brand)}
@@ -256,7 +268,15 @@ function Header() {
                   </button>
                   {isMobileBrandsOpen && (
                     <div className="ml-4 mt-1 bg-gray-50 rounded-md overflow-hidden">
-                      {["Doms", "Munix", "Miles",  "Kores"].map((brand) => (
+                      {/* All Brands Option for Mobile */}
+                      <button
+                        onClick={() => handleBrandClick('all')}
+                        className="block w-full text-left px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700 font-semibold border-b border-gray-200"
+                      >
+                        All Brands
+                      </button>
+                      
+                      {["Doms", "Munix", "Miles", "Kores"].map((brand) => (
                         <button
                           key={brand}
                           onClick={() => handleBrandClick(brand)}

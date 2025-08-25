@@ -146,20 +146,6 @@ function BrandsPage() {
           </p>
         </div>
 
-        {/* Brand Navigation */}
-        <div className="sticky top-4 z-10 mb-12 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-4 animate-fade-in-up">
-          <div className="flex flex-wrap justify-center gap-3">
-            {brandsData.map((brand) => (
-              <a
-                key={brand.name}
-                href={`#${brand.name.toLowerCase()}`}
-                className={`px-4 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-md bg-gradient-to-r ${brand.color} text-white`}
-              >
-                {brand.name}
-              </a>
-            ))}
-          </div>
-        </div>
 
         {brandsData.map((brand, index) => (
           <div
