@@ -108,14 +108,18 @@ function BrandsPage() {
         >
           <h2 className="text-3xl font-semibold mb-6">{brand.name}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* ✅ Show all brand images */}
+            {/* ✅ Show all brand images fully (with zoom on hover/tap) */}
             {brand.images.map((img, i) => (
-              <img
+              <div
                 key={i}
-                src={img}
-                alt={`${brand.name} product ${i + 1}`}
-                className="w-full h-64 object-cover rounded-lg shadow-xl hover:scale-105 transform transition-transform duration-300"
-              />
+                className="relative w-full h-64 flex items-center justify-center bg-white rounded-lg shadow-xl overflow-hidden group"
+              >
+                <img
+                  src={img}
+                  alt={`${brand.name} product ${i + 1}`}
+                  className="max-h-full max-w-full object-contain transform transition-transform duration-500 ease-in-out group-hover:scale-125"
+                />
+              </div>
             ))}
 
             {/* ✅ Add PDF card with distinct styling */}
@@ -125,22 +129,33 @@ function BrandsPage() {
                 href={brand.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative group w-full h-64 rounded-lg shadow-xl overflow-hidden border-2 border-blue-400"
+                className="relative group w-full h-64 rounded-lg shadow-xl overflow-hidden border-2 border-blue-400 flex items-center justify-center bg-white"
               >
-                {/* Use the first image of the brand with blur effect */}
+                {/* Use the first image of the brand with contain effect */}
                 <img
                   src={brand.images[0]}
                   alt={`${brand.name} PDF`}
-                  className="w-full h-full object-cover filter blur-sm group-hover:blur-none transition-all duration-300"
+                  className="max-h-full max-w-full object-contain opacity-50 group-hover:opacity-80 transition-all duration-300"
                 />
-                
+
                 {/* PDF icon badge */}
                 <div className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
                   </svg>
                 </div>
-                
+
                 {/* Overlay with text */}
                 <div className="absolute inset-0 bg-blue-900 bg-opacity-70 flex flex-col items-center justify-center p-4 text-center">
                   <span className="text-4xl mb-2">📄</span>
