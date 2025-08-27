@@ -6,7 +6,7 @@ import rc from "../assets/FeaturedProd/rc.webp";
 import ballon from "../assets/FeaturedProd/ballon.webp";
 import writeflow from "../assets/FeaturedProd/writeflow.jpg";
 
-// Updated featured products with guaranteed working images
+// Updated featured products with navigation paths that match your ProductPage
 const featuredProducts = [
   {
     id: 1,
@@ -14,7 +14,7 @@ const featuredProducts = [
     subText: "Office",
     badge: "NEW",
     bgImage: files,
-    link: "/office-supply", // navigation path
+    link: "/products#office", // Updated to match ProductPage office section
   },
   {
     id: 2,
@@ -22,14 +22,14 @@ const featuredProducts = [
     subText: "Stationery",
     badge: "NEW",
     bgImage: writeflow,
-    link: "/school-stationary",
+    link: "/products#stationery", // Updated to match ProductPage stationery section
   },
   {
     id: 3,
     mainText: "RC Car",
     subText: "Toys",
     bgImage: rc,
-    link: "/toys",
+    link: "/products#toys", // Updated to match ProductPage toys section
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const featuredProducts = [
     subText: "Decoration",
     badge: "NEW",
     bgImage: ballon,
-    link: "/decoration",
+    link: "/products#decoration", // Updated to match ProductPage decoration section
   },
 ];
 

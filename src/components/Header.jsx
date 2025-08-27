@@ -172,14 +172,12 @@ function Header() {
             </button>
             {isBrandsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                {/* All Brands Option */}
                 <button
                   onClick={() => handleBrandClick('all')}
                   className="block w-full text-left px-4 py-2 hover:bg-blue-50 hover:text-blue-700 font-semibold border-b border-gray-200"
                 >
                   All Brands
                 </button>
-                
                 {["Doms", "Miles", "Munix", "Kores"].map((brand) => (
                   <button
                     key={brand}
@@ -206,10 +204,10 @@ function Header() {
             </button>
             {isProductsDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                <Link to="/products/office" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Office</Link>
-                <Link to="/products/stationary" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Stationary</Link>
-                <Link to="/products/toys" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Toys</Link>
-                <Link to="/products/decoration" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Decoration</Link>
+                <Link to="/products#office" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Office</Link>
+                <Link to="/products#stationary" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Stationary</Link>
+                <Link to="/products#toys" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Toys</Link>
+                <Link to="/products#decoration" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Decoration</Link>
               </div>
             )}
           </li>
@@ -257,10 +255,10 @@ function Header() {
                     className="flex items-center justify-between w-full py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md focus:outline-none"
                   >
                     <span>BRANDS</span>
-                    <svg 
-                      className={`w-4 h-4 ml-2 transform transition-transform ${isMobileBrandsOpen ? 'rotate-180' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className={`w-4 h-4 ml-2 transform transition-transform ${isMobileBrandsOpen ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -268,14 +266,12 @@ function Header() {
                   </button>
                   {isMobileBrandsOpen && (
                     <div className="ml-4 mt-1 bg-gray-50 rounded-md overflow-hidden">
-                      {/* All Brands Option for Mobile */}
                       <button
                         onClick={() => handleBrandClick('all')}
                         className="block w-full text-left px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700 font-semibold border-b border-gray-200"
                       >
                         All Brands
                       </button>
-                      
                       {["Doms", "Munix", "Miles", "Kores"].map((brand) => (
                         <button
                           key={brand}
@@ -296,10 +292,10 @@ function Header() {
                     className="flex items-center justify-between w-full py-2 px-3 hover:bg-blue-50 hover:text-blue-700 rounded-md focus:outline-none"
                   >
                     <span>PRODUCTS</span>
-                    <svg 
-                      className={`w-4 h-4 ml-2 transform transition-transform ${isMobileProductsOpen ? 'rotate-180' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className={`w-4 h-4 ml-2 transform transition-transform ${isMobileProductsOpen ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -307,10 +303,10 @@ function Header() {
                   </button>
                   {isMobileProductsOpen && (
                     <div className="ml-4 mt-1 bg-gray-50 rounded-md overflow-hidden">
-                      <Link to="/products/office" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Office</Link>
-                      <Link to="/products/stationary" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Stationary</Link>
-                      <Link to="/products/toys" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Toys</Link>
-                      <Link to="/products/decoration" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Decoration</Link>
+                      <Link to="/products#office" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Office</Link>
+                      <Link to="/products#stationary" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Stationary</Link>
+                      <Link to="/products#toys" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Toys</Link>
+                      <Link to="/products#decoration" className="block px-3 py-2 text-base hover:bg-blue-100 hover:text-blue-700" onClick={toggleMobileMenu}>Decoration</Link>
                     </div>
                   )}
                 </li>

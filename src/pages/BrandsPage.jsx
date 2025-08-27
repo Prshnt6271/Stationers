@@ -13,6 +13,7 @@ import D8 from "../assets/Brand/Doms/D8.jpg";
 import D9 from "../assets/Brand/Doms/D9.jpg";
 import D10 from "../assets/Brand/Doms/D10.jpg";
 import D11 from "../assets/Brand/Doms/D11.jpg";
+import DomsThumb from "../assets/Brand/Doms/Doms.jpg"
 import DomsPDF from "../assets/Brand/Doms/Doms.pdf";
 
 // ✅ Import images for Kores
@@ -27,6 +28,7 @@ import K8 from "../assets/Brand/Kores/K8.jpg";
 import K9 from "../assets/Brand/Kores/K9.jpg";
 import K10 from "../assets/Brand/Kores/K10.jpg";
 import K11 from "../assets/Brand/Kores/K11.jpg";
+import KoresThumb from "../assets/Brand/Kores/Kores.jpg"
 import KoresPDF from "../assets/Brand/Kores/Kores.pdf";
 
 // ✅ Import images for Munix
@@ -41,6 +43,7 @@ import MU8 from "../assets/Brand/Munix/MU8.jpg";
 import MU9 from "../assets/Brand/Munix/MU9.jpg";
 import MU10 from "../assets/Brand/Munix/MU10.jpg";
 import MU11 from "../assets/Brand/Munix/MU11.jpg";
+import MunixThumb from "../assets/Brand/Munix/Munix.jpg"
 import MunixPDF from "../assets/Brand/Munix/Munix.pdf";
 
 // ✅ Import images for Miles
@@ -55,7 +58,7 @@ import MI8 from "../assets/Brand/Miles/MI8.jpg";
 import MI9 from "../assets/Brand/Miles/MI9.jpg";
 import MI10 from "../assets/Brand/Miles/MI10.jpg";
 import MI11 from "../assets/Brand/Miles/MI11.jpg";
-import MI12 from "../assets/Brand/Miles/MI12.jpg"
+import MilesThumb from "../assets/Brand/Miles/Miles.jpg"
 import MilesPDF from "../assets/Brand/Miles/Miles.pdf";
 
 const brandsData = [
@@ -63,24 +66,28 @@ const brandsData = [
     name: "Doms",
     images: [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11],
     pdf: DomsPDF,
+    pdfThumb: DomsThumb,
     color: "from-blue-500 to-cyan-500",
   },
   {
     name: "Kores",
     images: [K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11],
     pdf: KoresPDF,
+    pdfThumb: KoresThumb,
     color: "from-purple-500 to-pink-500",
   },
   {
     name: "Munix",
     images: [MU1, MU2, MU3, MU4, MU5, MU6, MU7, MU8, MU9, MU10, MU11],
     pdf: MunixPDF,
+    pdfThumb: MunixThumb,
     color: "from-green-500 to-emerald-500",
   },
   {
     name: "Miles",
-    images: [MI1, MI2, MI3, MI12, MI5, MI6, MI7, MI8, MI9, MI10, MI11],
+    images: [MI1, MI2, MI3, MI4, MI5, MI6, MI7, MI8, MI9, MI10, MI11],
     pdf: MilesPDF,
+    pdfThumb: MilesThumb,
     color: "from-orange-500 to-red-500",
   },
 ];
@@ -89,6 +96,7 @@ function BrandsPage() {
   const location = useLocation();
   const brandRefs = useRef({});
   const [activeImage, setActiveImage] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     if (location.hash) {
@@ -110,6 +118,34 @@ function BrandsPage() {
 
   const closeLightbox = () => {
     setActiveImage(null);
+  };
+
+  const handleEnquiry = (brandName, imageIndex) => {
+    // Handle enquiry logic here
+    alert(`Enquiry for ${brandName} product ${imageIndex + 1}`);
+  };
+
+  const addToCart = (brandName, imageIndex, imageSrc) => {
+    // Add to cart logic
+    const newItem = {
+      id: `${brandName}-${imageIndex}-${Date.now()}`,
+      brand: brandName,
+      imageIndex: imageIndex,
+      imageSrc: imageSrc,
+      timestamp: Date.now()
+    };
+    
+    setCartItems([...cartItems, newItem]);
+    
+    // Show a small notification
+    const notification = document.createElement("div");
+    notification.className = "fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50";
+    notification.textContent = "Added to cart!";
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 2000);
   };
 
   return (
@@ -146,7 +182,6 @@ function BrandsPage() {
           </p>
         </div>
 
-
         {brandsData.map((brand, index) => (
           <div
             key={brand.name}
@@ -163,28 +198,49 @@ function BrandsPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {/* Brand Images */}
+              {/* Brand Images - 11 product images */}
               {brand.images.map((img, i) => (
                 <div
                   key={i}
                   className="relative group cursor-pointer"
-                  onClick={() => openLightbox(img)}
                 >
                   <div className="relative w-full h-64 flex items-center justify-center bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
                     <img
                       src={img}
                       alt={`${brand.name} product ${i + 1}`}
                       className="max-h-full max-w-full object-contain transform transition-transform duration-700 group-hover:scale-110"
+                      onClick={() => openLightbox(img)}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                      <div className="text-center font-medium">Click to enlarge</div>
+                    
+                    {/* Hover Buttons */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                      <button
+                        className="bg-white text-gray-800 font-semibold py-2 px-4 rounded-lg mb-3 shadow-md transform transition-transform hover:scale-105"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEnquiry(brand.name, i);
+                        }}
+                      >
+                        Enquiry Now
+                      </button>
+                      <button
+                        className="bg-blue-600 text-white p-3 rounded-full shadow-md transform transition-transform hover:scale-110"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(brand.name, i, img);
+                        }}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
               ))}
 
-              {/* PDF Card */}
+              {/* PDF Card as the 12th item */}
               {brand.pdf && (
                 <a
                   key={`${brand.name}-pdf`}
@@ -195,7 +251,7 @@ function BrandsPage() {
                 >
                   <div className="relative w-full h-64 rounded-2xl shadow-lg overflow-hidden border-2 border-white transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl">
                     <img
-                      src={brand.images[0]}
+                      src={brand.pdfThumb}
                       alt={`${brand.name} PDF`}
                       className="w-full h-full object-cover opacity-40 group-hover:opacity-30 transition-all duration-300"
                     />

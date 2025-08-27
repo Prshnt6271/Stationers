@@ -1,12 +1,26 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 // Import local images
+// ✅ Phone images
 import img1 from '../assets/Hero/1.jpg';
 import img2 from '../assets/Hero/2.jpg';
 import img3 from '../assets/Hero/3.jpg';
 
+// ✅ Laptop images
+import L1 from '../assets/Hero/L1.jpg';
+import L2 from '../assets/Hero/L2.jpg';
+import L3 from '../assets/Hero/L3.jpg';
+
 export default function HeroSection() {
-  const images = useMemo(() => [img1, img2, img3], []);
+  // Store both phone + laptop versions
+  const images = useMemo(
+    () => [
+      { mobile: img1, desktop: L1 },
+      { mobile: img2, desktop: L2 },
+      { mobile: img3, desktop: L3 },
+    ],
+    []
+  );
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
@@ -32,7 +46,7 @@ export default function HeroSection() {
   }, [currentIndex]);
 
   return (
-    <section className="relative w-full overflow-hidden shadow-xl rounded-b-lg h-[80vh]">
+    <section className="relative w-full overflow-hidden shadow-xl rounded-b-lg h-[80vh] md:h-[70vh] lg:h-[65vh]">
       <div
         ref={carouselRef}
         className="flex transition-transform duration-700 ease-in-out h-full"
@@ -40,17 +54,22 @@ export default function HeroSection() {
       >
         {images.map((image, index) => (
           <div key={index} className="w-full flex-shrink-0 h-full">
-            <img
-              src={image}
-              alt={`Hero Slide ${index + 1}`}
-              className="w-full h-full object-cover rounded-b-lg"
-              loading="lazy"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  'https://placehold.co/1600x900/CCCCCC/333333?text=Image+Error';
-              }}
-            />
+            <picture>
+              {/* Laptop/Desktop */}
+              <source media="(min-width: 768px)" srcSet={image.desktop} />
+              {/* Phone (fallback) */}
+              <img
+                src={image.mobile}
+                alt={`Hero Slide ${index + 1}`}
+                className="w-full h-full object-cover rounded-b-lg"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    'https://placehold.co/1600x900/CCCCCC/333333?text=Image+Error';
+                }}
+              />
+            </picture>
           </div>
         ))}
       </div>
