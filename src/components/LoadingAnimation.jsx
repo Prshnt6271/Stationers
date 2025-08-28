@@ -57,12 +57,7 @@ const LoadingAnimation = () => {
       <div className="loading-content-3d">
         <h2 className="loading-title-3d">Kundkund Stationers</h2>
         <p className="loading-text-3d">Preparing your creative tools...</p>
-        
-        <div className="progress-container-3d">
-          <div className="progress-bar-3d" style={{ width: `${progress}%` }}></div>
-        </div>
-        
-        <div className="loading-percentage-3d">{progress}%</div>
+      
       </div>
     </div>
   );
