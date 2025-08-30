@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 // ✅ Import your own images for Doms
 import D1 from "../assets/Brand/Doms/D1.jpg";
@@ -92,21 +92,35 @@ const brandsData = [
   },
 ];
 
+// Helper function to pair images for left/right layout
+const pairImages = (images) => {
+  const pairs = [];
+  for (let i = 0; i < images.length; i += 2) {
+    if (i + 1 < images.length) {
+      pairs.push([images[i], images[i + 1]]);
+    } else {
+      pairs.push([images[i], images[0]]); // If odd number, pair last with first
+    }
+  }
+  return pairs;
+};
+
 function BrandsPage() {
   const location = useLocation();
   const brandRefs = useRef({});
   const [activeImage, setActiveImage] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  // Load cart items from localStorage on component mount
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(savedCartItems);
   }, []);
+
+  // Update localStorage whenever cartItems change
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   useEffect(() => {
     if (location.hash) {
@@ -122,69 +136,90 @@ function BrandsPage() {
     }
   }, [location]);
 
-  const openLightbox = (image) => {
-    setActiveImage(image);
-  };
-
-  const closeLightbox = () => {
-    setActiveImage(null);
-  };
+  const openLightbox = (image) => setActiveImage(image);
+  const closeLightbox = () => setActiveImage(null);
 
   const handleEnquiry = (brandName, imageIndex) => {
     alert(`Enquiry for ${brandName} product ${imageIndex + 1}`);
   };
 
   const addToCart = (brandName, imageIndex, imageSrc) => {
+    // Generate a price based on brand and product index (you can customize this)
+    const priceMap = {
+      "Doms": 12.99,
+      "Kores": 9.99,
+      "Munix": 14.99,
+      "Miles": 11.99
+    };
+    
+    const basePrice = priceMap[brandName] || 10.99;
+    const price = basePrice + (imageIndex * 0.5); // Add a small increment based on product index
+    
     const newItem = {
       id: `${brandName}-${imageIndex}-${Date.now()}`,
       brand: brandName,
-      imageIndex: imageIndex,
-      imageSrc: imageSrc,
+      imageIndex,
+      imageSrc,
+      price: price,
+      quantity: 1,
       timestamp: Date.now()
     };
     
-    setCartItems([...cartItems, newItem]);
+    // Get existing cart items
+    const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     
-    // Show a small notification
+    // Check if item already exists in cart
+    const existingItemIndex = existingCartItems.findIndex(
+      item => item.brand === brandName && item.imageIndex === imageIndex
+    );
+    
+    let updatedCartItems;
+    
+    if (existingItemIndex >= 0) {
+      // If item exists, increase quantity
+      updatedCartItems = [...existingCartItems];
+      updatedCartItems[existingItemIndex].quantity += 1;
+    } else {
+      // If item doesn't exist, add new item
+      updatedCartItems = [...existingCartItems, newItem];
+    }
+    
+    // Update state and localStorage
+    setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    
+    // Show notification
     const notification = document.createElement("div");
     notification.className = "fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50";
     notification.textContent = "Added to cart!";
     document.body.appendChild(notification);
-    
-    setTimeout(() => {
-      document.body.removeChild(notification);
-    }, 2000);
-  };
-
-  const handlePDFClick = (e, pdf) => {
-    // For mobile devices, we need to handle PDF opening differently
-    if (isMobile) {
-      e.preventDefault();
-      window.open(pdf, '_blank');
-    }
-    // For desktop, the normal link behavior is fine
+    setTimeout(() => document.body.removeChild(notification), 2000);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
+      {/* Cart Icon */}
+      <div className="fixed top-4 right-4 z-40">
+        <Link to="/cart" className="relative bg-white p-2 rounded-full shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          {cartItems.length > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              {cartItems.reduce((total, item) => total + item.quantity, 0)}
+            </span>
+          )}
+        </Link>
+      </div>
+
       {/* Lightbox Modal */}
       {activeImage && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-          onClick={closeLightbox}
-        >
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={closeLightbox}>
           <div className="relative max-w-4xl max-h-full">
-            <button 
-              className="absolute -top-12 right-0 text-white text-3xl z-10 md:top-2 md:right-2"
-              onClick={closeLightbox}
-            >
+            <button className="absolute -top-12 right-0 text-white text-3xl z-10 md:top-2 md:right-2" onClick={closeLightbox}>
               &times;
             </button>
-            <img 
-              src={activeImage} 
-              alt="Enlarged view" 
-              className="w-full h-auto max-h-[80vh] object-contain"
-            />
+            <img src={activeImage} alt="Enlarged view" className="w-full h-auto max-h-[80vh] object-contain" />
           </div>
         </div>
       )}
@@ -199,119 +234,99 @@ function BrandsPage() {
           </p>
         </div>
 
-        {brandsData.map((brand, index) => (
-          <div
-            key={brand.name}
-            id={brand.name.toLowerCase()}
-            ref={(el) => (brandRefs.current[brand.name.toLowerCase()] = el)}
-            className="mb-16 md:mb-24 scroll-mt-16"
-          >
-            <div 
-              className={`mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-gradient-to-r ${brand.color} text-white shadow-xl`}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold">{brand.name}</h2>
-              <p className="mt-2 opacity-90">Explore our {brand.name} product collection</p>
-            </div>
+        {brandsData.map((brand) => {
+          const imagePairs = pairImages(brand.images);
+          
+          return (
+            <div key={brand.name} id={brand.name.toLowerCase()} ref={(el) => (brandRefs.current[brand.name.toLowerCase()] = el)} className="mb-16 md:mb-24 scroll-mt-16">
+              {/* Brand Header */}
+              <div className={`mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-gradient-to-r ${brand.color} text-white shadow-xl`}>
+                <h2 className="text-3xl md:text-4xl font-bold">{brand.name}</h2>
+                <p className="mt-2 opacity-90">Explore our {brand.name} product collection</p>
+              </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {/* Brand Images - 11 product images */}
-              {brand.images.map((img, i) => (
-                <div
-                  key={i}
-                  className="relative group cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden"
-                >
-                  <div className="relative w-full h-48 md:h-64 flex items-center justify-center bg-white overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-                    <img
-                      src={img}
-                      alt={`${brand.name} product ${i + 1}`}
-                      className="max-h-full max-w-full object-contain p-2"
-                      onClick={() => openLightbox(img)}
-                    />
-                    
-                    {/* Hover Buttons - Always visible on mobile, hidden until hover on desktop */}
-                    <div className={`absolute inset-0 flex flex-col items-center justify-center ${isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition-opacity duration-300 z-20 p-2`}>
-                      <button
-                        className="bg-white text-gray-800 font-semibold py-1 md:py-2 px-2 md:px-4 rounded text-sm md:text-base mb-2 md:mb-3 shadow-md transform transition-transform hover:scale-105"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEnquiry(brand.name, i);
-                        }}
-                      >
-                        Enquiry Now
-                      </button>
-                      <button
-                        className="bg-blue-600 text-white p-2 md:p-3 rounded-full shadow-md transform transition-transform hover:scale-110"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToCart(brand.name, i, img);
-                        }}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* PDF Card as the 12th item */}
-              {brand.pdf && (
-                <a
-                  key={`${brand.name}-pdf`}
-                  href={brand.pdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block relative group"
-                  onClick={(e) => handlePDFClick(e, brand.pdf)}
-                >
-                  <div className="relative w-full h-48 md:h-64 rounded-xl md:rounded-2xl shadow-lg overflow-hidden border-2 border-white">
-                    <img
-                      src={brand.pdfThumb}
-                      alt={`${brand.name} PDF`}
-                      className="w-full h-full object-cover opacity-40 group-hover:opacity-30 transition-all duration-300"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 to-gray-900/40 flex flex-col items-center justify-center p-4 text-center">
-                      {/* Brand Name */}
-                      <div className="absolute top-2 left-2 md:top-4 md:left-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 md:px-3 md:py-1">
-                        <h3 className="text-sm md:text-lg font-bold text-gray-800">{brand.name}</h3>
+              {/* Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                {imagePairs.map((pair, i) => (
+                  <div key={i} className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden flex flex-col">
+                    {/* Split box into left and right parts */}
+                    <div className="flex h-48 md:h-64">
+                      {/* Left part - First Image */}
+                      <div className="flex-1 flex items-center justify-center bg-white overflow-hidden border-r">
+                        <img
+                          src={pair[0]}
+                          alt={`${brand.name} product ${i * 2 + 1}`}
+                          className="max-h-full max-w-full object-contain p-2 cursor-pointer"
+                          onClick={() => openLightbox(pair[0])}
+                        />
                       </div>
                       
-                      <div className="mb-2 md:mb-4 transform transition-transform duration-500 group-hover:scale-110">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-10 w-10 md:h-16 md:w-16 text-white"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                      {/* Right part - Second Image */}
+                      <div className="flex-1 flex items-center justify-center bg-white overflow-hidden">
+                        <img
+                          src={pair[1]}
+                          alt={`${brand.name} product ${i * 2 + 2}`}
+                          className="max-h-full max-w-full object-contain p-2 cursor-pointer"
+                          onClick={() => openLightbox(pair[1])}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Buttons below image */}
+                    <div className="flex justify-between items-center px-3 py-2 border-t">
+                      <button
+                        className="bg-white border border-gray-300 text-gray-700 font-medium py-1 px-3 rounded text-sm shadow-sm hover:bg-gray-100"
+                        onClick={() => handleEnquiry(brand.name, i * 2)}
+                      >
+                        Enquiry
+                      </button>
+                      <div className="flex space-x-2">
+                        <button
+                          className="bg-blue-600 text-white p-2 rounded-full shadow-md hover:scale-110 transition-transform"
+                          onClick={() => addToCart(brand.name, i * 2, pair[0])}
+                          title="Add left product to cart"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                      </div>
-                      
-                      <span className="text-base md:text-xl font-bold text-white mb-1">
-                        Product Catalog
-                      </span>
-                      <span className="text-sm md:text-lg font-semibold text-white">
-                        Download PDF
-                      </span>
-                      <div className="mt-2 md:mt-4 px-3 py-1 md:px-4 md:py-2 bg-white text-gray-900 rounded-full text-xs md:text-sm font-medium transform transition-transform duration-300 group-hover:scale-105">
-                        Click to view
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                        </button>
+                        <button
+                          className="bg-blue-600 text-white p-2 rounded-full shadow-md hover:scale-110 transition-transform"
+                          onClick={() => addToCart(brand.name, i * 2 + 1, pair[1])}
+                          title="Add right product to cart"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   </div>
-                </a>
-              )}
+                ))}
+
+                {/* PDF card stays same */}
+                {brand.pdf && (
+                  <a key={`${brand.name}-pdf`} href={brand.pdf} target="_blank" rel="noopener noreferrer" className="block relative group">
+                    <div className="relative w-full h-48 md:h-64 rounded-xl md:rounded-2xl shadow-lg overflow-hidden border-2 border-white">
+                      <img src={brand.pdfThumb} alt={`${brand.name} PDF`} className="w-full h-full object-cover opacity-40 group-hover:opacity-30 transition-all duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 to-gray-900/40 flex flex-col items-center justify-center p-4 text-center">
+                        <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">
+                          <h3 className="text-sm md:text-lg font-bold text-gray-800">{brand.name}</h3>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 md:h-16 md:w-16 text-white mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span className="text-base md:text-xl font-bold text-white">Product Catalog</span>
+                        <span className="text-sm md:text-lg text-white">Download PDF</span>
+                        <div className="mt-2 px-3 py-1 bg-white text-gray-900 rounded-full text-xs md:text-sm font-medium">Click to view</div>
+                      </div>
+                    </div>
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

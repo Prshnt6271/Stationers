@@ -130,13 +130,7 @@ export default function Footer() {
       {/* Copyright and Payment Icons */}
       <div className="border-t border-orange-500 mt-10 pt-6 text-center text-sm text-orange-200 flex flex-col sm:flex-row justify-between items-center px-4 sm:px-6 md:px-8">
         <p>&copy; Copyright 2024 KunKun Stationary. All rights reserved.</p>
-        <div className="flex space-x-2 mt-4 sm:mt-0">
-          {/* Payment icons */}
-          <img src="https://placehold.co/40x25/FFFFFF/000000?text=VISA" alt="Visa" className="h-6 rounded-sm shadow-sm" />
-          <img src="https://placehold.co/40x25/FFFFFF/000000?text=MC" alt="MasterCard" className="h-6 rounded-sm shadow-sm" />
-          <img src="https://placehold.co/40x25/FFFFFF/000000?text=AMEX" alt="American Express" className="h-6 rounded-sm shadow-sm" />
-          <img src="https://placehold.co/40x25/FFFFFF/000000?text=DISC" alt="Discover" className="h-6 rounded-sm shadow-sm" />
-        </div>
+     
       </div>
     </footer>
   );

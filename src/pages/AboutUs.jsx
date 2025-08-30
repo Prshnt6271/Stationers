@@ -100,8 +100,9 @@ const AboutUs = () => {
           ].map((item, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start">
-                <div className="bg-blue-100 p-2 rounded-full mr-4">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {/* ✅ Blue Circle with White Tick */}
+                <div className="bg-blue-600 p-2 rounded-full mr-4 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>

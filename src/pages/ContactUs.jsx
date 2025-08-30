@@ -1,12 +1,14 @@
 import React from 'react';
+import HeroSection from "../components/HeroSection";
 
 export default function ContactUs() {
   return (
     <section className="min-h-screen bg-white py-12 px-4 md:px-8 overflow-x-hidden">
+      <HeroSection></HeroSection>
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         
         {/* Left: Contact Form */}
-        <div>
+        <div className='mt-7'>
           <h2 className="text-2xl md:text-3xl font-bold mb-6 border-b border-gray-300 pb-2">
             SEND US AN EMAIL
           </h2>
@@ -30,7 +32,7 @@ export default function ContactUs() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <div>
                 <label className="block mb-1 text-gray-700 text-sm font-medium">Phone Number*</label>
                 <input
@@ -68,7 +70,7 @@ export default function ContactUs() {
         </div>
 
         {/* Right: Contact Info + Map */}
-        <div>
+        <div className='mt-7'>
           <h2 className="text-2xl md:text-3xl font-bold mb-6 border-b border-gray-300 pb-2">
             CONTACT US
           </h2>

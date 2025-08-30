@@ -75,12 +75,12 @@ function Header() {
   return (
     <header className="bg-white shadow-lg font-inter">
       {/* Main Header */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between bg-blue-800">
         {/* Logo Section */}
         <div className="flex-shrink-0 mb-4 md:mb-0">
           <Link to="/" className="flex items-center group">
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
-              <h1 className="text-lg md:text-xl font-bold tracking-wide">
+              <h1 className="text-lg md:text-xl font-bold tracki  ng-wide">
                 <span className="text-yellow-300">K</span>undkund
                 <span className="block text-sm font-medium opacity-90 -mt-1">STATIONERS</span>
               </h1>
@@ -88,49 +88,34 @@ function Header() {
           </Link>
         </div>
 
-        {/* Search Bar */}
-        <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0">
-          <form onSubmit={handleSearch} className="relative flex">
-            <div className="relative flex-grow">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for products..."
-                className="w-full p-3 pl-5 pr-12 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
-              />
-              <button
-                type="submit"
-                className="absolute right-0 top-0 h-full px-4 text-gray-500 hover:text-blue-600 focus:outline-none"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </div>
+      {/* Search Bar */}
+      <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0">
+        <form onSubmit={handleSearch} className="relative flex">
+          <div className="relative flex-grow">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for products..."
+              className="w-full p-3 pl-5 pr-12 text-white placeholder-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
+            />
+            <button
+              type="submit"
+              className="absolute right-0 top-0 h-full px-4 text-white hover:text-blue-300 focus:outline-none"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
 
-            {/* Category Dropdown */}
-            <div className="relative ml-2" ref={categoryDropdownRef}>
-              <button
-                type="button"
-                onClick={toggleCategoryDropdown}
-                className="h-full p-3 px-4 border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center text-sm transition-colors duration-200 rounded-full whitespace-nowrap"
-              >
-                Categories
-                <svg className="w-4 h-4 ml-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-              {isCategoryDropdownOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-20 overflow-hidden">
-                  <Link to="/category1" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 1</Link>
-                  <Link to="/category2" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 2</Link>
-                  <Link to="/category3" className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition">Category 3</Link>
-                </div>
-              )}
-            </div>
-          </form>
-        </div>
 
         {/* Mobile Toggles */}
         <div className="flex items-center space-x-4 sm:space-x-6 justify-end w-full md:w-auto">
@@ -151,7 +136,7 @@ function Header() {
       </div>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:block bg-gray-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
+      <nav className="hidden md:block bg-blue-800 text-white   py-3 px-4 sm:px-6 md:px-8 shadow-inner">
         <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
           <li>
             <Link to="/" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">

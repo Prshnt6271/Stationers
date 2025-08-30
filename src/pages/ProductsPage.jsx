@@ -7,7 +7,7 @@ const generateImageUrls = (category, count) => {
     const width = 400;
     const height = 400;
     const theme = category.toLowerCase();
-    return `https://source.unsplash.com/random/${width}x${height}?${theme}&sig=${i}`;
+    return `https://picsum.photos/${width}/${height}?random=${i}&${theme}`;
   });
 };
 
@@ -52,12 +52,12 @@ function ProductsPage() {
         }, 300);
       }
     }
-    
+
     // Simulate loading time for images
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
-    
+
     return () => clearTimeout(timer);
   }, [location]);
 
@@ -73,20 +73,20 @@ function ProductsPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
       {/* Lightbox Modal */}
       {activeImage && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
           onClick={closeLightbox}
         >
           <div className="relative max-w-4xl max-h-full">
-            <button 
+            <button
               className="absolute -top-12 right-0 text-white text-3xl z-10 hover:text-gray-300 transition-colors"
               onClick={closeLightbox}
             >
               &times;
             </button>
-            <img 
-              src={activeImage} 
-              alt="Enlarged view" 
+            <img
+              src={activeImage}
+              alt="Enlarged view"
               className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
             />
           </div>
@@ -99,7 +99,8 @@ function ProductsPage() {
             Our Products
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our wide range of premium products across different categories to meet all your needs.
+            Explore our wide range of premium products across different
+            categories to meet all your needs.
           </p>
         </div>
 
@@ -107,24 +108,27 @@ function ProductsPage() {
           <div
             key={category.name}
             id={category.name.toLowerCase()}
-            ref={(el) => (categoryRefs.current[category.name.toLowerCase()] = el)}
+            ref={(el) =>
+              (categoryRefs.current[category.name.toLowerCase()] = el)
+            }
             className="mb-24 scroll-mt-16"
           >
-            <div 
+            <div
               className={`mb-10 p-8 rounded-2xl bg-gradient-to-r ${category.color} text-white shadow-xl transform transition-all duration-500 hover:shadow-2xl`}
             >
               <h2 className="text-4xl font-bold">{category.name}</h2>
-              <p className="mt-2 opacity-90">Explore our {category.name} collection</p>
+              <p className="mt-2 opacity-90">
+                Explore our {category.name} collection
+              </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {category.images.map((img, i) => (
-                <div
-                  key={i}
-                  className="relative group cursor-pointer"
-                  onClick={() => openLightbox(img)}
-                >
-                  <div className="relative w-full h-64 flex items-center justify-center bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl">
+                <div key={i} className="relative group cursor-pointer">
+                  <div
+                    className="relative w-full h-64 flex items-center justify-center bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl"
+                    onClick={() => openLightbox(img)}
+                  >
                     {loading ? (
                       <div className="w-full h-full bg-gray-200 animate-pulse rounded-2xl"></div>
                     ) : (
@@ -137,10 +141,22 @@ function ProductsPage() {
                           loading="lazy"
                         />
                         <div className="absolute bottom-0 left-0 right-0 p-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                          <div className="text-center font-medium">Click to enlarge</div>
+                          <div className="text-center font-medium">
+                            Click to enlarge
+                          </div>
                         </div>
                       </>
                     )}
+                  </div>
+
+                  {/* ✅ Cart + Enquiry buttons below image */}
+                  <div className="flex justify-between mt-3">
+                    <button className="flex-1 mr-2 bg-blue-600 text-white py-2 px-3 rounded-lg shadow hover:bg-blue-700 transition">
+                      🛒 Add to Cart
+                    </button>
+                    <button className="flex-1 ml-2 bg-green-600 text-white py-2 px-3 rounded-lg shadow hover:bg-green-700 transition">
+                      📩 Enquiry
+                    </button>
                   </div>
                 </div>
               ))}
