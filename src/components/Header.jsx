@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/1.jpg';
 
-
 function Header() {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
@@ -60,7 +59,26 @@ function Header() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
+    
+    // Check if the search query matches any brand name (case insensitive)
+    const brandNames = ["doms", "miles", "munix", "kores", "cello", "natraj", "saino", "pierre"];
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+    
+    // Find if the search query matches any brand
+    const matchedBrand = brandNames.find(brand => 
+      normalizedQuery.includes(brand) || brand.includes(normalizedQuery)
+    );
+    
+    if (matchedBrand) {
+      // If a brand is found in the search, navigate to that brand's page
+      navigate(`/brands#${matchedBrand.toLowerCase()}`);
+    } else if (normalizedQuery) {
+      // If it's a general search, navigate to search results page with the query
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+    
+    setSearchQuery('');
+    setIsMobileMenuOpen(false);
   };
 
   const handleBrandClick = (brand) => {
@@ -81,43 +99,42 @@ function Header() {
         {/* Logo Section */}
         <div className="flex-shrink-0 mb-4 md:mb-0">
           <Link to="/" className="flex items-center group">
-         <img 
-  src={logo} 
-  alt="Kundkund Stationers" 
-  className="h-22 w-40"
-/>
-
+            <img 
+              src={logo} 
+              alt="Kundkund Stationers" 
+              className="h-22 w-40"
+            />
           </Link>
         </div>
 
-      {/* Search Bar */}
-      <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0">
-        <form onSubmit={handleSearch} className="relative flex">
-          <div className="relative flex-grow">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for products..."
-              className="w-full p-3 pl-5 pr-12 text-white placeholder-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
-            />
-            <button
-              type="submit"
-              className="absolute right-0 top-0 h-full px-4 text-white hover:text-blue-300 focus:outline-none"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-          </div>
-        </form>
-      </div>
-
+        {/* Search Bar */}
+        <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0">
+          <form onSubmit={handleSearch} className="relative flex">
+            <div className="relative flex-grow">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for products or brands..."
+                className="w-full p-3 pl-5 pr-12 text-white placeholder-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
+                style={{backgroundColor: 'rgba(255, 255, 255, 0.2)'}}
+              />
+              <button
+                type="submit"
+                className="absolute right-0 top-0 h-full px-4 text-white hover:text-blue-300 focus:outline-none"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
 
         {/* Mobile Toggles */}
         <div className="flex items-center space-x-4 sm:space-x-6 justify-end w-full md:w-auto">
