@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/1.jpg';
+
 
 function Header() {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
@@ -79,12 +81,11 @@ function Header() {
         {/* Logo Section */}
         <div className="flex-shrink-0 mb-4 md:mb-0">
           <Link to="/" className="flex items-center group">
-            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
-              <h1 className="text-lg md:text-xl font-bold tracki  ng-wide">
-                <span className="text-yellow-300">K</span>undkund
-                <span className="block text-sm font-medium opacity-90 -mt-1">STATIONERS</span>
-              </h1>
-            </div>
+            <img 
+              src="/src/assets/1.jpg" 
+              alt="Kundkund Stationers" 
+              className="h-22 w-40 "
+            />
           </Link>
         </div>
 
@@ -121,7 +122,7 @@ function Header() {
         <div className="flex items-center space-x-4 sm:space-x-6 justify-end w-full md:w-auto">
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-full hover:bg-gray-100 transition"
+            className="md:hidden text-white hover:text-blue-300 p-2 rounded-full hover:bg-blue-700 transition"
             aria-label="Toggle mobile menu"
           >
             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +137,7 @@ function Header() {
       </div>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:block bg-blue-800 text-white   py-3 px-4 sm:px-6 md:px-8 shadow-inner">
+      <nav className="hidden md:block bg-blue-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
         <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
           <li>
             <Link to="/" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
@@ -163,7 +164,7 @@ function Header() {
                 >
                   All Brands
                 </button>
-                {["Doms", "Miles", "Munix", "Kores"].map((brand) => (
+                {["Doms", "Miles", "Munix", "Kores","Cello","Natraj","Saino","Pierre"].map((brand) => (
                   <button
                     key={brand}
                     onClick={() => handleBrandClick(brand)}
@@ -257,7 +258,7 @@ function Header() {
                       >
                         All Brands
                       </button>
-                      {["Doms", "Munix", "Miles", "Kores"].map((brand) => (
+                      {["Doms", "Munix", "Miles", "Kores","Cello","Natraj","Saino","Pierre"].map((brand) => (
                         <button
                           key={brand}
                           onClick={() => handleBrandClick(brand)}

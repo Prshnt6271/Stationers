@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 // ✅ Import your own images for Doms
 import D1 from "../assets/Brand/Doms/D1.jpg";
@@ -61,6 +61,71 @@ import MI11 from "../assets/Brand/Miles/MI11.jpg";
 import MilesThumb from "../assets/Brand/Miles/Miles.jpg"
 import MilesPDF from "../assets/Brand/Miles/Miles.pdf";
 
+// ✅ Import images for Cello
+import C1 from "../assets/Brand/Cello/1.jpg";
+import C2 from "../assets/Brand/Cello/2.jpg";
+import C3 from "../assets/Brand/Cello/3.jpg";
+import C4 from "../assets/Brand/Cello/4.jpg";
+import C5 from "../assets/Brand/Cello/5.jpg";
+import C6 from "../assets/Brand/Cello/6.jpg";
+import C7 from "../assets/Brand/Cello/7.jpg";
+import C8 from "../assets/Brand/Cello/8.jpg";
+import C9 from "../assets/Brand/Cello/9.jpg";
+import C10 from "../assets/Brand/Cello/10.jpg";
+import C11 from "../assets/Brand/Cello/11.jpg";
+import C12 from "../assets/Brand/Cello/12.jpg";
+import CelloThumb from "../assets/Brand/Cello/Ct.jpg";
+import CelloPDF from "../assets/Brand/Cello/Cello.pdf";
+
+// ✅ Import images for Natraj
+import N1 from "../assets/Brand/Natraj/1.jpg";
+import N2 from "../assets/Brand/Natraj/2.jpg";
+import N3 from "../assets/Brand/Natraj/3.jpg";
+import N4 from "../assets/Brand/Natraj/4.jpg";
+import N5 from "../assets/Brand/Natraj/5.jpg";
+import N6 from "../assets/Brand/Natraj/6.jpg";
+import N7 from "../assets/Brand/Natraj/7.jpg";
+import N8 from "../assets/Brand/Natraj/8.jpg";
+import N9 from "../assets/Brand/Natraj/9.jpg";
+import N10 from "../assets/Brand/Natraj/10.jpg";
+import N11 from "../assets/Brand/Natraj/11.jpg";
+import N12 from "../assets/Brand/Natraj/12.jpg";
+import NatrajThumb from "../assets/Brand/Natraj/Nt.jpg";
+import NatrajPDF from "../assets/Brand/Natraj/Natraj.pdf";
+
+// ✅ Import images for Saino
+import S1 from "../assets/Brand/Saino/1.jpg";
+import S2 from "../assets/Brand/Saino/2.jpg";
+import S3 from "../assets/Brand/Saino/3.jpg";
+import S4 from "../assets/Brand/Saino/4.jpg";
+import S5 from "../assets/Brand/Saino/5.jpg";
+import S6 from "../assets/Brand/Saino/6.jpg";
+import S7 from "../assets/Brand/Saino/7.jpg";
+import S8 from "../assets/Brand/Saino/8.jpg";
+import S9 from "../assets/Brand/Saino/9.jpg";
+import S10 from "../assets/Brand/Saino/10.jpg";
+import S11 from "../assets/Brand/Saino/11.jpg";
+import S12 from "../assets/Brand/Saino/12.jpg";
+import SainoThumb from "../assets/Brand/Saino/St.jpg";
+import SainoPDF from "../assets/Brand/Saino/Saino.pdf";
+
+// ✅ Import images for Pierre
+import P1 from "../assets/Brand/Pier/1.jpg";
+import P2 from "../assets/Brand/Pier/2.jpg";
+import P3 from "../assets/Brand/Pier/3.jpg";
+import P4 from "../assets/Brand/Pier/4.jpg";
+import P5 from "../assets/Brand/Pier/5.jpg";
+import P6 from "../assets/Brand/Pier/6.jpg";
+import P7 from "../assets/Brand/Pier/7.jpg";
+import P8 from "../assets/Brand/Pier/8.jpg";
+import P9 from "../assets/Brand/Pier/9.jpg";
+import P10 from "../assets/Brand/Pier/10.jpg";
+import P11 from "../assets/Brand/Pier/11.jpg";
+import P12 from "../assets/Brand/Pier/12.jpg";
+import PierreThumb from "../assets/Brand/Pier/pier.jpg";
+import PierrePDF from "../assets/Brand/Pier/Pierre.pdf";
+
+
 const brandsData = [
   {
     name: "Doms",
@@ -90,6 +155,35 @@ const brandsData = [
     pdfThumb: MilesThumb,
     color: "from-orange-500 to-red-500",
   },
+
+   {
+    name: "Cello",
+    images: [C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12],
+    pdf: CelloPDF,
+    pdfThumb: CelloThumb,
+    color: "from-red-500 to-yellow-500",
+  },
+  {
+    name: "Natraj",
+    images: [N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N11, N12],
+    pdf: NatrajPDF,
+    pdfThumb: NatrajThumb,
+    color: "from-pink-500 to-purple-500",
+  },
+  {
+    name: "Saino",
+    images: [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12],
+    pdf: SainoPDF,
+    pdfThumb: SainoThumb,
+    color: "from-blue-500 to-indigo-500",
+  },
+  {
+    name: "Pierre",
+    images: [P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12],
+    pdf: PierrePDF,
+    pdfThumb: PierreThumb,
+    color: "from-emerald-500 to-green-700",
+  },
 ];
 
 // Helper function to pair images for left/right layout
@@ -107,6 +201,7 @@ const pairImages = (images) => {
 
 function BrandsPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const brandRefs = useRef({});
   const [activeImage, setActiveImage] = useState(null);
   const [cartItems, setCartItems] = useState([]);
@@ -140,11 +235,10 @@ function BrandsPage() {
   const closeLightbox = () => setActiveImage(null);
 
   const handleEnquiry = (brandName, imageIndex) => {
-    alert(`Enquiry for ${brandName} product ${imageIndex + 1}`);
+    navigate("/ContactUs", { state: { brand: brandName, product: imageIndex + 1 } });
   };
 
   const addToCart = (brandName, imageIndex, imageSrc) => {
-    // Generate a price based on brand and product index (you can customize this)
     const priceMap = {
       "Doms": 12.99,
       "Kores": 9.99,
@@ -153,42 +247,34 @@ function BrandsPage() {
     };
     
     const basePrice = priceMap[brandName] || 10.99;
-    const price = basePrice + (imageIndex * 0.5); // Add a small increment based on product index
+    const price = basePrice + (imageIndex * 0.5);
     
     const newItem = {
       id: `${brandName}-${imageIndex}-${Date.now()}`,
       brand: brandName,
       imageIndex,
       imageSrc,
-      price: price,
+      price,
       quantity: 1,
       timestamp: Date.now()
     };
     
-    // Get existing cart items
     const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    
-    // Check if item already exists in cart
     const existingItemIndex = existingCartItems.findIndex(
       item => item.brand === brandName && item.imageIndex === imageIndex
     );
     
     let updatedCartItems;
-    
     if (existingItemIndex >= 0) {
-      // If item exists, increase quantity
       updatedCartItems = [...existingCartItems];
       updatedCartItems[existingItemIndex].quantity += 1;
     } else {
-      // If item doesn't exist, add new item
       updatedCartItems = [...existingCartItems, newItem];
     }
     
-    // Update state and localStorage
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     
-    // Show notification
     const notification = document.createElement("div");
     notification.className = "fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50";
     notification.textContent = "Added to cart!";
@@ -200,8 +286,8 @@ function BrandsPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
       {/* Cart Icon */}
       <div className="fixed top-4 right-4 z-40">
-        <Link to="/cart" className="relative bg-white p-2 rounded-full shadow-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <Link to="/cart" className="relative flex items-center justify-center bg-blue-600 p-3 rounded-full shadow-lg hover:bg-blue-700 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
           {cartItems.length > 0 && (
@@ -249,9 +335,7 @@ function BrandsPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 {imagePairs.map((pair, i) => (
                   <div key={i} className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden flex flex-col">
-                    {/* Split box into left and right parts */}
                     <div className="flex h-48 md:h-64">
-                      {/* Left part - First Image */}
                       <div className="flex-1 flex items-center justify-center bg-white overflow-hidden border-r">
                         <img
                           src={pair[0]}
@@ -260,8 +344,6 @@ function BrandsPage() {
                           onClick={() => openLightbox(pair[0])}
                         />
                       </div>
-                      
-                      {/* Right part - Second Image */}
                       <div className="flex-1 flex items-center justify-center bg-white overflow-hidden">
                         <img
                           src={pair[1]}
@@ -272,7 +354,7 @@ function BrandsPage() {
                       </div>
                     </div>
 
-                    {/* Buttons below image */}
+                    {/* Buttons */}
                     <div className="flex justify-between items-center px-3 py-2 border-t">
                       <button
                         className="bg-white border border-gray-300 text-gray-700 font-medium py-1 px-3 rounded text-sm shadow-sm hover:bg-gray-100"
@@ -304,7 +386,7 @@ function BrandsPage() {
                   </div>
                 ))}
 
-                {/* PDF card stays same */}
+                {/* PDF card */}
                 {brand.pdf && (
                   <a key={`${brand.name}-pdf`} href={brand.pdf} target="_blank" rel="noopener noreferrer" className="block relative group">
                     <div className="relative w-full h-48 md:h-64 rounded-xl md:rounded-2xl shadow-lg overflow-hidden border-2 border-white">
