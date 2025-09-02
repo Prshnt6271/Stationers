@@ -81,11 +81,12 @@ function Header() {
         {/* Logo Section */}
         <div className="flex-shrink-0 mb-4 md:mb-0">
           <Link to="/" className="flex items-center group">
-            <img 
-              src="/src/assets/1.jpg" 
-              alt="Kundkund Stationers" 
-              className="h-22 w-40 "
-            />
+         <img 
+  src={logo} 
+  alt="Kundkund Stationers" 
+  className="h-22 w-40"
+/>
+
           </Link>
         </div>
 
