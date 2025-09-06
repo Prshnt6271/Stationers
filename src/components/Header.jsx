@@ -10,6 +10,8 @@ function Header() {
   const [isMobileBrandsOpen, setIsMobileBrandsOpen] = useState(false);
   const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
 
   const productsDropdownRef = useRef(null);
   const categoryDropdownRef = useRef(null);
@@ -17,8 +19,11 @@ function Header() {
   const mobileMenuRef = useRef(null);
   const mobileBrandsRef = useRef(null);
   const mobileProductsRef = useRef(null);
+  const searchRef = useRef(null);
 
   const navigate = useNavigate();
+
+  const brandNames = ["doms", "miles", "munix", "kores", "cello", "natraj", "saino", "pierre"];
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -42,6 +47,9 @@ function Header() {
       if (mobileProductsRef.current && !mobileProductsRef.current.contains(event.target)) {
         setIsMobileProductsOpen(false);
       }
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -50,18 +58,28 @@ function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const toggleProductsDropdown = () => setIsProductsDropdownOpen(!isProductsDropdownOpen);
-  const toggleCategoryDropdown = () => setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
-  const toggleBrandsDropdown = () => setIsBrandsDropdownOpen(!isBrandsDropdownOpen);
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const toggleMobileBrands = () => setIsMobileBrandsOpen(!isMobileBrandsOpen);
-  const toggleMobileProducts = () => setIsMobileProductsOpen(!isMobileProductsOpen);
+  // Handle search input changes and show suggestions
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    
+    if (value.trim().length > 0) {
+      const normalizedQuery = value.trim().toLowerCase();
+      const matchedBrands = brandNames.filter(brand => 
+        brand.startsWith(normalizedQuery)
+      );
+      setSuggestions(matchedBrands);
+      setShowSuggestions(true);
+    } else {
+      setShowSuggestions(false);
+      setSuggestions([]);
+    }
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
     
     // Check if the search query matches any brand name (case insensitive)
-    const brandNames = ["doms", "miles", "munix", "kores", "cello", "natraj", "saino", "pierre"];
     const normalizedQuery = searchQuery.trim().toLowerCase();
     
     // Find if the search query matches any brand
@@ -78,8 +96,24 @@ function Header() {
     }
     
     setSearchQuery('');
+    setShowSuggestions(false);
     setIsMobileMenuOpen(false);
   };
+
+  const handleSuggestionClick = (brand) => {
+    setSearchQuery(brand);
+    setShowSuggestions(false);
+    
+    // Navigate directly to the brand page
+    navigate(`/brands#${brand.toLowerCase()}`);
+  };
+
+  const toggleProductsDropdown = () => setIsProductsDropdownOpen(!isProductsDropdownOpen);
+  const toggleCategoryDropdown = () => setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+  const toggleBrandsDropdown = () => setIsBrandsDropdownOpen(!isBrandsDropdownOpen);
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleMobileBrands = () => setIsMobileBrandsOpen(!isMobileBrandsOpen);
+  const toggleMobileProducts = () => setIsMobileProductsOpen(!isMobileProductsOpen);
 
   const handleBrandClick = (brand) => {
     if (brand === 'all') {
@@ -107,14 +141,15 @@ function Header() {
           </Link>
         </div>
 
-        {/* Search Bar */}
-        <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0">
+        {/* Search Bar with Suggestions */}
+        <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0 relative" ref={searchRef}>
           <form onSubmit={handleSearch} className="relative flex">
             <div className="relative flex-grow">
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
+                onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
                 placeholder="Search for products or brands..."
                 className="w-full p-3 pl-5 pr-12 text-white placeholder-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
                 style={{backgroundColor: 'rgba(255, 255, 255, 0.2)'}}
@@ -134,6 +169,25 @@ function Header() {
               </button>
             </div>
           </form>
+          
+          {/* Search Suggestions */}
+          {showSuggestions && suggestions.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-40">
+              <ul className="py-1">
+                {suggestions.map((brand, index) => (
+                  <li key={index}>
+                    <button
+                      type="button"
+                      onClick={() => handleSuggestionClick(brand)}
+                      className="w-full text-left px-4 py-2 hover:bg-blue-50 hover:text-blue-700 capitalize"
+                    >
+                      {brand}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Mobile Toggles */}
@@ -155,8 +209,8 @@ function Header() {
       </div>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:block bg-blue-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner">
-        <ul className="flex justify-center space-x-6 text-sm font-medium items-center">
+      <nav className="hidden md:block bg-blue-800 text-white py-3 px-4 sm:px-6 md:px-8 shadow-inner ">
+        <ul className="flex justify-center space-x-6 text-sm font-medium items-center ml-45">
           <li>
             <Link to="/" className="hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md transition-colors duration-200">
               HOME

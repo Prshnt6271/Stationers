@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 
 function CartPage() {
   const [cartItems, setCartItems] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: ""
+  });
 
   // Load cart from localStorage
   useEffect(() => {
@@ -27,6 +33,43 @@ function CartPage() {
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
 
+  // Calculate total price
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Prepare order details message
+    const orderDetails = cartItems.map(item => 
+      `${item.brand} Product #${item.imageIndex + 1} - Quantity: ${item.quantity} - Price: $${item.price.toFixed(2)} - Subtotal: $${(item.price * item.quantity).toFixed(2)}`
+    ).join("%0A");
+    
+    const subtotal = calculateTotal();
+    const shipping = 10;
+    const tax = subtotal * 0.1;
+    const total = subtotal + shipping + tax;
+    
+    const message = `NEW ORDER INQUIRY%0A%0A%0A*CUSTOMER DETAILS:*%0A%0AName: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0A%0A%0A*ORDER DETAILS:*%0A%0A${orderDetails}%0A%0A%0A*ORDER SUMMARY:*%0A%0ASubtotal: $${subtotal.toFixed(2)}%0AShipping: $${shipping.toFixed(2)}%0ATax: $${tax.toFixed(2)}%0A%0A*TOTAL: $${total.toFixed(2)}*%0A%0A%0AThank you for your order!`;
+    
+    // WhatsApp business number (replace with your actual number)
+    const whatsappNumber = "1234567890";
+    
+    // Open WhatsApp with pre-filled message
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4">
       <div className="max-w-7xl mx-auto">
@@ -46,14 +89,16 @@ function CartPage() {
               <thead className="bg-gray-100 text-left">
                 <tr>
                   <th className="px-4 py-3">Product</th>
+                  <th className="px-4 py-3 text-center">Price</th>
                   <th className="px-4 py-3 text-center">Quantity</th>
+                  <th className="px-4 py-3 text-center">Subtotal</th>
                   <th className="px-4 py-3 text-right">Remove</th>
                 </tr>
               </thead>
               <tbody>
                 {cartItems.length === 0 ? (
                   <tr>
-                    <td colSpan="3" className="text-center py-6 text-gray-500">
+                    <td colSpan="5" className="text-center py-6 text-gray-500">
                       Your cart is empty.
                     </td>
                   </tr>
@@ -76,6 +121,9 @@ function CartPage() {
                         </div>
                       </td>
                       <td className="px-4 py-4 text-center">
+                        ${item.price.toFixed(2)}
+                      </td>
+                      <td className="px-4 py-4 text-center">
                         <div className="flex items-center justify-center space-x-2">
                           <button
                             onClick={() =>
@@ -96,6 +144,9 @@ function CartPage() {
                           </button>
                         </div>
                       </td>
+                      <td className="px-4 py-4 text-center">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </td>
                       <td className="px-4 py-4 text-right">
                         <button
                           onClick={() => removeFromCart(item.id)}
@@ -114,14 +165,108 @@ function CartPage() {
           {/* Right - Summary Box */}
           <div className="bg-white shadow rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4">CART SUMMARY</h2>
+            
+            <div className="space-y-3 mb-6">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Subtotal</span>
+                <span className="font-medium">${calculateTotal().toFixed(2)}</span>
+              </div>
+              
+              <div className="flex justify-between">
+                <span className="text-gray-600">Shipping</span>
+                <span className="font-medium">$10.00</span>
+              </div>
+              
+              <div className="flex justify-between">
+                <span className="text-gray-600">Tax</span>
+                <span className="font-medium">
+                  ${(calculateTotal() * 0.1).toFixed(2)}
+                </span>
+              </div>
+              
+              <div className="border-t pt-3 flex justify-between text-lg font-semibold">
+                <span>Total</span>
+                <span>
+                  ${(calculateTotal() + 10 + (calculateTotal() * 0.1)).toFixed(2)}
+                </span>
+              </div>
+            </div>
+
             <p className="text-gray-600 mb-6">
               You have <span className="font-bold">{cartItems.length}</span>{" "}
               {cartItems.length === 1 ? "item" : "items"} in your cart.
             </p>
 
-            <button className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600">
-              Proceed to Checkout
+            <button 
+              onClick={() => setShowForm(!showForm)}
+              className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600"
+            >
+              {showForm ? "Hide Checkout Form" : "Proceed to Checkout"}
             </button>
+
+            {/* Customer Information Form */}
+            {showForm && (
+              <form onSubmit={handleSubmit} className="mt-6 border-t pt-6">
+                <h3 className="text-lg font-medium text-gray-800 mb-4">Customer Information</h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition duration-200 mt-2"
+                  >
+                    Submit Order via WhatsApp
+                  </button>
+                </div>
+              </form>
+            )}
 
             <Link
               to="/brands"

@@ -10,7 +10,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
 
-// import LoadingAnimation from './components/LoadingAnimation';
+import LoadingAnimation from './components/LoadingAnimation';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +27,7 @@ export default function App() {
   return (
     <Router>
       <div className="font-sans antialiased text-gray-800 bg-gray-50 min-h-screen flex flex-col">
-        {/* {isLoading && <LoadingAnimation />} */}
+        {isLoading && <LoadingAnimation />}
         <Header />
         
         {/* Main content area that will change based on route */}
