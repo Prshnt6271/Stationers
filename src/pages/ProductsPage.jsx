@@ -18,7 +18,7 @@ const categoriesData = [
     color: "from-blue-500 to-cyan-500",
   },
   {
-    name: "Stationary",
+    name: "School Stationary",
     images: generateImageUrls("stationery", 11),
     color: "from-purple-500 to-pink-500",
   },

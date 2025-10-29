@@ -15,6 +15,7 @@ import D10 from "../assets/Brand/Doms/D10.jpg";
 import D11 from "../assets/Brand/Doms/D11.jpg";
 import DomsThumb from "../assets/Brand/Doms/Doms.jpg"
 import DomsPDF from "../assets/Brand/Doms/Doms.pdf";
+import DomsLogo from "../assets/Brand/Doms/Doms.jpg"; // Add logo import
 
 // ✅ Import images for Kores
 import K1 from "../assets/Brand/Kores/K1.jpg";
@@ -30,6 +31,7 @@ import K10 from "../assets/Brand/Kores/K10.jpg";
 import K11 from "../assets/Brand/Kores/K11.jpg";
 import KoresThumb from "../assets/Brand/Kores/Kores.jpg"
 import KoresPDF from "../assets/Brand/Kores/Kores.pdf";
+import KoresLogo from "../assets/Brand/Kores/Kores.jpg"; // Add logo import
 
 // ✅ Import images for Munix
 import MU1 from "../assets/Brand/Munix/MU1.jpg";
@@ -45,6 +47,7 @@ import MU10 from "../assets/Brand/Munix/MU10.jpg";
 import MU11 from "../assets/Brand/Munix/MU11.jpg";
 import MunixThumb from "../assets/Brand/Munix/Munix.jpg"
 import MunixPDF from "../assets/Brand/Munix/Munix.pdf";
+import MunixLogo from "../assets/Brand/Munix/Munix.jpg"; // Add logo import
 
 // ✅ Import images for Miles
 import MI1 from "../assets/Brand/Miles/MI1.jpg";
@@ -60,6 +63,7 @@ import MI10 from "../assets/Brand/Miles/MI10.jpg";
 import MI11 from "../assets/Brand/Miles/MI11.jpg";
 import MilesThumb from "../assets/Brand/Miles/Miles.jpg"
 import MilesPDF from "../assets/Brand/Miles/Miles.pdf";
+import MilesLogo from "../assets/Brand/Miles/Miles.jpg"; // Add logo import
 
 // ✅ Import images for Cello
 import C1 from "../assets/Brand/Cello/1.jpg";
@@ -76,6 +80,7 @@ import C11 from "../assets/Brand/Cello/11.jpg";
 import C12 from "../assets/Brand/Cello/12.jpg";
 import CelloThumb from "../assets/Brand/Cello/Ct.jpg";
 import CelloPDF from "../assets/Brand/Cello/Cello.pdf";
+import CelloLogo from "../assets/Brand/Cello/Ct.jpg"; // Add logo import
 
 // ✅ Import images for Natraj
 import N1 from "../assets/Brand/Natraj/1.jpg";
@@ -92,6 +97,7 @@ import N11 from "../assets/Brand/Natraj/11.jpg";
 import N12 from "../assets/Brand/Natraj/12.jpg";
 import NatrajThumb from "../assets/Brand/Natraj/Nt.jpg";
 import NatrajPDF from "../assets/Brand/Natraj/Natraj.pdf";
+import NatrajLogo from "../assets/Brand/Natraj/Nt.jpg"; // Add logo import
 
 // ✅ Import images for Saino
 import S1 from "../assets/Brand/Saino/1.jpg";
@@ -108,6 +114,7 @@ import S11 from "../assets/Brand/Saino/11.jpg";
 import S12 from "../assets/Brand/Saino/12.jpg";
 import SainoThumb from "../assets/Brand/Saino/St.jpg";
 import SainoPDF from "../assets/Brand/Saino/Saino.pdf";
+import SainoLogo from "../assets/Brand/Saino/St.jpg"; // Add logo import
 
 // ✅ Import images for Pierre
 import P1 from "../assets/Brand/Pier/1.jpg";
@@ -124,7 +131,7 @@ import P11 from "../assets/Brand/Pier/11.jpg";
 import P12 from "../assets/Brand/Pier/12.jpg";
 import PierreThumb from "../assets/Brand/Pier/pier.jpg";
 import PierrePDF from "../assets/Brand/Pier/Pierre.pdf";
-
+import PierreLogo from "../assets/Brand/Pier/pier.jpg"; // Add logo import
 
 const brandsData = [
   {
@@ -132,6 +139,7 @@ const brandsData = [
     images: [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11],
     pdf: DomsPDF,
     pdfThumb: DomsThumb,
+    logo: DomsLogo, // Add logo
     color: "from-blue-500 to-cyan-500",
   },
   {
@@ -139,6 +147,7 @@ const brandsData = [
     images: [K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11],
     pdf: KoresPDF,
     pdfThumb: KoresThumb,
+    logo: KoresLogo, // Add logo
     color: "from-purple-500 to-pink-500",
   },
   {
@@ -146,6 +155,7 @@ const brandsData = [
     images: [MU1, MU2, MU3, MU4, MU5, MU6, MU7, MU8, MU9, MU10, MU11],
     pdf: MunixPDF,
     pdfThumb: MunixThumb,
+    logo: MunixLogo, // Add logo
     color: "from-green-500 to-emerald-500",
   },
   {
@@ -153,14 +163,15 @@ const brandsData = [
     images: [MI1, MI2, MI3, MI4, MI5, MI6, MI7, MI8, MI9, MI10, MI11],
     pdf: MilesPDF,
     pdfThumb: MilesThumb,
+    logo: MilesLogo, // Add logo
     color: "from-orange-500 to-red-500",
   },
-
-   {
+  {
     name: "Cello",
     images: [C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12],
     pdf: CelloPDF,
     pdfThumb: CelloThumb,
+    logo: CelloLogo, // Add logo
     color: "from-red-500 to-yellow-500",
   },
   {
@@ -168,6 +179,7 @@ const brandsData = [
     images: [N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N11, N12],
     pdf: NatrajPDF,
     pdfThumb: NatrajThumb,
+    logo: NatrajLogo, // Add logo
     color: "from-pink-500 to-purple-500",
   },
   {
@@ -175,6 +187,7 @@ const brandsData = [
     images: [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12],
     pdf: SainoPDF,
     pdfThumb: SainoThumb,
+    logo: SainoLogo, // Add logo
     color: "from-blue-500 to-indigo-500",
   },
   {
@@ -182,6 +195,7 @@ const brandsData = [
     images: [P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12],
     pdf: PierrePDF,
     pdfThumb: PierreThumb,
+    logo: PierreLogo, // Add logo
     color: "from-emerald-500 to-green-700",
   },
 ];
@@ -325,10 +339,23 @@ function BrandsPage() {
           
           return (
             <div key={brand.name} id={brand.name.toLowerCase()} ref={(el) => (brandRefs.current[brand.name.toLowerCase()] = el)} className="mb-16 md:mb-24 scroll-mt-16">
-              {/* Brand Header */}
+              {/* Brand Header with Logo */}
               <div className={`mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-gradient-to-r ${brand.color} text-white shadow-xl`}>
-                <h2 className="text-3xl md:text-4xl font-bold">{brand.name}</h2>
-                <p className="mt-2 opacity-90">Explore our {brand.name} product collection</p>
+                <div className="flex items-center space-x-4">
+                  {brand.logo && (
+                    <div className="flex-shrink-0">
+                      <img 
+                        src={brand.logo} 
+                        alt={`${brand.name} logo`} 
+                        className="h-12 w-12 md:h-16 md:w-16 object-contain bg-white rounded-lg p-1"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <h2 className="text-3xl md:text-4xl font-bold">{brand.name}</h2>
+                    <p className="mt-2 opacity-90">Explore our {brand.name} product collection</p>
+                  </div>
+                </div>
               </div>
 
               {/* Grid */}

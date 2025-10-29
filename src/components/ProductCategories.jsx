@@ -147,7 +147,7 @@ function CategoryCard({ category }) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
       {category.size === "xlarge" && (
-        <div className="absolute inset-14 bg-gray-200/80 z-10 border border-gray-300"></div>
+        <div className="absolute inset-14 z-10 "></div>
       )}
       <div className="relative z-20 p-4 w-full text-white transform transition-all duration-300 group-hover:-translate-y-2">
         <h3 className="text-xl font-bold uppercase mb-1 group-hover:text-blue-300 transition-colors">
