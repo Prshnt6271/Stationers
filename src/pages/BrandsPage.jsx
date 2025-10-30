@@ -248,6 +248,34 @@ function BrandsPage() {
   const openLightbox = (image) => setActiveImage(image);
   const closeLightbox = () => setActiveImage(null);
 
+  // Close lightbox when clicking outside the image
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeLightbox();
+    }
+  };
+
+  // Close lightbox with Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        closeLightbox();
+      }
+    };
+
+    if (activeImage) {
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden"; // Prevent scrolling when lightbox is open
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "auto";
+    };
+  }, [activeImage]);
+
   const handleEnquiry = (brandName, imageIndex) => {
     navigate("/ContactUs", { state: { brand: brandName, product: imageIndex + 1 } });
   };
@@ -314,12 +342,50 @@ function BrandsPage() {
 
       {/* Lightbox Modal */}
       {activeImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" onClick={closeLightbox}>
-          <div className="relative max-w-4xl max-h-full">
-            <button className="absolute -top-12 right-0 text-white text-3xl z-10 md:top-2 md:right-2" onClick={closeLightbox}>
-              &times;
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4" 
+          onClick={handleBackdropClick}
+        >
+          <div className="relative max-w-4xl max-h-full w-full">
+            {/* Cross Button */}
+            <button 
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors duration-200 z-10 md:top-4 md:right-4 bg-black/50 rounded-full p-2 backdrop-blur-sm"
+              onClick={closeLightbox}
+              aria-label="Close image"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-8 w-8 md:h-10 md:w-10" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
-            <img src={activeImage} alt="Enlarged view" className="w-full h-auto max-h-[80vh] object-contain" />
+            
+            {/* Image */}
+            <img 
+              src={activeImage} 
+              alt="Enlarged view" 
+              className="w-full h-auto max-h-[80vh] object-contain rounded-lg" 
+            />
+            
+            {/* Download Button */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
+              <a 
+                href={activeImage} 
+                download 
+                className="bg-white/90 text-gray-900 px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-white transition-colors duration-200 backdrop-blur-sm"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Download</span>
+              </a>
+            </div>
           </div>
         </div>
       )}
@@ -367,7 +433,7 @@ function BrandsPage() {
                         <img
                           src={pair[0]}
                           alt={`${brand.name} product ${i * 2 + 1}`}
-                          className="max-h-full max-w-full object-contain p-2 cursor-pointer"
+                          className="max-h-full max-w-full object-contain p-2 cursor-pointer hover:scale-105 transition-transform duration-300"
                           onClick={() => openLightbox(pair[0])}
                         />
                       </div>
@@ -375,7 +441,7 @@ function BrandsPage() {
                         <img
                           src={pair[1]}
                           alt={`${brand.name} product ${i * 2 + 2}`}
-                          className="max-h-full max-w-full object-contain p-2 cursor-pointer"
+                          className="max-h-full max-w-full object-contain p-2 cursor-pointer hover:scale-105 transition-transform duration-300"
                           onClick={() => openLightbox(pair[1])}
                         />
                       </div>
@@ -384,14 +450,14 @@ function BrandsPage() {
                     {/* Buttons */}
                     <div className="flex justify-between items-center px-3 py-2 border-t">
                       <button
-                        className="bg-white border border-gray-300 text-gray-700 font-medium py-1 px-3 rounded text-sm shadow-sm hover:bg-gray-100"
+                        className="bg-white border border-gray-300 text-gray-700 font-medium py-1 px-3 rounded text-sm shadow-sm hover:bg-gray-100 transition-colors duration-200"
                         onClick={() => handleEnquiry(brand.name, i * 2)}
                       >
                         Enquiry
                       </button>
                       <div className="flex space-x-2">
                         <button
-                          className="bg-blue-600 text-white p-2 rounded-full shadow-md hover:scale-110 transition-transform"
+                          className="bg-blue-600 text-white p-2 rounded-full shadow-md hover:scale-110 hover:bg-blue-700 transition-all duration-200"
                           onClick={() => addToCart(brand.name, i * 2, pair[0])}
                           title="Add left product to cart"
                         >
@@ -400,7 +466,7 @@ function BrandsPage() {
                           </svg>
                         </button>
                         <button
-                          className="bg-blue-600 text-white p-2 rounded-full shadow-md hover:scale-110 transition-transform"
+                          className="bg-blue-600 text-white p-2 rounded-full shadow-md hover:scale-110 hover:bg-blue-700 transition-all duration-200"
                           onClick={() => addToCart(brand.name, i * 2 + 1, pair[1])}
                           title="Add right product to cart"
                         >

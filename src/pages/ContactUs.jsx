@@ -80,7 +80,7 @@ export default function ContactUs() {
               <svg className="w-6 h-6 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.03 21 3 13.97 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1v3.5c0 .35-.09.7-.24 1.02l-2.2 2.2z"></path>
               </svg>
-              <p>+91-9810399394, <br />+91-9650338339</p>
+              <p>+91 9650668139<br />+91 9818818668</p>
             </div>
 
             <div className="flex items-start space-x-4">
@@ -98,7 +98,7 @@ export default function ContactUs() {
               <svg className="w-6 h-6 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
               </svg>
-              <p>care@kunkunstationary.com</p>
+              <p>Stationerskundkund@gmail.com</p>
             </div>
           </div>
 
