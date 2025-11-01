@@ -3,42 +3,42 @@ import { useLocation } from "react-router-dom";
 
 // ✅ Import School Stationary images
 import S1 from "../assets/ProductPage/ScholStat/S1.jpg";
-// import S2 from "../assets/ProductPage/ScholStat/S2.jpg";
-// import S3 from "../assets/ProductPage/ScholStat/S3.jpg";
-// import S4 from "../assets/ProductPage/ScholStat/S4.jpg";
-// import S5 from "../assets/ProductPage/ScholStat/S5.jpg";
-// import S6 from "../assets/ProductPage/ScholStat/S6.jpg";
-// import S7 from "../assets/ProductPage/ScholStat/S7.jpg";
-// import S8 from "../assets/ProductPage/ScholStat/S8.jpg";
-// import S9 from "../assets/ProductPage/ScholStat/S9.jpg";
-// import S10 from "../assets/ProductPage/ScholStat/S10.jpg";
-// import S11 from "../assets/ProductPage/ScholStat/S11.jpg";
+import S2 from "../assets/ProductPage/ScholStat/S2.jpg";
+import S3 from "../assets/ProductPage/ScholStat/S3.jpg";
+import S4 from "../assets/ProductPage/ScholStat/S4.jpg";
+import S5 from "../assets/ProductPage/ScholStat/S5.jpg";
+import S6 from "../assets/ProductPage/ScholStat/S6.jpg";
+import S7 from "../assets/ProductPage/ScholStat/S7.jpg";
+import S8 from "../assets/ProductPage/ScholStat/S8.jpg";
+import S9 from "../assets/ProductPage/ScholStat/S9.jpg";
+import S10 from "../assets/ProductPage/ScholStat/S10.jpg";
+import S11 from "../assets/ProductPage/ScholStat/S11.jpg";
 
 // ✅ Import Toys images
-// import T1 from "../assets/ProductPage/Toys/T1.jpg";
-// import T2 from "../assets/ProductPage/Toys/T2.jpg";
-// import T3 from "../assets/ProductPage/Toys/T3.jpg";
-// import T4 from "../assets/ProductPage/Toys/T4.jpg";
-// import T5 from "../assets/ProductPage/Toys/T5.jpg";
-// import T6 from "../assets/ProductPage/Toys/T6.jpg";
-// import T7 from "../assets/ProductPage/Toys/T7.jpg";
-// import T8 from "../assets/ProductPage/Toys/T8.jpg";
-// import T9 from "../assets/ProductPage/Toys/T9.jpg";
-// import T10 from "../assets/ProductPage/Toys/T10.jpg";
-// import T11 from "../assets/ProductPage/Toys/T11.jpg";
+import T1 from "../assets/ProductPage/Toys/T1.jpg";
+import T2 from "../assets/ProductPage/Toys/T2.jpg";
+import T3 from "../assets/ProductPage/Toys/T3.jpg";
+import T4 from "../assets/ProductPage/Toys/T4.jpg";
+import T5 from "../assets/ProductPage/Toys/T5.jpg";
+import T6 from "../assets/ProductPage/Toys/T6.jpg";
+import T7 from "../assets/ProductPage/Toys/T7.jpg";
+import T8 from "../assets/ProductPage/Toys/T8.jpg";
+import T9 from "../assets/ProductPage/Toys/T9.jpg";
+import T10 from "../assets/ProductPage/Toys/T10.jpg";
+import T11 from "../assets/ProductPage/Toys/T11.jpg";
 
 // ✅ Import Decoration images
-// import D1 from "../assets/ProductPage/Decoration/D1.jpg";
-// import D2 from "../assets/ProductPage/Decoration/D2.jpg";
-// import D3 from "../assets/ProductPage/Decoration/D3.jpg";
-// import D4 from "../assets/ProductPage/Decoration/D4.jpg";
-// import D5 from "../assets/ProductPage/Decoration/D5.jpg";
-// import D6 from "../assets/ProductPage/Decoration/D6.jpg";
-// import D7 from "../assets/ProductPage/Decoration/D7.jpg";
-// import D8 from "../assets/ProductPage/Decoration/D8.jpg";
-// import D9 from "../assets/ProductPage/Decoration/D9.jpg";
-// import D10 from "../assets/ProductPage/Decoration/D10.jpg";
-// import D11 from "../assets/ProductPage/Decoration/D11.jpg";
+import D1 from "../assets/ProductPage/Decoration/D1.jpg";
+import D2 from "../assets/ProductPage/Decoration/D2.jpg";
+import D3 from "../assets/ProductPage/Decoration/D3.jpg";
+import D4 from "../assets/ProductPage/Decoration/D4.jpg";
+import D5 from "../assets/ProductPage/Decoration/D5.jpg";
+import D6 from "../assets/ProductPage/Decoration/D6.jpg";
+import D7 from "../assets/ProductPage/Decoration/D7.jpg";
+import D8 from "../assets/ProductPage/Decoration/D8.jpg";
+import D9 from "../assets/ProductPage/Decoration/D9.jpg";
+import D10 from "../assets/ProductPage/Decoration/D10.jpg";
+import D11 from "../assets/ProductPage/Decoration/D11.jpg";
 
 // ✅ Import Office images
 // import O1 from "../assets/ProductPage/Office/O1.jpg";
@@ -61,19 +61,19 @@ const categoriesData = [
   // },
   {
     name: "School Stationary",
-    images: [S1],
+    images: [S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11],
     color: "from-purple-500 to-pink-500",
-  }
-  // {
-  //   name: "Toys",
-  //   images: [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11],
-  //   color: "from-green-500 to-emerald-500",
-  // },
-  // {
-  //   name: "Decoration",
-  //   images: [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11],
-  //   color: "from-orange-500 to-red-500",
-  // },
+  },
+  {
+    name: "Toys",
+    images: [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11],
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    name: "Decoration",
+    images: [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11],
+    color: "from-orange-500 to-red-500",
+  },
 ];
 
 function ProductsPage() {
@@ -83,16 +83,23 @@ function ProductsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (location.hash) {
-      const category = location.hash.replace("#", "");
-      if (categoryRefs.current[category]) {
-        setTimeout(() => {
-          categoryRefs.current[category].scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 300);
+    // Check if we have a section to scroll to from navigation state
+    if (location.state?.scrollToSection) {
+      const section = location.state.scrollToSection;
+      console.log("Scrolling to section:", section);
+      
+      // Convert section name to match our category names
+      let targetSection = section;
+      
+      // Handle case where it might come as "SchoolStat" from old data
+      if (section === "SchoolStat") {
+        targetSection = "School Stationary";
       }
+      
+      // Wait for the page to render and then scroll to the section
+      setTimeout(() => {
+        scrollToSection(targetSection);
+      }, 500);
     }
 
     // Simulate loading time for images
@@ -102,6 +109,40 @@ function ProductsPage() {
 
     return () => clearTimeout(timer);
   }, [location]);
+
+  const scrollToSection = (sectionName) => {
+    console.log("Attempting to scroll to:", sectionName);
+    
+    // Find the category in our data
+    const category = categoriesData.find(cat => 
+      cat.name.toLowerCase() === sectionName.toLowerCase()
+    );
+    
+    if (category) {
+      const sectionId = category.name.toLowerCase().replace(/\s+/g, '-');
+      console.log("Found category, section ID:", sectionId);
+      
+      if (categoryRefs.current[sectionId]) {
+        console.log("Scrolling to element...");
+        categoryRefs.current[sectionId].scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      } else {
+        console.log("Element ref not found for:", sectionId);
+        // Fallback: try to find by ID
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+    } else {
+      console.log("Category not found:", sectionName);
+    }
+  };
 
   const openLightbox = (image) => {
     setActiveImage(image);
@@ -142,6 +183,9 @@ function ProductsPage() {
   const handleEnquiry = (categoryName, imageIndex) => {
     // Navigate to contact page or open enquiry modal
     console.log(`Enquiry for ${categoryName} product ${imageIndex + 1}`);
+    // You can implement your enquiry logic here
+    // For example: navigate to contact page with pre-filled data
+    // or open a modal form
   };
 
   const addToCart = (categoryName, imageIndex, imageSrc) => {
