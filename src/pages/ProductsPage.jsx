@@ -41,8 +41,8 @@ import D10 from "../assets/ProductPage/Decoration/D10.jpg";
 import D11 from "../assets/ProductPage/Decoration/D11.jpg";
 
 // ✅ Import Office images
-// import O1 from "../assets/ProductPage/Office/O1.jpg";
-// import O2 from "../assets/ProductPage/Office/O2.jpg";
+import O1 from "../assets/ProductPage/Office/O1.webp";
+import O2 from "../assets/ProductPage/Office/O2.webp";
 // import O3 from "../assets/ProductPage/Office/O3.jpg";
 // import O4 from "../assets/ProductPage/Office/O4.jpg";
 // import O5 from "../assets/ProductPage/Office/O5.jpg";
@@ -54,11 +54,11 @@ import D11 from "../assets/ProductPage/Decoration/D11.jpg";
 // import O11 from "../assets/ProductPage/Office/O11.jpg";
 
 const categoriesData = [
-  // {
-  //   name: "Office",
-  //   images: [O1, O2, O3, O4, O5, O6, O7, O8, O9, O10, O11],
-  //   color: "from-blue-500 to-cyan-500",
-  // },
+  {
+    name: "Office",
+    images: [O1, O2],
+    color: "from-blue-500 to-cyan-500",
+  },
   {
     name: "School Stationary",
     images: [S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11],
