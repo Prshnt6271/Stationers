@@ -33,9 +33,9 @@ function CartPage() {
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
 
-  // Calculate total price
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  // Calculate total items count
+  const calculateTotalItems = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
   // Handle form input changes
@@ -51,17 +51,14 @@ function CartPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Prepare order details message
+    // Prepare order details message without prices
     const orderDetails = cartItems.map(item => 
-      `${item.brand} Product #${item.imageIndex + 1} - Quantity: ${item.quantity} - Price: $${item.price.toFixed(2)} - Subtotal: $${(item.price * item.quantity).toFixed(2)}`
+      `${item.category} - Product ${item.imageIndex + 1} (Quantity: ${item.quantity})`
     ).join("%0A");
     
-    const subtotal = calculateTotal();
-    const shipping = 10;
-    const tax = subtotal * 0.1;
-    const total = subtotal + shipping + tax;
+    const totalItems = calculateTotalItems();
     
-    const message = `NEW ORDER INQUIRY%0A%0A%0A*CUSTOMER DETAILS:*%0A%0AName: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0A%0A%0A*ORDER DETAILS:*%0A%0A${orderDetails}%0A%0A%0A*ORDER SUMMARY:*%0A%0ASubtotal: $${subtotal.toFixed(2)}%0AShipping: $${shipping.toFixed(2)}%0ATax: $${tax.toFixed(2)}%0A%0A*TOTAL: $${total.toFixed(2)}*%0A%0A%0AThank you for your order!`;
+    const message = `NEW ORDER INQUIRY%0A%0A%0A*CUSTOMER DETAILS:*%0A%0AName: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0A%0A%0A*ORDER DETAILS:*%0A%0A${orderDetails}%0A%0ATotal Items: ${totalItems}%0A%0A%0AThank you for your order! Please contact us for pricing details.`;
     
     // WhatsApp business number (replace with your actual number)
     const whatsappNumber = "1234567890";
@@ -72,7 +69,7 @@ function CartPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Breadcrumb / Steps */}
         <div className="flex justify-center space-x-6 text-lg font-semibold mb-10">
           <span className="text-blue-600 underline">SHOPPING CART</span>
@@ -82,198 +79,170 @@ function CartPage() {
           <span className="text-gray-500">ORDER COMPLETE</span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left - Cart Table */}
-          <div className="lg:col-span-2 bg-white shadow rounded-lg overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-gray-100 text-left">
-                <tr>
-                  <th className="px-4 py-3">Product</th>
-                  <th className="px-4 py-3 text-center">Price</th>
-                  <th className="px-4 py-3 text-center">Quantity</th>
-                  <th className="px-4 py-3 text-center">Subtotal</th>
-                  <th className="px-4 py-3 text-right">Remove</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cartItems.length === 0 ? (
-                  <tr>
-                    <td colSpan="5" className="text-center py-6 text-gray-500">
-                      Your cart is empty.
-                    </td>
-                  </tr>
-                ) : (
-                  cartItems.map((item) => (
-                    <tr key={item.id} className="border-t">
-                      <td className="px-4 py-4 flex items-center space-x-4">
-                        <img
-                          src={item.imageSrc}
-                          alt={item.brand}
-                          className="w-16 h-16 object-contain rounded border"
-                        />
-                        <div>
-                          <h3 className="font-medium text-gray-800">
-                            {item.brand}
-                          </h3>
-                          <p className="text-sm text-gray-500">
-                            Product {item.imageIndex + 1}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-center">
-                        ${item.price.toFixed(2)}
-                      </td>
-                      <td className="px-4 py-4 text-center">
-                        <div className="flex items-center justify-center space-x-2">
-                          <button
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity - 1)
-                            }
-                            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                          >
-                            -
-                          </button>
-                          <span className="px-3">{item.quantity}</span>
-                          <button
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity + 1)
-                            }
-                            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-center">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </td>
-                      <td className="px-4 py-4 text-right">
-                        <button
-                          onClick={() => removeFromCart(item.id)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          ✕
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+        <div className="bg-white shadow rounded-lg overflow-hidden">
+          {/* Cart Header */}
+          <div className="bg-gray-100 px-6 py-4 border-b">
+            <h1 className="text-xl font-bold text-gray-800">
+              Your Cart ({calculateTotalItems()} {calculateTotalItems() === 1 ? 'item' : 'items'})
+            </h1>
           </div>
 
-          {/* Right - Summary Box */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">CART SUMMARY</h2>
-            
-            <div className="space-y-3 mb-6">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Subtotal</span>
-                <span className="font-medium">${calculateTotal().toFixed(2)}</span>
+          {/* Cart Items */}
+          <div className="p-6">
+            {cartItems.length === 0 ? (
+              <div className="text-center py-8">
+                <div className="text-gray-500 text-lg mb-4">Your cart is empty</div>
+                <Link
+                  to="/products"
+                  className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+                >
+                  Continue Shopping
+                </Link>
               </div>
-              
-              <div className="flex justify-between">
-                <span className="text-gray-600">Shipping</span>
-                <span className="font-medium">$10.00</span>
-              </div>
-              
-              <div className="flex justify-between">
-                <span className="text-gray-600">Tax</span>
-                <span className="font-medium">
-                  ${(calculateTotal() * 0.1).toFixed(2)}
-                </span>
-              </div>
-              
-              <div className="border-t pt-3 flex justify-between text-lg font-semibold">
-                <span>Total</span>
-                <span>
-                  ${(calculateTotal() + 10 + (calculateTotal() * 0.1)).toFixed(2)}
-                </span>
-              </div>
-            </div>
+            ) : (
+              <div className="space-y-4">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between border-b pb-4">
+                    {/* Product Info */}
+                    <div className="flex items-center space-x-4 flex-1">
+                      <img
+                        src={item.imageSrc}
+                        alt={item.category}
+                        className="w-16 h-16 object-contain rounded border"
+                      />
+                      <div>
+                        <h3 className="font-medium text-gray-800">
+                          {item.category}
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          Product {item.imageIndex + 1}
+                        </p>
+                      </div>
+                    </div>
 
-            <p className="text-gray-600 mb-6">
-              You have <span className="font-bold">{cartItems.length}</span>{" "}
-              {cartItems.length === 1 ? "item" : "items"} in your cart.
-            </p>
-
-            <button 
-              onClick={() => setShowForm(!showForm)}
-              className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600"
-            >
-              {showForm ? "Hide Checkout Form" : "Proceed to Checkout"}
-            </button>
-
-            {/* Customer Information Form */}
-            {showForm && (
-              <form onSubmit={handleSubmit} className="mt-6 border-t pt-6">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Customer Information</h3>
-                
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Enter your full name"
-                    />
+                    {/* Quantity Controls */}
+                    <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition duration-200"
+                        >
+                          -
+                        </button>
+                        <span className="px-3 font-medium">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition duration-200"
+                        >
+                          +
+                        </button>
+                      </div>
+                      
+                      {/* Remove Button */}
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-red-500 hover:text-red-700 ml-4"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Enter your phone number"
-                    />
-                  </div>
-                  
-                  <button
-                    type="submit"
-                    className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition duration-200 mt-2"
-                  >
-                    Submit Order via WhatsApp
-                  </button>
-                </div>
-              </form>
+                ))}
+              </div>
             )}
 
-            <Link
-              to="/brands"
-              className="block text-center mt-4 text-blue-600 hover:underline"
-            >
-              Continue Shopping
-            </Link>
+            {/* Checkout Section */}
+            {cartItems.length > 0 && (
+              <div className="mt-8 border-t pt-6">
+                <div className="flex justify-between items-center mb-6">
+                  <div className="text-lg font-semibold">
+                    Total Items: {calculateTotalItems()}
+                  </div>
+                  
+                  <button 
+                    onClick={() => setShowForm(!showForm)}
+                    className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
+                  >
+                    {showForm ? "Hide Checkout Form" : "Proceed to Checkout"}
+                  </button>
+                </div>
+
+                {/* Customer Information Form */}
+                {showForm && (
+                  <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg border">
+                    <h3 className="text-lg font-medium text-gray-800 mb-4">Customer Information</h3>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Enter your full name"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Enter your email"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                          Phone Number *
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          required
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Enter your phone number"
+                        />
+                      </div>
+                      
+                      <button
+                        type="submit"
+                        className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition duration-200 mt-2"
+                      >
+                        Submit Order via WhatsApp
+                      </button>
+                    </div>
+                  </form>
+                )}
+
+                <div className="text-center mt-6">
+                  <Link
+                    to="/products"
+                    className="text-blue-600 hover:underline font-medium"
+                  >
+                    ← Continue Shopping
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

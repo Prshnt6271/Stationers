@@ -43,15 +43,6 @@ import D11 from "../assets/ProductPage/Decoration/D11.jpg";
 // ✅ Import Office images
 import O1 from "../assets/ProductPage/Office/O1.webp";
 import O2 from "../assets/ProductPage/Office/O2.webp";
-// import O3 from "../assets/ProductPage/Office/O3.jpg";
-// import O4 from "../assets/ProductPage/Office/O4.jpg";
-// import O5 from "../assets/ProductPage/Office/O5.jpg";
-// import O6 from "../assets/ProductPage/Office/O6.jpg";
-// import O7 from "../assets/ProductPage/Office/O7.jpg";
-// import O8 from "../assets/ProductPage/Office/O8.jpg";
-// import O9 from "../assets/ProductPage/Office/O9.jpg";
-// import O10 from "../assets/ProductPage/Office/O10.jpg";
-// import O11 from "../assets/ProductPage/Office/O11.jpg";
 
 const categoriesData = [
   {
@@ -81,27 +72,24 @@ function ProductsPage() {
   const categoryRefs = useRef({});
   const [activeImage, setActiveImage] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const [enquiryForm, setEnquiryForm] = useState({
+    isOpen: false,
+    productCategory: "",
+    productIndex: null,
+    formData: {
+      name: "",
+      email: "",
+      company: "",
+      phone: "",
+      message: ""
+    }
+  });
 
   useEffect(() => {
-    // Check if we have a section to scroll to from navigation state
-    if (location.state?.scrollToSection) {
-      const section = location.state.scrollToSection;
-      console.log("Scrolling to section:", section);
-      
-      // Convert section name to match our category names
-      let targetSection = section;
-      
-      // Handle case where it might come as "SchoolStat" from old data
-      if (section === "SchoolStat") {
-        targetSection = "School Stationary";
-      }
-      
-      // Wait for the page to render and then scroll to the section
-      setTimeout(() => {
-        scrollToSection(targetSection);
-      }, 500);
-    }
-
+    // Reset scroll state when location changes
+    setHasScrolled(false);
+    
     // Simulate loading time for images
     const timer = setTimeout(() => {
       setLoading(false);
@@ -109,6 +97,61 @@ function ProductsPage() {
 
     return () => clearTimeout(timer);
   }, [location]);
+
+  useEffect(() => {
+    if (loading || hasScrolled) return;
+
+    let targetSection = null;
+    let scrollMethod = "";
+
+    // Method 1: Check React Router state (from ProductCategories)
+    if (location.state?.scrollToSection) {
+      targetSection = location.state.scrollToSection;
+      scrollMethod = "state";
+    }
+    // Method 2: Check URL hash (from header navigation)
+    else if (location.hash) {
+      targetSection = location.hash.replace('#', '');
+      scrollMethod = "hash";
+    }
+    // Method 3: Check URL search params (backup method)
+    else if (location.search) {
+      const urlParams = new URLSearchParams(location.search);
+      targetSection = urlParams.get('section');
+      scrollMethod = "search";
+    }
+
+    console.log("Navigation detected:", { targetSection, scrollMethod, location });
+
+    if (targetSection) {
+      // Convert section name to match our category names
+      let processedSection = targetSection;
+      
+      // Handle different naming conventions
+      if (processedSection === "SchoolStat") {
+        processedSection = "School Stationary";
+      }
+      // Convert kebab-case to normal name (office -> Office, school-stationary -> School Stationary)
+      else if (processedSection.includes('-')) {
+        processedSection = processedSection
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      }
+      // Capitalize first letter if it's a single word
+      else {
+        processedSection = processedSection.charAt(0).toUpperCase() + processedSection.slice(1);
+      }
+
+      console.log("Processed section:", processedSection);
+
+      // Wait a bit for the page to render completely
+      setTimeout(() => {
+        scrollToSection(processedSection);
+        setHasScrolled(true);
+      }, 800);
+    }
+  }, [location, loading, hasScrolled]);
 
   const scrollToSection = (sectionName) => {
     console.log("Attempting to scroll to:", sectionName);
@@ -122,26 +165,42 @@ function ProductsPage() {
       const sectionId = category.name.toLowerCase().replace(/\s+/g, '-');
       console.log("Found category, section ID:", sectionId);
       
+      // Try using ref first
       if (categoryRefs.current[sectionId]) {
-        console.log("Scrolling to element...");
+        console.log("Scrolling to element via ref...");
         categoryRefs.current[sectionId].scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-      } else {
-        console.log("Element ref not found for:", sectionId);
-        // Fallback: try to find by ID
+        return true;
+      } 
+      // Fallback: try to find by ID
+      else {
+        console.log("Trying to find element by ID...");
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
+          return true;
         }
       }
     } else {
       console.log("Category not found:", sectionName);
+      // Try direct ID matching as last resort
+      const directElement = document.getElementById(sectionName.toLowerCase().replace(/\s+/g, '-'));
+      if (directElement) {
+        directElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+        return true;
+      }
     }
+    
+    console.log("Failed to scroll to section:", sectionName);
+    return false;
   };
 
   const openLightbox = (image) => {
@@ -150,6 +209,73 @@ function ProductsPage() {
 
   const closeLightbox = () => {
     setActiveImage(null);
+  };
+
+  // Open enquiry form
+  const openEnquiryForm = (categoryName, imageIndex) => {
+    setEnquiryForm({
+      isOpen: true,
+      productCategory: categoryName,
+      productIndex: imageIndex,
+      formData: {
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        message: `I'm interested in ${categoryName} product ${imageIndex + 1}. Please provide more information.`
+      }
+    });
+  };
+
+  // Close enquiry form
+  const closeEnquiryForm = () => {
+    setEnquiryForm({
+      isOpen: false,
+      productCategory: "",
+      productIndex: null,
+      formData: {
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        message: ""
+      }
+    });
+  };
+
+  // Handle form input changes
+  const handleFormInputChange = (e) => {
+    const { name, value } = e.target;
+    setEnquiryForm(prev => ({
+      ...prev,
+      formData: {
+        ...prev.formData,
+        [name]: value
+      }
+    }));
+  };
+
+  // Handle form submission
+  const handleEnquirySubmit = (e) => {
+    e.preventDefault();
+    
+    // Here you would typically send the data to your backend
+    console.log("Enquiry Form Data:", {
+      ...enquiryForm.formData,
+      productCategory: enquiryForm.productCategory,
+      productIndex: enquiryForm.productIndex
+    });
+
+    // Show success message
+    const notification = document.createElement("div");
+    notification.className = "fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 font-medium";
+    notification.textContent = "Enquiry submitted successfully!";
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      document.body.removeChild(notification);
+      closeEnquiryForm();
+    }, 3000);
   };
 
   // Close lightbox when clicking outside the image
@@ -163,11 +289,16 @@ function ProductsPage() {
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape") {
-        closeLightbox();
+        if (activeImage) {
+          closeLightbox();
+        }
+        if (enquiryForm.isOpen) {
+          closeEnquiryForm();
+        }
       }
     };
 
-    if (activeImage) {
+    if (activeImage || enquiryForm.isOpen) {
       document.addEventListener("keydown", handleEscape);
       document.body.style.overflow = "hidden";
     } else {
@@ -178,33 +309,14 @@ function ProductsPage() {
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "auto";
     };
-  }, [activeImage]);
-
-  const handleEnquiry = (categoryName, imageIndex) => {
-    // Navigate to contact page or open enquiry modal
-    console.log(`Enquiry for ${categoryName} product ${imageIndex + 1}`);
-    // You can implement your enquiry logic here
-    // For example: navigate to contact page with pre-filled data
-    // or open a modal form
-  };
+  }, [activeImage, enquiryForm.isOpen]);
 
   const addToCart = (categoryName, imageIndex, imageSrc) => {
-    const priceMap = {
-      "Office": 15.99,
-      "School Stationary": 8.99,
-      "Toys": 12.99,
-      "Decoration": 18.99
-    };
-    
-    const basePrice = priceMap[categoryName] || 10.99;
-    const price = basePrice + (imageIndex * 0.5);
-    
     const newItem = {
       id: `${categoryName}-${imageIndex}-${Date.now()}`,
       category: categoryName,
       imageIndex,
       imageSrc,
-      price,
       quantity: 1,
       timestamp: Date.now()
     };
@@ -284,6 +396,137 @@ function ProductsPage() {
         </div>
       )}
 
+      {/* Enquiry Form Modal */}
+      {enquiryForm.isOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeEnquiryForm();
+            }
+          }}
+        >
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-t-2xl text-white">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold">Product Enquiry</h2>
+                <button 
+                  onClick={closeEnquiryForm}
+                  className="text-white hover:text-gray-200 transition-colors duration-200"
+                  aria-label="Close form"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <p className="mt-2 opacity-90">
+                {enquiryForm.productCategory} - Product {enquiryForm.productIndex + 1}
+              </p>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleEnquirySubmit} className="p-6 space-y-4">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  value={enquiryForm.formData.name}
+                  onChange={handleFormInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={enquiryForm.formData.email}
+                  onChange={handleFormInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  placeholder="Enter your email address"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={enquiryForm.formData.company}
+                  onChange={handleFormInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  placeholder="Enter your company name (optional)"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  value={enquiryForm.formData.phone}
+                  onChange={handleFormInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  Your Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows="4"
+                  value={enquiryForm.formData.message}
+                  onChange={handleFormInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-vertical"
+                  placeholder="Tell us about your requirements..."
+                />
+              </div>
+
+              <div className="flex space-x-3 pt-2">
+                <button
+                  type="button"
+                  onClick={closeEnquiryForm}
+                  className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg shadow-md hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
+                >
+                  Submit Enquiry
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
@@ -344,7 +587,7 @@ function ProductsPage() {
                   <div className="flex justify-between items-center px-3 py-3 border-t">
                     <button 
                       className="bg-white border border-gray-300 text-gray-700 font-medium py-2 px-3 rounded text-sm shadow-sm hover:bg-gray-100 transition-colors duration-200 flex-1 mr-2"
-                      onClick={() => handleEnquiry(category.name, i)}
+                      onClick={() => openEnquiryForm(category.name, i)}
                     >
                       Enquiry
                     </button>

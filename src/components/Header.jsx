@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../assets/1.jpg';
+import logo from '../assets/2.webp';
 
 function Header() {
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
