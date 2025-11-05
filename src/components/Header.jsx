@@ -136,7 +136,7 @@ function Header() {
             <img 
               src={logo} 
               alt="Kundkund Stationers" 
-              className="h-22 w-40"
+              className="h-35 w-40"
             />
           </Link>
         </div>
@@ -285,7 +285,7 @@ function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30" onClick={toggleMobileMenu}>
+        <div className="md:hidden fixed inset-0 bg-blue-800 z-30" onClick={toggleMobileMenu}>
           <div
             className="fixed top-0 right-0 w-64 h-full bg-white shadow-xl p-6 overflow-y-auto"
             ref={mobileMenuRef}
