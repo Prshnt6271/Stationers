@@ -129,17 +129,17 @@ function Header() {
   return (
     <header className="bg-white shadow-lg font-inter">
       {/* Main Header */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between bg-blue-800">
-        {/* Logo Section */}
-        <div className="flex-shrink-0 mb-4 md:mb-0">
-          <Link to="/" className="flex items-center group">
-            <img 
-              src={logo} 
-              alt="Kundkund Stationers" 
-              className="h-35 w-40"
-            />
-          </Link>
-        </div>
+     <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between bg-blue-800">
+  {/* Logo Section */}
+  <div className="flex-shrink-0 mb-4 md:mb-0 transform scale-140 origin-left"> {/* Scale and set transform origin */}
+    <Link to="/" className="flex items-center group">
+      <img 
+        src={logo} 
+        alt="Kundkund Stationers" 
+        className="h-35 w-40"
+      />
+    </Link>
+  </div>
 
         {/* Search Bar with Suggestions */}
         <div className="w-full md:w-auto md:flex-1 md:max-w-xl mx-0 md:mx-8 mb-4 md:mb-0 relative" ref={searchRef}>
@@ -150,7 +150,7 @@ function Header() {
                 value={searchQuery}
                 onChange={handleSearchChange}
                 onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
-                placeholder="Search for products or brands..."
+                placeholder="Search for  brands..."
                 className="w-full p-3 pl-5 pr-12 text-white placeholder-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm shadow-sm"
                 style={{backgroundColor: 'rgba(255, 255, 255, 0.2)'}}
               />
