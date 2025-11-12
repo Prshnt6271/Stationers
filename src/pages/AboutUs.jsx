@@ -126,7 +126,7 @@ const AboutUs = () => {
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Visit Us</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
           {[
-            {icon: "📍", title: "Address", content: "KundKund StationaryT/83, Gali No-7, Gautampuri , New Delhi, PIN - 110053"},
+            {icon: "📍", title: "Address", content: "KundKund Stationers  T/83, Gali No-7, Gautampuri , New Delhi, PIN - 110053"},
             {icon: "📞", title: "Phone", content: "+91 9650668139,+91 9818818668"},
             {icon: "📧", title: "Email", content: "Stationerskundkund@gmail.com"},
             {icon: "🌐", title: "Website", content: "www.kundkundstationers.com"}

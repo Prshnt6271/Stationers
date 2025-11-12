@@ -11,13 +11,13 @@ export default function Footer() {
         <div className="flex flex-col space-y-4">
           <h3 className="text-xl font-bold mb-3 border-b-2 border-orange-400 pb-2">ABOUT US</h3>
           <p className="text-sm leading-relaxed text-orange-100">
-            KundKund Stationary is a leading art and stationery store in India with a vast distribution channel serving the Art and Design Industry.
+            KundKund Stationers is a leading art and stationery store in India with a vast distribution channel serving the Art and Design Industry.
           </p>
           <div className="flex items-start text-sm text-orange-100">
             <svg className="w-5 h-5 mr-2 flex-shrink-0 text-orange-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"></path>
             </svg>
-            <span>KundKund Stationary<br />T/83, Gali No-7, Gautampuri , New Delhi, PIN - 110053<br /></span>
+            <span>KundKund Stationers<br />T/83, Gali No-7, Gautampuri , New Delhi, PIN - 110053<br /></span>
           </div>
           <div className="flex items-center text-sm text-orange-100">
             <svg className="w-5 h-5 mr-2 flex-shrink-0 text-orange-300" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@ export default function Footer() {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="KundKund Stationary Location"
+              title="KundKund Stationers Location"
               className="rounded-lg"
             ></iframe>
           </div>
@@ -129,7 +129,7 @@ export default function Footer() {
 
       {/* Copyright and Payment Icons */}
       <div className="border-t border-orange-500 mt-10 pt-6 text-center text-sm text-orange-200 flex flex-col sm:flex-row justify-between items-center px-4 sm:px-6 md:px-8">
-        <p>&copy; Copyright 2024 KundKund Stationary. All rights reserved.</p>
+        <p>&copy; Copyright 2025 KundKund Stationers. All rights reserved.</p>
      
       </div>
     </footer>
