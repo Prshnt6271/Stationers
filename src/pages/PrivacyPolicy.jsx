@@ -123,9 +123,9 @@ const PrivacyPolicy = () => {
             If you have any questions about this Privacy Policy, please contact us:
           </p>
           <ul className="list-disc pl-5 mb-4">
-            <li>By email: privacy@kundkundstationers.com</li>
-            <li>By visiting the <Link to="/contact" className="text-blue-600 hover:underline">contact page</Link> on our website</li>
-            <li>By phone: +91 XXXXX XXXXX</li>
+            <li>By email: Stationerskundkund@gmail.com</li>
+            <li>By visiting the <Link to="/ContactUs" className="text-blue-600 hover:underline">contact page</Link> on our website</li>
+            <li>By phone: +91 9650668139,+91 9818818668</li>
           </ul>
         </div>
       </div>
