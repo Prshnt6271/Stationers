@@ -136,7 +136,7 @@ function Header() {
             <img 
               src={logo} 
               alt="Kundkund Stationers" 
-              className="h-50 w-55 md:h-45 md:w-55"  // Increased size for mobile, original for desktop
+              className="h-80 w-75 md:h-45 md:w-55"  // Increased size for mobile, original for desktop
             />
           </Link>
         </div>
